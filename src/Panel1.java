@@ -1,0 +1,2 @@
+public class Panel1 {
+}
