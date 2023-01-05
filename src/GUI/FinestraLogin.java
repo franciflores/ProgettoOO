@@ -1,5 +1,5 @@
 package GUI;
-import Classi.Controller;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,26 +18,23 @@ import java.awt.Toolkit;
 
 public class FinestraLogin extends JFrame{
 
+	//Dichiarazioni
+	private static FinestraLogin fin = null;
 	private JFrame FrameLogin;
 	private JTextField textFieldMatricola;
 	private JTextField textFieldPassword;
-	private Controller controller;
-
-	//Finestra Login
-	public FinestraLogin(Controller c) {
-		controller = c;
-		initialize();
-	}
 
 	//Inizializza la Finestra
-	private void initialize() {
+	public void initialize() {
 		FrameLogin = new JFrame();
+		FrameLogin.setVisible(true);
 		FrameLogin.setResizable(false);
 		FrameLogin.setTitle("Login");
 		FrameLogin.setBounds(100, 100, 640, 480);
 		FrameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel PanelLogin = new JPanel();
+		PanelLogin.setVisible(true);
 		FrameLogin.getContentPane().add(PanelLogin, BorderLayout.CENTER);
 		PanelLogin.setLayout(null);
 		
@@ -73,4 +70,13 @@ public class FinestraLogin extends JFrame{
 		btnLogin.setBounds(260, 236, 89, 23);
 		PanelLogin.add(btnLogin);
 	}
+	
+	//Costruttore privato (Facciamo un singleton)
+	public static FinestraLogin getInstance() 
+	{
+		if (fin==null)
+			fin = new FinestraLogin();
+		return fin;
+	}
 }
+
