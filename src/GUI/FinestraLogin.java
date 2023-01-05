@@ -1,11 +1,13 @@
 package GUI;
-
+import Classi.Controller;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+
+
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -13,28 +15,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FinestraLogin {
+public class FinestraLogin extends JFrame{
 
 	private JFrame FrameLogin;
 	private JTextField textFieldMatricola;
 	private JTextField textFieldPassword;
 	
-	//Dichiarazione finestra
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraLogin window = new FinestraLogin();
-					window.FrameLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Controller controller;
 
 	//Finestra Login
-	public FinestraLogin() {
+	public FinestraLogin(Controller c) {
+		controller = c;
 		initialize();
 	}
 
