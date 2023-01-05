@@ -116,5 +116,5 @@ public class FinestraLogin extends JFrame {
 		gbc_btnConferma.gridy = 3;
 		contentPane.add(btnConferma, gbc_btnConferma);
 	}
-}
 
+}
