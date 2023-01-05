@@ -14,13 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FinestraLogin extends JFrame{
 
 	private JFrame FrameLogin;
 	private JTextField textFieldMatricola;
 	private JTextField textFieldPassword;
-	
 	private Controller controller;
 
 	//Finestra Login
@@ -47,6 +47,7 @@ public class FinestraLogin extends JFrame{
 		textFieldMatricola.setColumns(10);
 		
 		JLabel loginTextLabel = new JLabel("Effettua il Login");
+		loginTextLabel.setToolTipText("non sai chi sono io ma mangio le gambe di lux nel tempo libero\r\n");
 		loginTextLabel.setLabelFor(textFieldMatricola);
 		loginTextLabel.setBounds(269, 134, 80, 14);
 		PanelLogin.add(loginTextLabel);
