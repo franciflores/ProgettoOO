@@ -4,6 +4,7 @@ public class Tartaruga {
 	
 	private String idTartaruga;
 	private String nomeTartaruga;
+	private CartellaMedica cartellaTartaruga;
 	
 	public Tartaruga(String idTartaruga, String nomeTartaruga) {
 		super();
@@ -26,7 +27,9 @@ public class Tartaruga {
 	public void setNomeTartaruga(String nomeTartaruga) {
 		this.nomeTartaruga = nomeTartaruga;
 	}
-	
-	
+
+	public CartellaMedica getCartellaTartaruga() {
+		return cartellaTartaruga;
+	}
 
 }

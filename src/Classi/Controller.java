@@ -14,6 +14,9 @@ public class Controller {
 	FinestraLogin finestraPrincipale;
 	MenuOperazioni menu;
 	FinestraTartaruga finestraTart;
+	FinestraVasca finestraVasca;
+	FinestraCentro finestraCentro;
+	FinestraAddetto finestraAddetto;
 	
 	public static void main(String[] args)
 	{
@@ -46,5 +49,23 @@ public class Controller {
 		menu.setVisible(false);
 		finestraTart = new FinestraTartaruga(this);
 		finestraTart.setVisible(true);
+	}
+	
+	public void ShowVascaFrame() {
+		menu.setVisible(false);
+		finestraVasca = new FinestraVasca(this);
+		finestraVasca.setVisible(true);
+	}
+	
+	public void ShowCentroFrame() {
+		menu.setVisible(false);
+		finestraCentro = new FinestraCentro(this);
+		finestraCentro.setVisible(true);
+	}
+	
+	public void ShowAddettoFrame() {
+		menu.setVisible(false);
+		finestraAddetto = new FinestraAddetto(this);
+		finestraAddetto.setVisible(true);
 	}
 }	

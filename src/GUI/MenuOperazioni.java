@@ -44,6 +44,7 @@ public class MenuOperazioni extends JFrame {
 		btnCreaCentro.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnCreaCentro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.ShowCentroFrame();
 			}
 		});
 		
@@ -77,6 +78,11 @@ public class MenuOperazioni extends JFrame {
 		contentPane.add(btnCreaCentro, gbc_btnCreaCentro);
 		
 		JButton btnCreaVasca =new JButton("Nuova Vasca");
+		btnCreaVasca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.ShowVascaFrame();
+			}
+		});
 		btnCreaVasca.setFont(new Font("Verdana", Font.PLAIN, 13));
 		GridBagConstraints gbc_btnCreaVasca = new GridBagConstraints();
 		gbc_btnCreaVasca.fill = GridBagConstraints.HORIZONTAL;
@@ -86,6 +92,11 @@ public class MenuOperazioni extends JFrame {
 		contentPane.add(btnCreaVasca, gbc_btnCreaVasca);
 		
 		JButton btnCreaPersonale = new JButton("Nuovo Addetto");
+		btnCreaPersonale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.ShowAddettoFrame();
+			}
+		});
 		btnCreaPersonale.setFont(new Font("Verdana", Font.PLAIN, 13));
 		GridBagConstraints gbc_btnCreaPersonale = new GridBagConstraints();
 		gbc_btnCreaPersonale.fill = GridBagConstraints.HORIZONTAL;
