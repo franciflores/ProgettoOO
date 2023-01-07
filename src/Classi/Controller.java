@@ -18,9 +18,22 @@ public class Controller {
 	FinestraCentro finestraCentro;
 	FinestraAddetto finestraAddetto;
 	
+	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
+	private final static String user = "postgres";
+	private final static String password = "Armandoegger1_"; //Temporanea
+	
+	static Connection connessione;
+	
 	public static void main(String[] args)
 	{
-		Controller c = new Controller();			
+		try {
+			connessione = DriverManager.getConnection(url, user, password);
+			Controller c = new Controller();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
 	}
 	
 	public Controller() {
