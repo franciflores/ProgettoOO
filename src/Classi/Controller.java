@@ -3,8 +3,10 @@ package Classi;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import GUI.*;
 
@@ -17,6 +19,7 @@ public class Controller {
 	FinestraVasca finestraVasca;
 	FinestraCentro finestraCentro;
 	FinestraAddetto finestraAddetto;
+	FinestraCartella finestraCartellaMedica;
 	
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
@@ -80,5 +83,21 @@ public class Controller {
 		menu.setVisible(false);
 		finestraAddetto = new FinestraAddetto(this);
 		finestraAddetto.setVisible(true);
+	}
+	
+	public void ProceduraTerminata(JFrame frame) {
+		JOptionPane.showConfirmDialog(frame, "Congratulazioni, inserimento completato!", "Procedura Terminata", JOptionPane.OK_OPTION);
+	}
+	
+	public void CreaCartella() {
+		menu.setVisible(false);
+		finestraCartellaMedica = new FinestraCartella(this);
+		finestraCartellaMedica.setVisible(true);
+	}
+
+	public void CreaCartella(String specie, Float peso, Float lunghezza, Float larghezza) throws SQLException {
+		Statement st = connessione.createStatement();
+		st.executeUpdate("INSERT INTO  cartellemediche(specietartaruga, lunghezzatartaruga, larghezzatartaruga, pesotartaruga) VALUES \n"
+				+ "('"+specie+"', '"+lunghezza+"', '"+larghezza+"', '"+peso+"')");
 	}
 }	

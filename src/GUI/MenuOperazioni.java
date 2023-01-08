@@ -33,77 +33,66 @@ public class MenuOperazioni extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
 		
 		JButton btnCreaCentro = new JButton("Nuovo Centro");
+		btnCreaCentro.setBounds(287, 28, 142, 25);
 		btnCreaCentro.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnCreaCentro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowCentroFrame();
 			}
 		});
+		contentPane.setLayout(null);
 		
 		JLabel lblAzioni = new JLabel("Azioni");
+		lblAzioni.setBounds(205, 5, 47, 18);
 		lblAzioni.setFont(new Font("Verdana", Font.BOLD, 14));
-		GridBagConstraints gbc_lblAzioni = new GridBagConstraints();
-		gbc_lblAzioni.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAzioni.gridx = 4;
-		gbc_lblAzioni.gridy = 0;
-		contentPane.add(lblAzioni, gbc_lblAzioni);
+		contentPane.add(lblAzioni);
 		
 		JButton btnCreaTartaruga = new JButton("Nuova Tartaruga");
+		btnCreaTartaruga.setBounds(16, 28, 143, 25);
 		btnCreaTartaruga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowTartarugaFrame();
 			}
 		});
 		btnCreaTartaruga.setFont(new Font("Verdana", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnCreaTartaruga = new GridBagConstraints();
-		gbc_btnCreaTartaruga.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCreaTartaruga.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCreaTartaruga.gridx = 1;
-		gbc_btnCreaTartaruga.gridy = 1;
-		contentPane.add(btnCreaTartaruga, gbc_btnCreaTartaruga);
-		GridBagConstraints gbc_btnCreaCentro = new GridBagConstraints();
-		gbc_btnCreaCentro.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCreaCentro.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCreaCentro.gridwidth = 4;
-		gbc_btnCreaCentro.gridx = 6;
-		gbc_btnCreaCentro.gridy = 1;
-		contentPane.add(btnCreaCentro, gbc_btnCreaCentro);
+		contentPane.add(btnCreaTartaruga);
+		contentPane.add(btnCreaCentro);
 		
 		JButton btnCreaVasca =new JButton("Nuova Vasca");
+		btnCreaVasca.setBounds(16, 58, 143, 25);
 		btnCreaVasca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowVascaFrame();
 			}
 		});
 		btnCreaVasca.setFont(new Font("Verdana", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnCreaVasca = new GridBagConstraints();
-		gbc_btnCreaVasca.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCreaVasca.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCreaVasca.gridx = 1;
-		gbc_btnCreaVasca.gridy = 2;
-		contentPane.add(btnCreaVasca, gbc_btnCreaVasca);
+		contentPane.add(btnCreaVasca);
 		
 		JButton btnCreaPersonale = new JButton("Nuovo Addetto");
+		btnCreaPersonale.setBounds(287, 58, 142, 25);
 		btnCreaPersonale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowAddettoFrame();
 			}
 		});
 		btnCreaPersonale.setFont(new Font("Verdana", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnCreaPersonale = new GridBagConstraints();
-		gbc_btnCreaPersonale.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCreaPersonale.gridwidth = 4;
-		gbc_btnCreaPersonale.gridx = 6;
-		gbc_btnCreaPersonale.gridy = 2;
-		contentPane.add(btnCreaPersonale, gbc_btnCreaPersonale);
+		contentPane.add(btnCreaPersonale);
+		
+		JLabel lblOperazioni = new JLabel("Operazioni");
+		lblOperazioni.setFont(new Font("Verdana", Font.BOLD, 14));
+		lblOperazioni.setBounds(188, 115, 83, 18);
+		contentPane.add(lblOperazioni);
+		
+		JButton btnCompilaCartella = new JButton("Compila Cartella");
+		btnCompilaCartella.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.CreaCartella();
+			}
+		});
+		btnCompilaCartella.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btnCompilaCartella.setBounds(10, 152, 149, 25);
+		contentPane.add(btnCompilaCartella);
 	}
-
 }
