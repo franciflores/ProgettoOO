@@ -61,6 +61,11 @@ public class FinestraCartella extends JFrame {
 		btnAnnulla.setFont(new Font("Verdana", Font.BOLD, 12));
 		btnAnnulla.setBounds(10, 227, 111, 25);
 		contentPane.add(btnAnnulla);
+		btnAnnulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.RitornoMenu(finestraCorrente);
+			}
+		});
 		
 		final JFormattedTextField TextFieldLunghezza = new JFormattedTextField();
 		TextFieldLunghezza.setBounds(288, 82, 116, 20);
