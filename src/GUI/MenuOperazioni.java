@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JLabel;
+import java.awt.Button;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class MenuOperazioni extends JFrame {
 
@@ -94,5 +97,10 @@ public class MenuOperazioni extends JFrame {
 		btnCompilaCartella.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnCompilaCartella.setBounds(10, 152, 149, 25);
 		contentPane.add(btnCompilaCartella);
+		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btnLogOut.setBounds(316, 214, 89, 23);
+		contentPane.add(btnLogOut);
 	}
 }
