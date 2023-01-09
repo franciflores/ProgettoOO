@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import java.awt.Button;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MenuOperazioni extends JFrame {
 
@@ -36,24 +38,15 @@ public class MenuOperazioni extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		
-		JButton btnCreaCentro = new JButton("Nuovo Centro");
-		btnCreaCentro.setBounds(287, 28, 142, 25);
-		btnCreaCentro.setFont(new Font("Verdana", Font.PLAIN, 13));
-		btnCreaCentro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controller.ShowCentroFrame();
-			}
-		});
 		contentPane.setLayout(null);
 		
-		JLabel lblAzioni = new JLabel("Azioni");
-		lblAzioni.setBounds(205, 5, 47, 18);
-		lblAzioni.setFont(new Font("Verdana", Font.BOLD, 14));
+		JLabel lblAzioni = new JLabel("\"qui metteremo 'benvenuto x' con il nome dell'utente\"");
+		lblAzioni.setBounds(10, 5, 414, 18);
+		lblAzioni.setFont(new Font("Gill Sans Nova", Font.BOLD, 14));
 		contentPane.add(lblAzioni);
 		
 		JButton btnCreaTartaruga = new JButton("Nuova Tartaruga");
-		btnCreaTartaruga.setBounds(16, 28, 143, 25);
+		btnCreaTartaruga.setBounds(140, 59, 143, 25);
 		btnCreaTartaruga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowTartarugaFrame();
@@ -61,10 +54,9 @@ public class MenuOperazioni extends JFrame {
 		});
 		btnCreaTartaruga.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(btnCreaTartaruga);
-		contentPane.add(btnCreaCentro);
 		
 		JButton btnCreaVasca =new JButton("Nuova Vasca");
-		btnCreaVasca.setBounds(16, 58, 143, 25);
+		btnCreaVasca.setBounds(3, 59, 135, 25);
 		btnCreaVasca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowVascaFrame();
@@ -73,19 +65,9 @@ public class MenuOperazioni extends JFrame {
 		btnCreaVasca.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(btnCreaVasca);
 		
-		JButton btnCreaPersonale = new JButton("Nuovo Addetto");
-		btnCreaPersonale.setBounds(287, 58, 142, 25);
-		btnCreaPersonale.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controller.ShowAddettoFrame();
-			}
-		});
-		btnCreaPersonale.setFont(new Font("Verdana", Font.PLAIN, 13));
-		contentPane.add(btnCreaPersonale);
-		
 		JLabel lblOperazioni = new JLabel("Operazioni");
 		lblOperazioni.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblOperazioni.setBounds(188, 115, 83, 18);
+		lblOperazioni.setBounds(182, 34, 83, 18);
 		contentPane.add(lblOperazioni);
 		
 		JButton btnCompilaCartella = new JButton("Compila Cartella");
@@ -95,10 +77,15 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnCompilaCartella.setFont(new Font("Verdana", Font.PLAIN, 13));
-		btnCompilaCartella.setBounds(10, 152, 149, 25);
+		btnCompilaCartella.setBounds(285, 59, 146, 25);
 		contentPane.add(btnCompilaCartella);
 		
 		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.RitornoAlLogin();
+			}
+		});
 		btnLogOut.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnLogOut.setBounds(316, 214, 89, 23);
 		contentPane.add(btnLogOut);

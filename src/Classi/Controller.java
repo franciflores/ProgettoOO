@@ -18,7 +18,6 @@ public class Controller {
 	FinestraTartaruga finestraTart;
 	FinestraVasca finestraVasca;
 	FinestraCentro finestraCentro;
-	FinestraAddetto finestraAddetto;
 	FinestraCartella finestraCartellaMedica;
 	
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
@@ -29,15 +28,15 @@ public class Controller {
 	
 	public static void main(String[] args)
 	{
-		try {
-			connessione = DriverManager.getConnection(url, user, password);
+		//try {
+		//	connessione = DriverManager.getConnection(url, user, password);
 			Controller c = new Controller();
-		} catch (SQLException e) {
+		//} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 					
-	}
+//}
 	
 	public Controller() {
 		finestraPrincipale = new FinestraLogin(this);
@@ -79,11 +78,6 @@ public class Controller {
 		finestraCentro.setVisible(true);
 	}
 	
-	public void ShowAddettoFrame() {
-		menu.setVisible(false);
-		finestraAddetto = new FinestraAddetto(this);
-		finestraAddetto.setVisible(true);
-	}
 	
 	public void ProceduraTerminata(JFrame frame) {
 		JOptionPane.showConfirmDialog(frame, "Congratulazioni, inserimento completato!", "Procedura Terminata", JOptionPane.OK_OPTION);
@@ -99,5 +93,12 @@ public class Controller {
 		Statement st = connessione.createStatement();
 		st.executeUpdate("INSERT INTO  cartellemediche(specietartaruga, lunghezzatartaruga, larghezzatartaruga, pesotartaruga) VALUES \n"
 				+ "('"+specie+"', '"+lunghezza+"', '"+larghezza+"', '"+peso+"')");
+	}
+	
+	public void RitornoAlLogin() {
+		menu.dispose();
+		finestraPrincipale=null;
+		finestraPrincipale = new FinestraLogin(this);
+		finestraPrincipale.setVisible(true);
 	}
 }	

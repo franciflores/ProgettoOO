@@ -28,6 +28,7 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class FinestraLogin extends JFrame {
 
 	private JPanel contentPane;
@@ -39,6 +40,7 @@ public class FinestraLogin extends JFrame {
 	 * Create the frame.
 	 * @param controller 
 	 */
+	
 	public FinestraLogin(Controller c) {
 		setResizable(false);
 		controller = c;
