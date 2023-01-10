@@ -12,11 +12,16 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class FinestraVasca extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame finestraCorrente;
+	private JTextField textFieldLarghezza;
+	private JTextField textFieldLunghezza;
+	private JTextField textFieldProfondita;
 	/**
 	 * Create the frame.
 	 */
@@ -56,5 +61,40 @@ public class FinestraVasca extends JFrame {
 		btnContinua.setFont(new Font("Verdana", Font.BOLD, 12));
 		btnContinua.setBounds(315, 225, 111, 25);
 		contentPane.add(btnContinua);
+		
+		JLabel lblCreaVasca = new JLabel("Crea una nuova vasca");
+		lblCreaVasca.setFont(new Font("Verdana", Font.BOLD, 14));
+		lblCreaVasca.setBounds(115, 11, 224, 14);
+		contentPane.add(lblCreaVasca);
+		
+		JLabel lblLarghezzaVasca = new JLabel("Larghezza vasca");
+		lblLarghezzaVasca.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblLarghezzaVasca.setBounds(57, 52, 140, 16);
+		contentPane.add(lblLarghezzaVasca);
+		
+		textFieldLarghezza = new JTextField();
+		textFieldLarghezza.setBounds(288, 49, 116, 22);
+		contentPane.add(textFieldLarghezza);
+		textFieldLarghezza.setColumns(10);
+		
+		JLabel lblLunghezzaVasca = new JLabel("Lunghezza vasca");
+		lblLunghezzaVasca.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblLunghezzaVasca.setBounds(57, 99, 140, 16);
+		contentPane.add(lblLunghezzaVasca);
+		
+		textFieldLunghezza = new JTextField();
+		textFieldLunghezza.setBounds(288, 97, 116, 22);
+		contentPane.add(textFieldLunghezza);
+		textFieldLunghezza.setColumns(10);
+		
+		JLabel lblProfonditaVasca = new JLabel("Profondità vasca");
+		lblProfonditaVasca.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblProfonditaVasca.setBounds(57, 142, 146, 16);
+		contentPane.add(lblProfonditaVasca);
+		
+		textFieldProfondita = new JTextField();
+		textFieldProfondita.setBounds(288, 140, 116, 22);
+		contentPane.add(textFieldProfondita);
+		textFieldProfondita.setColumns(10);
 	}
 }

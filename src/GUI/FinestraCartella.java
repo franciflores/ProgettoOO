@@ -115,12 +115,12 @@ public class FinestraCartella extends JFrame {
 		
 		JLabel lblLunghezzaTartaruga = new JLabel("Lunghezza Tartaruga");
 		lblLunghezzaTartaruga.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblLunghezzaTartaruga.setBounds(57, 82, 107, 16);
+		lblLunghezzaTartaruga.setBounds(57, 82, 152, 16);
 		contentPane.add(lblLunghezzaTartaruga);
 		
 		JLabel lblLarghezzaTartaruga = new JLabel("Larghezza Tartaruga");
 		lblLarghezzaTartaruga.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblLarghezzaTartaruga.setBounds(57, 112, 107, 16);
+		lblLarghezzaTartaruga.setBounds(57, 112, 139, 16);
 		contentPane.add(lblLarghezzaTartaruga);
 		
 		JLabel lblPesoTartaruga = new JLabel("Peso Tartaruga");
