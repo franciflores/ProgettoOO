@@ -92,9 +92,9 @@ public class FinestraCartella extends JFrame {
 							&& TextFieldLarghezza.getText().length() > 0) {
 						
 						if(textFieldSpecie.getText().length() > 0) {
-							controller.CreaCartella(textFieldSpecie.getText(), peso, lunghezza, larghezza);
+							/*controller.CreaCartella(textFieldSpecie.getText(), peso, lunghezza, larghezza);
 							controller.ProceduraTerminata(finestraCorrente);
-							controller.RitornoMenu(finestraCorrente);
+							controller.RitornoMenu(finestraCorrente);*/
 						}
 						else {
 							JOptionPane.showMessageDialog(finestraCorrente, "Specie Tartaruga non puo' essere vuoto!", "Attenzione", JOptionPane.OK_OPTION);
@@ -103,10 +103,7 @@ public class FinestraCartella extends JFrame {
 					}
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(finestraCorrente, "Inserisci un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			    }
 			}
 		});
 		btnContinua.setFont(new Font("Verdana", Font.BOLD, 12));

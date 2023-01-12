@@ -87,7 +87,7 @@ public class FinestraVasca extends JFrame {
 		contentPane.add(textFieldLunghezza);
 		textFieldLunghezza.setColumns(10);
 		
-		JLabel lblProfonditaVasca = new JLabel("Profondità vasca");
+		JLabel lblProfonditaVasca = new JLabel("Profondita' vasca");
 		lblProfonditaVasca.setFont(new Font("Verdana", Font.PLAIN, 12));
 		lblProfonditaVasca.setBounds(57, 142, 146, 16);
 		contentPane.add(lblProfonditaVasca);
