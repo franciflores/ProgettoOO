@@ -20,6 +20,7 @@ public class Controller {
 	FinestraCentro finestraCentro;
 	FinestraCartella finestraCartellaMedica;
 	
+	
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 	private final static String password = "Armandoegger1_"; //Temporanea
@@ -37,29 +38,32 @@ public class Controller {
 		}
 					
 //}
-	
+	//Costruttore del Controller
 	public Controller() {
 		finestraPrincipale = new FinestraLogin(this);
 		finestraPrincipale.setVisible(true);
 	}
 	
+	/**Passa alla finestra del Menu**/
 	public void ShowMenu() {
 		finestraPrincipale.setVisible(false);
 		menu = new MenuOperazioni(this);
 		menu.setVisible(true);
 	}
 	
+	/**Torniamo alla finestra del Menu**/
 	public void RitornoMenu(JFrame frameCorrente) {
 		frameCorrente.setVisible(false);
 		menu.setVisible(true);
 	}
 	
+	/**Serve a tornare alla finestra Precedente**/
 	public void FinestraPrecedente(JFrame frameCorrente, JFrame framePrecedente) {
 		frameCorrente.setVisible(false);
 		framePrecedente.setVisible(true);
 	}
 	
-	/*Schermate Crea*/
+	/**Schermate Crea**/
 	public void ShowTartarugaFrame() {
 		menu.setVisible(false);
 		finestraTart = new FinestraTartaruga(this);
@@ -89,15 +93,17 @@ public class Controller {
 		finestraCartellaMedica.setVisible(true);
 	}
 
+	
 	public void CreaCartella(String specie, Float peso, Float lunghezza, Float larghezza) throws SQLException {
 		Statement st = connessione.createStatement();
 		st.executeUpdate("INSERT INTO  cartellemediche(specietartaruga, lunghezzatartaruga, larghezzatartaruga, pesotartaruga) VALUES \n"
 				+ "('"+specie+"', '"+lunghezza+"', '"+larghezza+"', '"+peso+"')");
 	}
 	
+	//Chiude il Menu e torna al login (Resetta la finestra di Login)
 	public void RitornoAlLogin() {
 		menu.dispose();
-		finestraPrincipale=null;
+		finestraPrincipale = null;
 		finestraPrincipale = new FinestraLogin(this);
 		finestraPrincipale.setVisible(true);
 	}
