@@ -27,7 +27,7 @@ import javax.swing.ImageIcon;
 public class MenuOperazioni extends JFrame {
 
 	private JPanel contentPane;
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -41,13 +41,13 @@ public class MenuOperazioni extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblAzioni = new JLabel("\"qui metteremo 'benvenuto x' con il nome dell'utente\"");
 		lblAzioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAzioni.setBounds(10, 5, 464, 18);
 		lblAzioni.setFont(new Font("Gill Sans Nova", Font.BOLD, 14));
 		contentPane.add(lblAzioni);
-		
+
 		JButton btnNuovaTartaruga = new JButton("Nuova Tartaruga");
 		btnNuovaTartaruga.setBounds(151, 59, 171, 25);
 		btnNuovaTartaruga.addActionListener(new ActionListener() {
@@ -59,7 +59,7 @@ public class MenuOperazioni extends JFrame {
 		});
 		btnNuovaTartaruga.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(btnNuovaTartaruga);
-		
+
 		JButton btnCreaVasca = new JButton("Nuova Vasca");
 		btnCreaVasca.setEnabled(false);
 		btnCreaVasca.setBounds(10, 59, 135, 25);
@@ -70,12 +70,12 @@ public class MenuOperazioni extends JFrame {
 		});
 		btnCreaVasca.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(btnCreaVasca);
-		
+
 		JLabel lblOperazioni = new JLabel("Operazioni");
 		lblOperazioni.setFont(new Font("Verdana", Font.BOLD, 14));
 		lblOperazioni.setBounds(200, 34, 83, 18);
 		contentPane.add(lblOperazioni);
-		
+
 		JButton btnCompilaCartella = new JButton("Compila Cartella");
 		btnCompilaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,7 +85,7 @@ public class MenuOperazioni extends JFrame {
 		btnCompilaCartella.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnCompilaCartella.setBounds(328, 59, 146, 25);
 		contentPane.add(btnCompilaCartella);
-		
+
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
