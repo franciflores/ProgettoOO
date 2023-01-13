@@ -16,32 +16,48 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 
 public class FinestraTartaruga extends JFrame {
-
-	private JPanel PanelSceltaTartaruga;
 	private Controller controller;
 	private JFrame finestraCorrente;
 	/**
 	 * Create the frame.
 	 */
-	public FinestraTartaruga(Controller c) {
+	public FinestraTartaruga(Controller c, int panelDaAttivare) {
 		controller = c;
 		finestraCorrente = this;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
-		PanelSceltaTartaruga = new JPanel();
-		PanelSceltaTartaruga.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(PanelSceltaTartaruga);
-		PanelSceltaTartaruga.setLayout(null);
-		
-		JLabel lblBenvenuto = new JLabel("Scegliere il tipo di inserimento");
-		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblBenvenuto.setBounds(10, 11, 414, 18);
-		PanelSceltaTartaruga.add(lblBenvenuto);
+		if(panelDaAttivare==0) {
+			JPanel NuovaTartaruga = new JPanel();
+			getContentPane().add(NuovaTartaruga, BorderLayout.CENTER);
+			NuovaTartaruga.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("Inserimento di una nuova Tartaruga nel centro");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(10, 5, 414, 24);
+			NuovaTartaruga.add(lblNewLabel);
+			
+			JButton btnNewButton = new JButton("Inserisci");
+			btnNewButton.setBounds(173, 227, 96, 23);
+			NuovaTartaruga.add(btnNewButton);
+		}
+				else{
+			JPanel VecchiaTartaruga = new JPanel();
+			getContentPane().add(VecchiaTartaruga, BorderLayout.CENTER);
+			VecchiaTartaruga.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("Riammissione di una Tartaruga");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(10, 5, 414, 14);
+			VecchiaTartaruga.add(lblNewLabel);
+			
+			JButton btnNewButton = new JButton("Inserisci");
+			btnNewButton.setBounds(176, 227, 89, 23);
+			VecchiaTartaruga.add(btnNewButton);
+		}
 	}
 }

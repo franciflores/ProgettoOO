@@ -13,6 +13,7 @@ import GUI.*;
 public class Controller {
 	
 	//Dichiarazioni dei Frame
+	public int SceltaPanel;
 	FinestraLogin finestraPrincipale;
 	MenuOperazioni menu;
 	FinestraTartaruga finestraTart;
@@ -63,10 +64,14 @@ public class Controller {
 		framePrecedente.setVisible(true);
 	}
 	
-	/**Schermate Crea**/
+	public int DialogTartarughe() {
+		return JOptionPane.showConfirmDialog(null,"La Tartaruga è già stata nel centro?","Opzione",0,3);
+	}
+	
+	//Apri finestraTartarughe
 	public void ShowTartarugaFrame() {
 		menu.setVisible(false);
-		finestraTart = new FinestraTartaruga(this);
+		finestraTart = new FinestraTartaruga(this,SceltaPanel);
 		finestraTart.setVisible(true);
 	}
 	
