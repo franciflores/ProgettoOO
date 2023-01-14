@@ -117,7 +117,7 @@ public class FinestraLogin extends JFrame {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
-				controller.ShowMenu();
+				controller.AvviaMenu();
 			}
 		});
 		btnConferma.setFont(new Font("Verdana", Font.PLAIN, 14));

@@ -52,7 +52,8 @@ public class MenuOperazioni extends JFrame {
 		btnNuovaTartaruga.setBounds(151, 59, 171, 25);
 		btnNuovaTartaruga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Cambiare con un setter questa Variabile
+				controller.SceltaPanel = controller.DialogTartarughe();
 				controller.ShowTartarugaFrame();
 			}
 		});
@@ -94,11 +95,5 @@ public class MenuOperazioni extends JFrame {
 		btnLogOut.setFont(new Font("Verdana", Font.PLAIN, 13));
 		btnLogOut.setBounds(370, 320, 89, 23);
 		contentPane.add(btnLogOut);
-	}
-
-
-	public void ApriOptionPaneTartaruga() {
-		JOptionPane DialogTart = new JOptionPane("E' la prima volta che prendiamo in cura questa tartaruga?",JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-		//Ora devo fare in modo di prendere il valore YES,NO come valore e fare un IF
 	}
 }
