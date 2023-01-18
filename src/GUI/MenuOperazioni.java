@@ -149,5 +149,14 @@ public class MenuOperazioni extends JFrame {
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		verticalStrut_2.setBounds(360, 93, 12, 263);
 		contentPane.add(verticalStrut_2);
+		
+		JButton btnNewButton_1 = new JButton("Compila Cartella");
+		btnNewButton_1.setBounds(137, 113, 91, 23);
+		contentPane.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.ShowCartellaFrame();
+			}
+		});
 	}
 }
