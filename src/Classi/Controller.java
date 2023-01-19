@@ -20,7 +20,7 @@ public class Controller {
 	FinestraVasca finestraVasca;
 	FinestraCentro finestraCentro;
 	FinestraCartella finestraCartellaMedica;
-	//CompilaCartella finestraCompilaCartella;
+	
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
@@ -118,9 +118,5 @@ public class Controller {
 		finestraCartellaMedica.setVisible(true);
 	}
 	
-	/*public void ShowCompilaFrame() {
-		menu.setVisible(false);
-		finestraCompilaCartella = new CompilaCartella;
-		finestraCompilaCartella.setVisible(true);
-	} appena trovo un modo per farlo senza utilizzare una nuova finestra lo finisco*/
+	
 }

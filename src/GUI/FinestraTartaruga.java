@@ -79,19 +79,19 @@ public class FinestraTartaruga extends JFrame {
 			NuovaTartaruga.add(textFieldSpecie);
 			textFieldSpecie.setColumns(10);
 
-			JLabel lblNewLabel = new JLabel("Lunghezza (cm)");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setBounds(10, 65, 95, 14);
-			NuovaTartaruga.add(lblNewLabel);
+			JLabel lblLunghezza = new JLabel("Lunghezza (cm)");
+			lblLunghezza.setHorizontalAlignment(SwingConstants.CENTER);
+			lblLunghezza.setBounds(10, 65, 95, 14);
+			NuovaTartaruga.add(lblLunghezza);
 
 			jSpinnerLunghezza = new JSpinner();
 			jSpinnerLunghezza.setBounds(115, 62, 309, 20);
 			NuovaTartaruga.add(jSpinnerLunghezza);
 
-			JLabel lblNewLabel_1 = new JLabel("Larghezza (cm)");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setBounds(10, 90, 95, 14);
-			NuovaTartaruga.add(lblNewLabel_1);
+			JLabel lblLarghezza = new JLabel("Larghezza (cm)");
+			lblLarghezza.setHorizontalAlignment(SwingConstants.CENTER);
+			lblLarghezza.setBounds(10, 90, 95, 14);
+			NuovaTartaruga.add(lblLarghezza);
 
 			jSpinnerLarghezza = new JSpinner();
 			jSpinnerLarghezza.setBounds(115, 87, 309, 20);
@@ -481,15 +481,6 @@ public class FinestraTartaruga extends JFrame {
 
 	}
 
-	public void StatoBottoneCambiato(ItemEvent Evento, JSpinner barraDiTesto) {
-		if(Evento.getStateChange()==1) {
-			((Component) barraDiTesto).setEnabled(true);
-			barraDiTesto.setValue(1);
-		}
-		else {
-			((Component) barraDiTesto).setEnabled(false);
-		}
-	}
 	
 	public void StatoBottoneCambiato(ItemEvent Evento, Object barraDiTesto) {
 		if(Evento.getStateChange()==1) {
