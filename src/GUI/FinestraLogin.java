@@ -10,8 +10,10 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import Classi.Controller;
+import Eccezioni.EccezioneLogin;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -27,6 +29,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Choice;
 
 @SuppressWarnings("serial")
 public class FinestraLogin extends JFrame {
@@ -35,6 +38,7 @@ public class FinestraLogin extends JFrame {
 	private Controller controller;
 	private JTextField textFieldMatricola;
 	private JPasswordField passwordFieldMatricola;
+	private JFrame finestraCorrente;
 
 	/**
 	 * Create the frame.
@@ -43,6 +47,7 @@ public class FinestraLogin extends JFrame {
 	
 	public FinestraLogin(Controller c) {
 		setResizable(false);
+		finestraCorrente = this;
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -50,81 +55,108 @@ public class FinestraLogin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{212, 0, 212, 0};
-		gbl_contentPane.rowHeights = new int[]{62, 62, 62, 62, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblBenvenuto = new JLabel("Esegui il Login");
+		lblBenvenuto.setBounds(151, 21, 140, 22);
 		lblBenvenuto.setFont(new Font("Verdana", Font.BOLD, 17));
 		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblBenvenuto = new GridBagConstraints();
-		gbc_lblBenvenuto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBenvenuto.gridx = 1;
-		gbc_lblBenvenuto.gridy = 0;
-		contentPane.add(lblBenvenuto, gbc_lblBenvenuto);
+		contentPane.add(lblBenvenuto);
 		
 		JLabel lblMatricola = new JLabel("Matricola");
+		lblMatricola.setBounds(54, 131, 61, 18);
 		lblMatricola.setToolTipText("");
 		lblMatricola.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblMatricola.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblMatricola = new GridBagConstraints();
-		gbc_lblMatricola.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMatricola.gridx = 0;
-		gbc_lblMatricola.gridy = 1;
-		contentPane.add(lblMatricola, gbc_lblMatricola);
+		contentPane.add(lblMatricola);
 		
 		textFieldMatricola = new JTextField();
+		textFieldMatricola.setBounds(246, 128, 106, 24);
 		textFieldMatricola.setToolTipText("Inserisci Matricola");
 		lblMatricola.setLabelFor(textFieldMatricola);
 		textFieldMatricola.setFont(new Font("Verdana", Font.PLAIN, 14));
 		textFieldMatricola.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldMatricola.setColumns(10);
-		GridBagConstraints gbc_textFieldMatricola = new GridBagConstraints();
-		gbc_textFieldMatricola.gridwidth = 2;
-		gbc_textFieldMatricola.ipadx = 99;
-		gbc_textFieldMatricola.weighty = 1.0;
-		gbc_textFieldMatricola.weightx = 2.0;
-		gbc_textFieldMatricola.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldMatricola.gridx = 1;
-		gbc_textFieldMatricola.gridy = 1;
-		contentPane.add(textFieldMatricola, gbc_textFieldMatricola);
+		contentPane.add(textFieldMatricola);
 		
 		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setBounds(54, 179, 67, 18);
 		lblPassword.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 2;
-		contentPane.add(lblPassword, gbc_lblPassword);
+		contentPane.add(lblPassword);
 		
 		passwordFieldMatricola = new JPasswordField();
+		passwordFieldMatricola.setBounds(246, 176, 106, 24);
 		lblPassword.setLabelFor(passwordFieldMatricola);
 		passwordFieldMatricola.setFont(new Font("Verdana", Font.PLAIN, 14));
 		passwordFieldMatricola.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_passwordFieldMatricola = new GridBagConstraints();
-		gbc_passwordFieldMatricola.gridwidth = 2;
-		gbc_passwordFieldMatricola.ipadx = 99;
-		gbc_passwordFieldMatricola.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordFieldMatricola.gridx = 1;
-		gbc_passwordFieldMatricola.gridy = 2;
-		contentPane.add(passwordFieldMatricola, gbc_passwordFieldMatricola);
+		contentPane.add(passwordFieldMatricola);
+		
+		JLabel lblTipoLogin = new JLabel("Professione");
+		lblTipoLogin.setToolTipText("");
+		lblTipoLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTipoLogin.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblTipoLogin.setBounds(54, 79, 81, 18);
+		contentPane.add(lblTipoLogin);
+		
+		final Choice choiceProfessione = new Choice();
+		choiceProfessione.setBounds(246, 77, 106, 20);
+		contentPane.add(choiceProfessione);
+		
+		choiceProfessione.add("Medico Veterinario");
+		choiceProfessione.add("Tecnico");
+		choiceProfessione.add("Ricercatore");
+		choiceProfessione.add("Operatore");
 		
 		JButton btnConferma = new JButton("Accedi");
+		btnConferma.setBounds(333, 211, 77, 27);
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
+				
+				try {
+					
+					//Ottenimento della scelta
+					int scelta = choiceProfessione.getSelectedIndex();
+					
+					/*Scelta la professione come Medico Veterinario*/
+					if(scelta == 0) {
+						/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
+						
+						/*Se l'utente non esiste nel DB allora si lancia un eccezione con il seguente messaggio
+						 * 
+						 *  "Utente non presente, credenziali errate o professione errata!"
+						 *  
+						 *  Altrimenti si mostra il menu*/
+					}
+					/*Scelta la professione come Tecnico*/
+					else if(scelta == 1) {
+						
+					}
+					/*Scelta la professione come Ricercatore*/
+					else if(scelta == 2) {
+						
+					}
+					/*Scelta la professione come Operatore*/
+					else if(scelta == 3) {
+						
+					}
+					else {
+						throw new EccezioneLogin("Scelta professione errata");
+					}
+					
+				}
+				catch(EccezioneLogin e1) {
+					e1.MostraJDialogErroreScelta(finestraCorrente);
+				}
+				
+
+				
+				/*Per ovviare a tante Frame Menu, passiamo al controller la scelta ed in base a quest'ultima si settano i bottoni nel menu*/
 				controller.AvviaMenu();
 			}
 		});
 		btnConferma.setFont(new Font("Verdana", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnConferma = new GridBagConstraints();
-		gbc_btnConferma.gridx = 2;
-		gbc_btnConferma.gridy = 3;
-		contentPane.add(btnConferma, gbc_btnConferma);
+		contentPane.add(btnConferma);
+		
 	}
-
 }
