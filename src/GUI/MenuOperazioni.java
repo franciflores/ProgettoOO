@@ -106,54 +106,78 @@ public class MenuOperazioni extends JFrame {
 		horizontalStrut_1.setBounds(298, 61, 54, 19);
 		contentPane.add(horizontalStrut_1);
 
-		JLabel lblNewLabel = new JLabel("Operatore");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(20, 93, 85, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblOperatore = new JLabel("Operatore");
+		lblOperatore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOperatore.setBounds(20, 193, 85, 14);
+		contentPane.add(lblOperatore);
 
 		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setBounds(115, 87, 12, 263);
+		verticalStrut.setBounds(115, 176, 12, 174);
 		contentPane.add(verticalStrut);
 
-		JLabel lblNewLabel_1 = new JLabel("Medico");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(135, 93, 91, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblMedico = new JLabel("Medico");
+		lblMedico.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMedico.setBounds(135, 193, 91, 14);
+		contentPane.add(lblMedico);
 
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		horizontalStrut_2.setBounds(10, 296, 464, 18);
 		contentPane.add(horizontalStrut_2);
 
-		JLabel lblNewLabel_2 = new JLabel("Tecnico Laboratorio");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(258, 93, 94, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblTecnicoLab = new JLabel("Tecnico Laboratorio");
+		lblTecnicoLab.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTecnicoLab.setBounds(258, 193, 94, 14);
+		contentPane.add(lblTecnicoLab);
 
-		JLabel lblNewLabel_3 = new JLabel("Ricercatore");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBounds(382, 93, 92, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblRicercatore = new JLabel("Ricercatore");
+		lblRicercatore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicercatore.setBounds(382, 193, 92, 14);
+		contentPane.add(lblRicercatore);
 
-		JButton btnNewButton = new JButton("che cosa fa l'operatore?");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnOperatore = new JButton("Cibo per Vasca");
+		btnOperatore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.ApriFinestraCibo();
 			}
 		});
-		btnNewButton.setBounds(16, 113, 89, 23);
-		contentPane.add(btnNewButton);
+		btnOperatore.setBounds(4, 213, 113, 23);
+		contentPane.add(btnOperatore);
 
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		verticalStrut_1.setBounds(236, 87, 12, 263);
+		verticalStrut_1.setBounds(236, 176, 12, 174);
 		contentPane.add(verticalStrut_1);
 
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		verticalStrut_2.setBounds(360, 93, 12, 263);
+		verticalStrut_2.setBounds(360, 176, 12, 180);
 		contentPane.add(verticalStrut_2);
 		
-		JButton btnNewButton_1 = new JButton("Compila Cartella");
-		btnNewButton_1.setBounds(137, 113, 91, 23);
-		contentPane.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnCompilaCartella = new JButton("Compila Cartella");
+		btnCompilaCartella.setBounds(125, 213, 113, 23);
+		contentPane.add(btnCompilaCartella);
+		
+		JButton btnTecnico = new JButton("BtnTecnico");
+		btnTecnico.setBounds(245, 213, 117, 23);
+		contentPane.add(btnTecnico);
+		
+		JButton btnRicercatore = new JButton("BtnRicercatore");
+		btnRicercatore.setBounds(372, 213, 107, 23);
+		contentPane.add(btnRicercatore);
+		
+		JButton btnModificaTartaruga = new JButton("Modifica Tartaruga ");
+		btnModificaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnModificaTartaruga.setBounds(178, 104, 124, 21);
+		contentPane.add(btnModificaTartaruga);
+		
+		JButton btnStatoTartaruga = new JButton("Stato Tartaruga");
+		btnStatoTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnStatoTartaruga.setBounds(350, 103, 124, 21);
+		contentPane.add(btnStatoTartaruga);
+		
+		JButton btnVediTartarughe = new JButton("Vedi Tartarughe");
+		btnVediTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnVediTartarughe.setBounds(10, 103, 117, 21);
+		contentPane.add(btnVediTartarughe);
+		btnCompilaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowCartellaFrame();
 			}

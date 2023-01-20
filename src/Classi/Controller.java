@@ -20,6 +20,7 @@ public class Controller {
 	FinestraVasca finestraVasca;
 	FinestraCentro finestraCentro;
 	FinestraCartella finestraCartellaMedica;
+	FinestraCiboDato finestraCiboDato;
 	
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
@@ -90,6 +91,11 @@ public class Controller {
 
 	public void ProceduraTerminata(JFrame frame) {
 		JOptionPane.showConfirmDialog(frame, "Congratulazioni, inserimento completato!", "Procedura Terminata", JOptionPane.OK_OPTION);
+	}
+	
+	public void ApriFinestraCibo() {
+		menu.setVisible(false);
+		finestraCiboDato = new FinestraCiboDato(this);
 	}
 
 	public void CreaCartella() {
