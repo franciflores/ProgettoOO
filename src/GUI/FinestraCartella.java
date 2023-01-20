@@ -3,7 +3,6 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -27,6 +26,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 
 public class FinestraCartella extends JFrame {
 
@@ -46,6 +46,17 @@ public class FinestraCartella extends JFrame {
 	private JComboBox comboBoxCollo;
 	private JComboBox comboBoxPinne;
 	private JComboBox comboBoxCoda;
+	private JLabel lblTesta;
+	private JLabel lblOcchi;
+	private JLabel lblNaso;
+	private JLabel lblBecco;
+	private JLabel lblCollo;
+	private JLabel lblPinne;
+	private JLabel lblCoda;
+	private JCheckBox chckbxChiudiCartella;
+	private JLabel lblChiusura;
+	private JCheckBox chckbxRilasciata;
+	private JCheckBox chckbxDeceduta;
 
 	/**
 	 * Create the frame.
@@ -100,6 +111,8 @@ public class FinestraCartella extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AccendiCheck(e,chckbxPeso, chckbxLarghezza, chckbxLunghezza);
 				AccendiBox(e, comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxBecco, comboBoxCollo, comboBoxPinne, comboBoxCoda);
+				AccendiLabel(e, lblTesta, lblOcchi, lblNaso, lblBecco, lblCollo, lblPinne, lblCoda);
+				AccendiChiusura(e, chckbxChiudiCartella);
 			}
 		});
 		
@@ -154,7 +167,8 @@ public class FinestraCartella extends JFrame {
 		jSpinnerLunghezza.setBounds(281, 133, 103, 20);
 		contentPane.add(jSpinnerLunghezza);
 		
-		JLabel lblTesta = new JLabel("Testa");
+		lblTesta = new JLabel("Testa");
+		lblTesta.setEnabled(false);
 		lblTesta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTesta.setBounds(13, 178, 53, 14);
 		contentPane.add(lblTesta);
@@ -167,7 +181,8 @@ public class FinestraCartella extends JFrame {
 		contentPane.add(comboBoxTesta);
 
 
-		JLabel lblOcchi = new JLabel("Occhi");
+		lblOcchi = new JLabel("Occhi");
+		lblOcchi.setEnabled(false);
 		lblOcchi.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOcchi.setBounds(13, 209, 53, 14);
 		contentPane.add(lblOcchi);
@@ -179,7 +194,8 @@ public class FinestraCartella extends JFrame {
 		comboBoxOcchi.setBounds(71, 205, 351, 22);
 		contentPane.add(comboBoxOcchi);
 
-		JLabel lblNaso = new JLabel("Naso");
+		lblNaso = new JLabel("Naso");
+		lblNaso.setEnabled(false);
 		lblNaso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNaso.setBounds(13, 240, 53, 14);
 		contentPane.add(lblNaso);
@@ -191,7 +207,8 @@ public class FinestraCartella extends JFrame {
 		comboBoxNaso.setBounds(71, 236, 351, 22);
 		contentPane.add(comboBoxNaso);
 
-		JLabel lblBecco = new JLabel("Becco");
+		lblBecco = new JLabel("Becco");
+		lblBecco.setEnabled(false);
 		lblBecco.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBecco.setBounds(13, 271, 53, 14);
 		contentPane.add(lblBecco);
@@ -203,7 +220,8 @@ public class FinestraCartella extends JFrame {
 		comboBoxBecco.setBounds(71, 267, 351, 22);
 		contentPane.add(comboBoxBecco);
 
-		JLabel lblCollo = new JLabel("Collo");
+		lblCollo = new JLabel("Collo");
+		lblCollo.setEnabled(false);
 		lblCollo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCollo.setBounds(13, 302, 53, 14);
 		contentPane.add(lblCollo);
@@ -215,7 +233,8 @@ public class FinestraCartella extends JFrame {
 		comboBoxCollo.setBounds(71, 298, 351, 22);
 		contentPane.add(comboBoxCollo);
 
-		JLabel lblPinne = new JLabel("Pinne");
+		lblPinne = new JLabel("Pinne");
+		lblPinne.setEnabled(false);
 		lblPinne.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPinne.setBounds(13, 333, 53, 14);
 		contentPane.add(lblPinne);
@@ -227,7 +246,8 @@ public class FinestraCartella extends JFrame {
 		comboBoxPinne.setBounds(71, 329, 351, 22);
 		contentPane.add(comboBoxPinne);
 
-		JLabel lblCoda = new JLabel("Coda");
+		lblCoda = new JLabel("Coda");
+		lblCoda.setEnabled(false);
 		lblCoda.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoda.setBounds(13, 364, 53, 14);
 		contentPane.add(lblCoda);
@@ -239,62 +259,116 @@ public class FinestraCartella extends JFrame {
 		comboBoxCoda.setBounds(71, 360, 351, 22);
 		contentPane.add(comboBoxCoda);
 		
-		JCheckBox chckbxDataChiusura = new JCheckBox("Data Chiusura");
-		chckbxDataChiusura.setFont(new Font("Verdana", Font.BOLD, 11));
-		chckbxDataChiusura.setBounds(71, 403, 136, 23);
-		contentPane.add(chckbxDataChiusura);
+		chckbxChiudiCartella = new JCheckBox("Chiudi la Cartella");
+		chckbxChiudiCartella.setEnabled(false);
+		chckbxChiudiCartella.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				ChiudiCartella(e,textFieldDataChiusura, lblChiusura, chckbxRilasciata, chckbxDeceduta);
+			}
+		});
+		chckbxChiudiCartella.setFont(new Font("Verdana", Font.BOLD, 11));
+		chckbxChiudiCartella.setBounds(71, 403, 136, 23);
+		contentPane.add(chckbxChiudiCartella);
 		
 		textFieldDataChiusura = new JTextField();
+		textFieldDataChiusura.setVisible(false);
 		textFieldDataChiusura.setBounds(281, 405, 103, 20);
 		contentPane.add(textFieldDataChiusura);
 		textFieldDataChiusura.setColumns(10);
 		
-		JLabel lblChiusura = new JLabel("Specificare il motivo della chiusura");
+		lblChiusura = new JLabel("Specificare il motivo della chiusura");
+		lblChiusura.setVisible(false);
 		lblChiusura.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChiusura.setFont(new Font("Verdana", Font.BOLD, 14));
 		lblChiusura.setBounds(58, 438, 313, 18);
 		contentPane.add(lblChiusura);
 		
-		JCheckBox chckbxRilasciata = new JCheckBox("Tartaruga Rilasciata");
+		chckbxRilasciata = new JCheckBox("Tartaruga Rilasciata");
+		chckbxRilasciata.setVisible(false);
+		chckbxRilasciata.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				SpuntaUna(e, chckbxDeceduta);
+			}
+		});
 		chckbxRilasciata.setFont(new Font("Verdana", Font.PLAIN, 11));
 		chckbxRilasciata.setBounds(37, 465, 159, 23);
 		contentPane.add(chckbxRilasciata);
 		
-		JCheckBox chckbxDeceduta = new JCheckBox("Tartaruga Deceduta");
+		chckbxDeceduta = new JCheckBox("Tartaruga Deceduta");
+		chckbxDeceduta.setVisible(false);
+		chckbxDeceduta.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e2) {
+				SpuntaUna(e2, chckbxRilasciata);
+			}
+		});
 		chckbxDeceduta.setFont(new Font("Verdana", Font.PLAIN, 11));
 		chckbxDeceduta.setBounds(241, 465, 143, 23);
 		contentPane.add(chckbxDeceduta);
 		}	
 	
-	public void StatoBottoneCambiato(ItemEvent Evento, Object JOggetto) {
+	public void StatoBottoneCambiato(ItemEvent Evento, JSpinner JOggetto) {
 		if(Evento.getStateChange()==1) {
-			((JSpinner) JOggetto).setEnabled(true);
+			JOggetto.setEnabled(true);
 		}
 		else {
-			((JSpinner) JOggetto).setEnabled(false);
+			JOggetto.setEnabled(false);
 		}
 	}
 	public void AccendiCheck(ActionEvent Evento, JCheckBox Check1, JCheckBox Check2, JCheckBox Check3){
 		if(Evento.ACTION_PERFORMED==1001) {
-			((Component) Check1).setEnabled(true);
-			((Component) Check2).setEnabled(true);
-			((Component) Check3).setEnabled(true);
+			Check1.setEnabled(true);
+			Check2.setEnabled(true);
+			Check3.setEnabled(true);
 		}
 	}
 	public void AccendiBox(ActionEvent Evento, JComboBox Box1, JComboBox Box2, JComboBox Box3, JComboBox Box4, JComboBox Box5, JComboBox Box6, JComboBox Box7){
 		if(Evento.ACTION_PERFORMED==1001) {
-			((Component) Box1).setEnabled(true);
-			((Component) Box2).setEnabled(true);
-			((Component) Box3).setEnabled(true);
-			((Component) Box4).setEnabled(true);
-			((Component) Box5).setEnabled(true);
-			((Component) Box6).setEnabled(true);
-			((Component) Box7).setEnabled(true);
+			Box1.setEnabled(true);
+			Box2.setEnabled(true);
+			Box3.setEnabled(true);
+			Box4.setEnabled(true);
+			Box5.setEnabled(true);
+			Box6.setEnabled(true);
+			Box7.setEnabled(true);
 		}
 }
-	//public void AccendiLabel(ActionEvent Evento, Object Lab1, Object Lab2, Object Lab3, Object Lab4, Object Lab5, Object Lab6, Object Lab7)
-	//public void AccendiChiusura(ActionEvent Evento, Object CheckData, Object Testo, Object LabChiusura, Object CheckR, Object CheckD)
+	public void AccendiLabel(ActionEvent Evento, JLabel Lab1, JLabel Lab2,JLabel Lab3, JLabel Lab4, JLabel Lab5,JLabel Lab6, JLabel Lab7){
+		if(Evento.ACTION_PERFORMED==1001) {
+			Lab1.setEnabled(true);
+			Lab2.setEnabled(true);
+			Lab3.setEnabled(true);
+			Lab4.setEnabled(true);
+			Lab5.setEnabled(true);
+			Lab6.setEnabled(true);
+			Lab7.setEnabled(true);
+		}
 	}
-
-	
+	public void AccendiChiusura(ActionEvent Evento, JCheckBox CheckData) {
+		if(Evento.ACTION_PERFORMED==1001) {
+			CheckData.setEnabled(true);
+		}
+	}
+	public void ChiudiCartella(ItemEvent Evento, JTextField JOggetto, JLabel JEtichetta, JCheckBox JCbox1, JCheckBox JCbox2) {
+		if(Evento.getStateChange()==1) {
+			JOggetto.setVisible(true);
+			JEtichetta.setVisible(true);
+			JCbox1.setVisible(true);
+			JCbox2.setVisible(true);
+		}
+		else {
+			JOggetto.setVisible(false);
+			JEtichetta.setVisible(false);
+			JCbox1.setVisible(false);
+			JCbox2.setVisible(false);
+		}
+	}
+	public void SpuntaUna(ItemEvent Evento, JCheckBox Cbox) {
+		if(Evento.getStateChange()==1) {
+			 Cbox.setEnabled(false);
+			}
+		else {
+			Cbox.setEnabled(true);
+		}
+	}
+}
 
