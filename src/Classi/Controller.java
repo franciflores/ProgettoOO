@@ -21,6 +21,7 @@ public class Controller {
 	FinestraCentro finestraCentro;
 	FinestraCartella finestraCartellaMedica;
 	FinestraCiboDato finestraCiboDato;
+	FinestraListaTartarugheCentro finestraListaTartarugheCentro;
 	
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
@@ -96,12 +97,19 @@ public class Controller {
 	public void ApriFinestraCibo() {
 		menu.setVisible(false);
 		finestraCiboDato = new FinestraCiboDato(this);
+		finestraCiboDato.setVisible(true);
 	}
 
 	public void CreaCartella() {
 		menu.setVisible(false);
 		finestraCartellaMedica = new FinestraCartella(this);
 		finestraCartellaMedica.setVisible(true);
+	}
+	
+	public void CreaFinestraListaTartarugheCentro() {
+		menu.setVisible(false);
+		finestraListaTartarugheCentro = new FinestraListaTartarugheCentro(this);
+		finestraListaTartarugheCentro.setVisible(true);
 	}
 
 

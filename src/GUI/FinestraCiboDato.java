@@ -15,6 +15,8 @@ import javax.swing.JSpinner;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FinestraCiboDato extends JFrame {
 
@@ -223,6 +225,11 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(chckbxVegetali_1);
 		
 		JButton btnAnnulla = new JButton("Annulla");
+		btnAnnulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.RitornoMenu(finestraCorrente);
+			}
+		});
 		btnAnnulla.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				c.RitornoMenu(finestraCorrente);

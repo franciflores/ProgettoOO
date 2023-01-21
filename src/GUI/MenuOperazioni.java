@@ -177,6 +177,16 @@ public class MenuOperazioni extends JFrame {
 		btnVediTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnVediTartarughe.setBounds(10, 103, 117, 21);
 		contentPane.add(btnVediTartarughe);
+		
+		JButton btnListaTartarughe = new JButton("Lista Tartaruga");
+		btnListaTartarughe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.CreaFinestraListaTartarugheCentro();
+			}
+		});
+		btnListaTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnListaTartarughe.setBounds(10, 144, 124, 21);
+		contentPane.add(btnListaTartarughe);
 		btnCompilaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowCartellaFrame();
