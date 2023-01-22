@@ -49,7 +49,8 @@ create table Personale (
 	matricola bigserial primary key,
 	nome VARCHAR(50) not null,
 	cognome VARCHAR(50) not null,
-	professione ruolo not null
+	professione ruolo not null,
+	password VARCHAR(50) not null
 );
 
 create type valutazione as enum ('compromesso', 'con ferite profonde', 'con ferite superficiali', 'buona', 'perfetta');

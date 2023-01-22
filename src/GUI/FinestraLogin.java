@@ -119,10 +119,11 @@ public class FinestraLogin extends JFrame {
 					
 					String matricolaText = textFieldMatricola.getText();
 					String professioneText = choiceProfessione.getSelectedItem();
+					String passwordText = passwordFieldMatricola.getText();
 						
 					/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
 						
-					esistenzaAddetto = controller.esistePersonaleDB(matricolaText, professioneText);
+					esistenzaAddetto = controller.esistePersonaleDB(matricolaText, professioneText, passwordText);
 						
 					if(esistenzaAddetto) {
 							

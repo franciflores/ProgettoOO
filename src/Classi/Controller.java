@@ -137,12 +137,12 @@ public class Controller {
 	}
 	
 	/*Metodi per comunicare con gli oggetti DAO*/
-	public boolean esistePersonaleDB(String matricola, String professione) {
+	public boolean esistePersonaleDB(String matricola, String professione, String password) {
 		
 		boolean esistenza = false;
 		
 		try {
-			esistenza = personaleDao.esistePersonale(matricola, professione, connessione);
+			esistenza = personaleDao.esistePersonale(matricola, professione, password, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

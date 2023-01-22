@@ -4,15 +4,15 @@ import java.sql.*;
 
 public class PersonaleDao {
 	
-	public boolean esistePersonale(String matricola, String ruolo, Connection connessioneDB) throws SQLException {
+	public boolean esistePersonale(String matricola, String ruolo, String password,  Connection connessioneDB) throws SQLException {
 		
-		String sqlQuery = "Select * from personale where professione = '" + ruolo + "' and matricola = '" + matricola + "';";
+		String sqlQuery = "Select * from personale where professione = '" + ruolo + "' and matricola = '" + matricola + "' and password = '" + password + "' ;";
 		boolean exist = false;
 		
 		Statement query = connessioneDB.createStatement();
 		ResultSet rs = query.executeQuery(sqlQuery);
 		
-		/*Se l'oggetto result set non è vuoto allora esiste un addetto con queste caratteristiche*/
+		/*Se l'oggetto result set non ï¿½ vuoto allora esiste un addetto con queste caratteristiche*/
 		if(rs.next()) {
 			exist = true;
 		}
@@ -28,7 +28,7 @@ public class PersonaleDao {
 		Statement query = connessioneDB.createStatement();
 		ResultSet rs = query.executeQuery(sqlQuery);
 		
-		/*Se l'oggetto result set non è vuoto allora recupero il nome dell'addetto*/
+		/*Se l'oggetto result set non ï¿½ vuoto allora recupero il nome dell'addetto*/
 		if(rs.next()) {
 			nomeAddetto = rs.getString("nome");
 		}
