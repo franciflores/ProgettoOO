@@ -34,7 +34,7 @@ public class MenuOperazioni extends JFrame {
 	 * Create the frame.
 	 * @param nomeAddetto 
 	 */
-	public MenuOperazioni(final Controller controller, String nomeAddetto) {
+	public MenuOperazioni(final Controller controller, String nomeAddetto, String professione) {
 		setResizable(false);
 		setTitle("Menu Operazioni");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,33 +107,13 @@ public class MenuOperazioni extends JFrame {
 		horizontalStrut_1.setBounds(298, 61, 54, 19);
 		contentPane.add(horizontalStrut_1);
 
-		JLabel lblOperatore = new JLabel("Operatore");
-		lblOperatore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOperatore.setBounds(20, 193, 85, 14);
-		contentPane.add(lblOperatore);
-
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setBounds(115, 176, 12, 174);
 		contentPane.add(verticalStrut);
 
-		JLabel lblMedico = new JLabel("Medico");
-		lblMedico.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMedico.setBounds(135, 193, 91, 14);
-		contentPane.add(lblMedico);
-
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		horizontalStrut_2.setBounds(10, 296, 464, 18);
 		contentPane.add(horizontalStrut_2);
-
-		JLabel lblTecnicoLab = new JLabel("Tecnico Laboratorio");
-		lblTecnicoLab.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTecnicoLab.setBounds(258, 193, 94, 14);
-		contentPane.add(lblTecnicoLab);
-
-		JLabel lblRicercatore = new JLabel("Ricercatore");
-		lblRicercatore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRicercatore.setBounds(382, 193, 92, 14);
-		contentPane.add(lblRicercatore);
 
 		JButton btnOperatore = new JButton("Cibo per Vasca");
 		btnOperatore.addActionListener(new ActionListener() {
@@ -155,14 +135,9 @@ public class MenuOperazioni extends JFrame {
 		JButton btnCompilaCartella = new JButton("Compila Cartella");
 		btnCompilaCartella.setBounds(125, 213, 113, 23);
 		contentPane.add(btnCompilaCartella);
-		
-		JButton btnTecnico = new JButton("BtnTecnico");
-		btnTecnico.setBounds(245, 213, 117, 23);
-		contentPane.add(btnTecnico);
-		
-		JButton btnRicercatore = new JButton("BtnRicercatore");
-		btnRicercatore.setBounds(372, 213, 107, 23);
-		contentPane.add(btnRicercatore);
+		if(!professione.equals("Medico")) {
+			btnCompilaCartella.setEnabled(false);
+		}
 		
 		JButton btnModificaTartaruga = new JButton("Modifica Tartaruga ");
 		btnModificaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -186,8 +161,15 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnListaTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnListaTartarughe.setBounds(10, 144, 124, 21);
+		btnListaTartarughe.setBounds(248, 214, 124, 21);
 		contentPane.add(btnListaTartarughe);
+		
+		JLabel lblOperazioniTart = new JLabel("Operazioni Tartarughe");
+		lblOperazioniTart.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOperazioniTart.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblOperazioniTart.setBounds(10, 176, 464, 18);
+		contentPane.add(lblOperazioniTart);
+		
 		btnCompilaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowCartellaFrame();

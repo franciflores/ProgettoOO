@@ -5,9 +5,9 @@ public class CartellaMedica {
 	private int identificativoCartella;
 	private Tartaruga tartarugaAssociata;
 	private String specieTartaruga;
-	private float lunghezzaTartaruga;
-	private float larghezzaTartaruga;
-	private float pesoTartaruga;
+	private int lunghezzaTartaruga;
+	private int larghezzaTartaruga;
+	private int pesoTartaruga;
 	private String luogoRitrovamento;
 
 	
@@ -56,7 +56,7 @@ public class CartellaMedica {
 		return lunghezzaTartaruga;
 	}
 
-	public void setLunghezzaTartaruga(float lunghezzaTartaruga) {
+	public void setLunghezzaTartaruga(int lunghezzaTartaruga) {
 		this.lunghezzaTartaruga = lunghezzaTartaruga;
 	}
 
@@ -64,7 +64,7 @@ public class CartellaMedica {
 		return larghezzaTartaruga;
 	}
 
-	public void setLarghezzaTartaruga(float larghezzaTartaruga) {
+	public void setLarghezzaTartaruga(int larghezzaTartaruga) {
 		this.larghezzaTartaruga = larghezzaTartaruga;
 	}
 
@@ -72,8 +72,8 @@ public class CartellaMedica {
 		return pesoTartaruga;
 	}
 
-	public void setPesoTartaruga(float pesoTartaruga) {
-		this.pesoTartaruga = pesoTartaruga;
+	public void setPesoTartaruga(int peso) {
+		this.pesoTartaruga = peso;
 	}
 
 	public String getLuogoRitrovamento() {

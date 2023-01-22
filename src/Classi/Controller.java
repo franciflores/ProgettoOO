@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import DAO.PersonaleDao;
+import DAO.TartarugaDao;
 import GUI.*;
 
 public class Controller {
@@ -30,6 +32,7 @@ public class Controller {
 	
 	/*Oggetti Dao*/
 	PersonaleDao personaleDao = new PersonaleDao();
+	TartarugaDao tartarugaDao = new TartarugaDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -51,10 +54,11 @@ public class Controller {
 		finestraPrincipale.setVisible(true);
 	}
 
-	/**Crea e passa alla finestra del Menu**/
-	public void AvviaMenu(String nomeAddetto) {
+	/**Crea e passa alla finestra del Menu
+	 * @param professione **/
+	public void AvviaMenu(String nomeAddetto, String professione) {
 		finestraPrincipale.setVisible(false);
-		menu = new MenuOperazioni(this, nomeAddetto);
+		menu = new MenuOperazioni(this, nomeAddetto, professione);
 		menu.setVisible(true);
 	}
 
@@ -161,6 +165,20 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return nomeAddetto;
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheByCentroDB(String idCentro){
+		ArrayList<Tartaruga> listaTratrarughe= new ArrayList<Tartaruga>();
+		
+		try {
+			listaTratrarughe = tartarugaDao.getTartarugheByCentro(idCentro, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaTratrarughe;
+		
 	}
 	
 	
