@@ -43,7 +43,7 @@ create table Centro (
 	nomeCentro VARCHAR(50) not null
 );
 
-CREATE TYPE ruolo AS ENUM ('medico', 'ricercatore', 'tecnico', 'operatore');
+CREATE TYPE ruolo AS ENUM ('Medico', 'Ricercatore', 'Tecnico', 'Operatore');
 
 create table Personale (
 	matricola bigserial primary key,

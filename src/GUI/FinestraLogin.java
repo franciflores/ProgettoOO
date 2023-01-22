@@ -103,7 +103,7 @@ public class FinestraLogin extends JFrame {
 		choiceProfessione.setBounds(246, 77, 106, 20);
 		contentPane.add(choiceProfessione);
 		
-		choiceProfessione.add("Medico Veterinario");
+		choiceProfessione.add("Medico");
 		choiceProfessione.add("Tecnico");
 		choiceProfessione.add("Ricercatore");
 		choiceProfessione.add("Operatore");
@@ -113,37 +113,28 @@ public class FinestraLogin extends JFrame {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean esistenzaAddetto = false;
+				
 				try {
 					
-					//Ottenimento della scelta
-					int scelta = choiceProfessione.getSelectedIndex();
-					
-					/*Scelta la professione come Medico Veterinario*/
-					if(scelta == 0) {
-						/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
+					String matricolaText = textFieldMatricola.getText();
+					String professioneText = choiceProfessione.getSelectedItem();
 						
-						/*Se l'utente non esiste nel DB allora si lancia un eccezione con il seguente messaggio
-						 * 
-						 *  "Utente non presente, credenziali errate o professione errata!"
-						 *  
-						 *  Altrimenti si mostra il menu*/
-					}
-					/*Scelta la professione come Tecnico*/
-					else if(scelta == 1) {
+					/*Aggiungere il controllo sull'accesso per mostrare il Menu*/
 						
-					}
-					/*Scelta la professione come Ricercatore*/
-					else if(scelta == 2) {
+					esistenzaAddetto = controller.esistePersonaleDB(matricolaText, professioneText);
 						
-					}
-					/*Scelta la professione come Operatore*/
-					else if(scelta == 3) {
-						
+					if(esistenzaAddetto) {
+							
+						String nomeAddetto = controller.getNomeByMatricolaDB(matricolaText);
+							
+						/*Per ovviare a tante Frame Menu, passiamo al controller la scelta ed in base a quest'ultima si settano i bottoni nel menu*/
+						controller.AvviaMenu(nomeAddetto);
 					}
 					else {
-						throw new EccezioneLogin("Scelta professione errata");
+						throw new EccezioneLogin("Utente non presente, credenziali errate o professione errata!");
 					}
-					
+						
 				}
 				catch(EccezioneLogin e1) {
 					e1.MostraJDialogErroreScelta(finestraCorrente);
@@ -151,8 +142,7 @@ public class FinestraLogin extends JFrame {
 				
 
 				
-				/*Per ovviare a tante Frame Menu, passiamo al controller la scelta ed in base a quest'ultima si settano i bottoni nel menu*/
-				controller.AvviaMenu();
+
 			}
 		});
 		btnConferma.setFont(new Font("Verdana", Font.PLAIN, 14));

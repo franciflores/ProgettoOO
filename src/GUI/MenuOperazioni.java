@@ -32,8 +32,9 @@ public class MenuOperazioni extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param nomeAddetto 
 	 */
-	public MenuOperazioni(final Controller controller) {
+	public MenuOperazioni(final Controller controller, String nomeAddetto) {
 		setResizable(false);
 		setTitle("Menu Operazioni");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +45,7 @@ public class MenuOperazioni extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblAzioni = new JLabel("\"qui metteremo 'benvenuto x' con il nome dell'utente\"");
+		JLabel lblAzioni = new JLabel("Benvenuto " + nomeAddetto);
 		lblAzioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAzioni.setBounds(10, 5, 464, 18);
 		lblAzioni.setFont(new Font("Tahoma", Font.BOLD, 13));

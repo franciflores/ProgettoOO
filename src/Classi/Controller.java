@@ -8,12 +8,12 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import DAO.PersonaleDao;
 import GUI.*;
 
 public class Controller {
 
 	//Dichiarazioni dei Frame
-	public int SceltaPanel;
 	FinestraLogin finestraPrincipale;
 	MenuOperazioni menu;
 	FinestraTartaruga finestraTart;
@@ -27,20 +27,24 @@ public class Controller {
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 	private final static String password = "Armandoegger1_"; //Temporanea
+	
+	/*Oggetti Dao*/
+	PersonaleDao personaleDao = new PersonaleDao();
 
 	static Connection connessione;
+	public int SceltaPanel;
 
 	public static void main(String[] args)
 	{
-		//try {
-		//	connessione = DriverManager.getConnection(url, user, password);
+		try {
+			connessione = DriverManager.getConnection(url, user, password);
 			Controller c = new Controller();
-		//} catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
+			e.printStackTrace();
 		}
 
-//}
+}
 	//Costruttore del Controller
 	public Controller() {
 		finestraPrincipale = new FinestraLogin(this);
@@ -48,9 +52,9 @@ public class Controller {
 	}
 
 	/**Crea e passa alla finestra del Menu**/
-	public void AvviaMenu() {
+	public void AvviaMenu(String nomeAddetto) {
 		finestraPrincipale.setVisible(false);
-		menu = new MenuOperazioni(this);
+		menu = new MenuOperazioni(this, nomeAddetto);
 		menu.setVisible(true);
 	}
 
@@ -130,6 +134,33 @@ public class Controller {
 		menu.setVisible(false);
 		finestraCartellaMedica = new FinestraCartella(this);
 		finestraCartellaMedica.setVisible(true);
+	}
+	
+	/*Metodi per comunicare con gli oggetti DAO*/
+	public boolean esistePersonaleDB(String matricola, String professione) {
+		
+		boolean esistenza = false;
+		
+		try {
+			esistenza = personaleDao.esistePersonale(matricola, professione, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return esistenza;
+	}
+	
+	public String getNomeByMatricolaDB(String matricola) {
+		String nomeAddetto = "";
+		
+		try {
+			nomeAddetto = personaleDao.getNomeByMatricola(matricola, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nomeAddetto;
 	}
 	
 	
