@@ -1,4 +1,4 @@
-
+﻿
 
 'Creazione Database:'
 CREATE DATABASE "DBTartarughe"
@@ -95,10 +95,8 @@ ALTER table cartellamedica add CONSTRAINT fk_id_personale FOREIGN KEY (personale
 
 create table CiboVasca(
 	idVasca bigserial ,
-	idTipo tipoCibo
+	idTipo smallserial
 );
-
-ALTER table centro add CONSTRAINT pk_id_centro Primary KEY (id);
 
 ALTER table cibovasca add CONSTRAINT fk_id_vasca FOREIGN KEY (idvasca) REFERENCES vasca (id);
 ALTER table cibovasca add CONSTRAINT fk_id_tipo FOREIGN KEY (idtipo) REFERENCES cibo (id);
