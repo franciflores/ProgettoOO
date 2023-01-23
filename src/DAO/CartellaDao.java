@@ -8,12 +8,9 @@ import javax.swing.JComboBox;
 import Classi.Tartaruga;
 import Classi.CartellaMedica;
 
-
-
 public class CartellaDao {
 	
 	public void recuperaTarghe(JComboBox comboBox, Connection connessioneDB) throws SQLException{
-		ArrayList<String> listaTarghe = new ArrayList<String>();
 		
 		String sqlQueryTarghe = "Select tartarugatarga from cartellamedica;";
 		
