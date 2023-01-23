@@ -23,4 +23,18 @@ public class CartellaDao {
 		
 	}
 	
+	public int recuperaPeso(Object targa, Connection connessioneDB) throws SQLException{
+		int peso=0;
+		String sqlQuery = "Select peso from cartellamedica where tartarugatarga = '" + targa + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			peso = rs.getInt("peso");
+		}
+		
+		return peso;
+	}
+	
 }

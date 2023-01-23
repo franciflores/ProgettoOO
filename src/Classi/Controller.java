@@ -196,5 +196,17 @@ public class Controller {
 		
 	}
 	
+	public int getPesoByTarga(Object targa) {
+		int peso=0;
+		
+		try {
+			peso=cartellaDao.recuperaPeso(targa, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return peso;
+	}
 	
 }

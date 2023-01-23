@@ -97,7 +97,7 @@ public class FinestraCartella extends JFrame {
 		btnConferma.setBounds(313, 505, 111, 25);
 		contentPane.add(btnConferma);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 12));
 		comboBox.setMaximumRowCount(100);
 		controller.getTarghe(comboBox);
@@ -114,6 +114,7 @@ public class FinestraCartella extends JFrame {
 				AccendiBox(e, comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxBecco, comboBoxCollo, comboBoxPinne, comboBoxCoda);
 				AccendiLabel(e, lblTesta, lblOcchi, lblNaso, lblBecco, lblCollo, lblPinne, lblCoda);
 				AccendiChiusura(e, chckbxChiudiCartella);
+				jSpinnerPeso.setValue(controller.getPesoByTarga(comboBox.getSelectedItem()));
 			}
 		});
 		
