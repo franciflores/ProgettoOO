@@ -12,11 +12,15 @@ import javax.swing.table.DefaultTableModel;
 
 import Classi.Controller;
 import Classi.Tartaruga;
+import Eccezioni.EccezioneCentro;
+import Eccezioni.EccezioneLogin;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+
+import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -75,11 +79,19 @@ public class FinestraListaTartarugheCentro extends JFrame {
 				/*Lista per conservare cio' che otteniamo dal DB*/
 				ArrayList<Tartaruga> listaTartarugheDB = new ArrayList<Tartaruga>();
 				
+				boolean esistenzaCentro = false;
+				
 				/*Array monodimensionale in cui salviamo unariga alla volta*/
 				Object[] valoriRighe = new Object[12];
 				
 				/*Ottieni il riferiemnto alla tabella modello che usa JTable*/
 			    DefaultTableModel modelloTabella = (DefaultTableModel) tabella.getModel();
+			    
+			    //Setta il numero di colonne a 0
+			    modelloTabella.setColumnCount(0); 
+			    
+			    //Setta il numero di righe a 0
+			    modelloTabella.setRowCount(0);
 			    
 			    /*Setta i nomi delle colonne*/
 			    modelloTabella.addColumn("Targa");
@@ -94,35 +106,47 @@ public class FinestraListaTartarugheCentro extends JFrame {
 		        modelloTabella.addColumn("Stato Occhi");
 		        modelloTabella.addColumn("Stato Pinne");
 		        modelloTabella.addColumn("Stato Testa");
-		        
-		        tabella.setEditingColumn(NORMAL);
 
 				
 				if(textFieldCodCentro.getText().length() > 0) {
 					/*Verificare mediante Dao se il centro esiste, se si' farsi ritornare la lista delle tartarughe e mostrarle mediante una JTable
 					 * altrimenti, eccezione*/
+					try {
+						esistenzaCentro = controller.esisteCentroDB(textFieldCodCentro.getText());
+						
+						if(esistenzaCentro) {
+							 listaTartarugheDB =  controller.getTartarugheByCentroDB(textFieldCodCentro.getText()); 
+							 
+							 for(Tartaruga t : listaTartarugheDB) {
+	
+								  valoriRighe[0] = t.getTarga();
+								  valoriRighe[1] = t.getNomeTartaruga();
+								  valoriRighe[2] = t.getCartellaTartaruga().getSpecieTartaruga();
+								  valoriRighe[3] = t.getCartellaTartaruga().getLarghezzaTartaruga();
+								  //valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
+								  valoriRighe[4] = t.getCartellaTartaruga().getPesoTartaruga();
+								  valoriRighe[5] = t.getDescrizioneStatoBecco();
+								  valoriRighe[6] = t.getDescrizioneStatoCoda();
+								  valoriRighe[7] = t.getDescrizioneStatoCollo();
+								  valoriRighe[8] = t.getDescrizioneStatoNaso();
+								  valoriRighe[9] = t.getDescrizioneStatoOcchi();
+								  valoriRighe[10] = t.getDescrizioneStatoPinne();
+								  valoriRighe[11] = t.getDescrizioneStatoTesta();
+								  
+								  modelloTabella.addRow(valoriRighe);
+								  
+							 }
+						}
 
-					 listaTartarugheDB =  controller.getTartarugheByCentroDB(textFieldCodCentro.getText()); 
-					 
-					 for(Tartaruga t : listaTartarugheDB) {
+						else {
+							throw new EccezioneCentro("Centro non presente!");
+						}
+						
+					}
+					catch(EccezioneCentro e1) {
+						e1.MostraJDialogErroreScelta(finestraCorrente);
+					}
 
-						  valoriRighe[0] = t.getTarga();
-						  valoriRighe[1] = t.getNomeTartaruga();
-						  valoriRighe[2] = t.getCartellaTartaruga().getSpecieTartaruga();
-						  valoriRighe[3] = t.getCartellaTartaruga().getLarghezzaTartaruga();
-						  //valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
-						  valoriRighe[4] = t.getCartellaTartaruga().getPesoTartaruga();
-						  valoriRighe[5] = t.getDescrizioneStatoBecco();
-						  valoriRighe[6] = t.getDescrizioneStatoCoda();
-						  valoriRighe[7] = t.getDescrizioneStatoCollo();
-						  valoriRighe[8] = t.getDescrizioneStatoNaso();
-						  valoriRighe[9] = t.getDescrizioneStatoOcchi();
-						  valoriRighe[10] = t.getDescrizioneStatoPinne();
-						  valoriRighe[11] = t.getDescrizioneStatoTesta();
-						  
-						  modelloTabella.addRow(valoriRighe);
-						  
-					 }	     	 
 				}
 				else {
 					JOptionPane.showMessageDialog(finestraCorrente, "Il campo non puo' essere vuoto", "Attenzione", JOptionPane.ERROR_MESSAGE);

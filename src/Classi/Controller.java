@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import DAO.CartellaDao;
+import DAO.CentroDao;
 import DAO.PersonaleDao;
 import DAO.TartarugaDao;
 import GUI.*;
@@ -37,6 +38,7 @@ public class Controller {
 	PersonaleDao personaleDao = new PersonaleDao();
 	TartarugaDao tartarugaDao = new TartarugaDao();
 	CartellaDao cartellaDao = new CartellaDao();
+	CentroDao centroDao = new CentroDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -207,6 +209,20 @@ public class Controller {
 		}
 		
 		return peso;
+	}
+	
+	public boolean esisteCentroDB(String centroId) {
+		
+		boolean esistenza = false;
+		
+		try {
+			esistenza = centroDao.esistenzaCentro(centroId, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return esistenza;
 	}
 	
 }
