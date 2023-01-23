@@ -100,6 +100,7 @@ public class FinestraCartella extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 12));
 		comboBox.setMaximumRowCount(100);
+		controller.getTarghe(comboBox);
 		comboBox.setBounds(71, 40, 136, 22);
 		contentPane.add(comboBox); //con una query sql si devono ottenere i nomi o targhe delle tartarughe in cura al centro
 		

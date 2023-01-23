@@ -78,9 +78,6 @@ ALTER TABLE tartaruga ADD COLUMN IF NOT EXISTS vascaId bigserial;
 
 ALTER table tartaruga add CONSTRAINT fk_id_vasca FOREIGN KEY (vascaId) REFERENCES vasca (id);
 
-ALTER TABLE tartaruga ADD COLUMN IF NOT EXISTS cartellaId bigserial;
-
-ALTER table tartaruga add CONSTRAINT fk_id_cartella FOREIGN KEY (cartellaId) REFERENCES cartellaMedica (id);
 
 ALTER TABLE tartaruga ADD COLUMN IF NOT EXISTS centroId bigserial;
 
@@ -93,6 +90,10 @@ ALTER table personale add CONSTRAINT fk_id_centro FOREIGN KEY (centroId) REFEREN
 ALTER TABLE cartellamedica ADD COLUMN IF NOT EXISTS personaleId bigserial;
 
 ALTER table cartellamedica add CONSTRAINT fk_id_personale FOREIGN KEY (personaleId) REFERENCES personale (matricola);
+
+ALter table cartellamedica ADD COLUMN IF NOT EXISTS tartarugatarga bigserial;
+
+ALter table cartellamedica add CONSTRAINT fk_targa_tartaruga FOREIGN KEY (tartarugatarga) REFERENCES tartaruga (targa)
 
 create table CiboVasca(
 	idVasca bigserial ,

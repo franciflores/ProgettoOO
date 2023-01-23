@@ -6,12 +6,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import DAO.CartellaDao;
 import DAO.PersonaleDao;
 import DAO.TartarugaDao;
 import GUI.*;
+
 
 public class Controller {
 
@@ -24,7 +27,7 @@ public class Controller {
 	FinestraCartella finestraCartellaMedica;
 	FinestraCiboDato finestraCiboDato;
 	FinestraListaTartarugheCentro finestraListaTartarugheCentro;
-	
+
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
@@ -33,6 +36,7 @@ public class Controller {
 	/*Oggetti Dao*/
 	PersonaleDao personaleDao = new PersonaleDao();
 	TartarugaDao tartarugaDao = new TartarugaDao();
+	CartellaDao cartellaDao = new CartellaDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -178,6 +182,17 @@ public class Controller {
 		}
 		
 		return listaTratrarughe;
+		
+	}
+	
+	public void getTarghe(JComboBox comboBox){
+		
+		try {
+			cartellaDao.recuperaTarghe(comboBox, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
