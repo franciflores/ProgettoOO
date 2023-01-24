@@ -30,6 +30,8 @@ public class Controller {
 	FinestraCartella finestraCartellaMedica;
 	FinestraCiboDato finestraCiboDato;
 	FinestraListaTartarugheCentro finestraListaTartarugheCentro;
+	FinestraStoriaTartaruga finestraStoriaTartaruga;
+	FinestraStatistiche finestraStatistiche;
 
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
@@ -149,6 +151,18 @@ public class Controller {
 		finestraCartellaMedica.setVisible(true);
 	}
 	
+	public void CreaFinestraStoriaTartarughe() {
+		menu.setVisible(false);
+		finestraStoriaTartaruga = new FinestraStoriaTartaruga(this);
+		finestraStoriaTartaruga.setVisible(true);
+	}
+	
+	public void CreaFinestraStatistiche() {
+		menu.setVisible(false);
+		finestraStatistiche = new FinestraStatistiche(this);
+		finestraStatistiche.setVisible(true);
+	}
+	
 	/*Metodi per comunicare con gli oggetti DAO*/
 	public boolean esistePersonaleDB(String matricola, String professione, String password) {
 		
@@ -181,6 +195,20 @@ public class Controller {
 		
 		try {
 			listaTratrarughe = tartarugaDao.getTartarugheByCentro(idCentro, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaTratrarughe;
+		
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheByTargaDB(String targa){
+		ArrayList<Tartaruga> listaTratrarughe= new ArrayList<Tartaruga>();
+		
+		try {
+			listaTratrarughe = tartarugaDao.getTartarugheByTarga(targa, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -355,6 +383,58 @@ public void getIdVasca(JComboBox comboBox){
 		}
 		
 		return esistenza;
+	}
+	
+	public boolean esistenzaTargaDB(String targa) {
+		boolean esistenza = false;
+		
+		try {
+			esistenza = tartarugaDao.esistenzaTarga(targa, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return esistenza;
+	}
+	
+	public Integer tartarugheRilasciateDB(String dataInizio, String dataFine){
+		Integer nTartRilasciate = 0;
+		
+		try {
+			nTartRilasciate = tartarugaDao.tartarugheRilasciate(dataInizio, dataFine,connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nTartRilasciate;
+	}
+	
+	public Integer tartarugheMorteDB(String dataInizio, String dataFine){
+		Integer nTartMorte = 0;
+		
+		try {
+			nTartMorte = tartarugaDao.tartarugheMorte(dataInizio, dataFine,connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nTartMorte;
+	}
+	
+	public Integer tartarugheAmmesseDB(String dataInizio, String dataFine){
+		Integer nTartAmmesse = 0;
+		
+		try {
+			nTartAmmesse = tartarugaDao.tartarugheAmmesse(dataInizio, dataFine,connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nTartAmmesse;
 	}
 	
 }

@@ -133,7 +133,7 @@ public class MenuOperazioni extends JFrame {
 		contentPane.add(verticalStrut_2);
 		
 		JButton btnCompilaCartella = new JButton("Compila Cartella");
-		btnCompilaCartella.setBounds(125, 213, 113, 23);
+		btnCompilaCartella.setBounds(161, 213, 141, 23);
 		contentPane.add(btnCompilaCartella);
 		if(!professione.equals("Medico")) {
 			btnCompilaCartella.setEnabled(false);
@@ -161,7 +161,7 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnListaTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnListaTartarughe.setBounds(248, 214, 124, 21);
+		btnListaTartarughe.setBounds(350, 213, 124, 22);
 		contentPane.add(btnListaTartarughe);
 		
 		JLabel lblOperazioniTart = new JLabel("Operazioni Tartarughe");
@@ -169,6 +169,26 @@ public class MenuOperazioni extends JFrame {
 		lblOperazioniTart.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblOperazioniTart.setBounds(10, 176, 464, 18);
 		contentPane.add(lblOperazioniTart);
+		
+		JButton btnStoriaTartaruga = new JButton("Storia Tartaruga");
+		btnStoriaTartaruga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.CreaFinestraStoriaTartarughe();
+			}
+		});
+		btnStoriaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnStoriaTartaruga.setBounds(10, 262, 113, 23);
+		contentPane.add(btnStoriaTartaruga);
+		
+		JButton btnStatistiche = new JButton("Statistiche Tartarughe");
+		btnStatistiche.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.CreaFinestraStatistiche();
+			}
+		});
+		btnStatistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnStatistiche.setBounds(163, 262, 139, 23);
+		contentPane.add(btnStatistiche);
 		
 		btnCompilaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -1,85 +1,85 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Classi.Controller;
 import Classi.Tartaruga;
-import Eccezioni.EccezioneCentro;
-import Eccezioni.EccezioneLogin;
+import Eccezioni.EccezioneTartaruga;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 
-import javax.management.modelmbean.ModelMBeanOperationInfo;
-import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class FinestraListaTartarugheCentro extends JFrame {
+public class FinestraStoriaTartaruga extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame finestraCorrente;
-	private JTextField textFieldCodCentro;
+	private JTextField textFieldTargaTart;
 	private JTable tabella;
-
 	/**
 	 * Create the frame.
 	 */
-	public FinestraListaTartarugheCentro(final Controller controller) {
-		setTitle("Tartarughe di un Centro");
+	public FinestraStoriaTartaruga(final Controller controller) {
 		finestraCorrente = this;
-		tabella = new JTable();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 713, 300);
+		setBounds(100, 100, 734, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblDescrizione = new JLabel("Inserisci il codice di un centro");
-		lblDescrizione.setBounds(113, 27, 206, 46);
-		lblDescrizione.setToolTipText("");
-		lblDescrizione.setFont(new Font("Verdana", Font.BOLD, 12));
-		lblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblDescrizione);
+		JLabel lblInserisciLaTarga = new JLabel("<html>Inserisci la targa di una tartaruga <br/>per mostrare la sua storia</html>");
+		lblInserisciLaTarga.setToolTipText("");
+		lblInserisciLaTarga.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInserisciLaTarga.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblInserisciLaTarga.setBounds(141, 37, 206, 46);
+		contentPane.add(lblInserisciLaTarga);
+		
+		textFieldTargaTart = new JTextField();
+		textFieldTargaTart.setColumns(10);
+		textFieldTargaTart.setBounds(446, 50, 151, 22);
+		contentPane.add(textFieldTargaTart);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(26, 110, 663, 96);
+		contentPane.add(scrollPane);
+		
+		tabella = new JTable();
+		scrollPane.setViewportView(tabella);
 		
 		JButton btnAnnulla = new JButton("Annulla");
-		btnAnnulla.setBounds(10, 225, 111, 25);
 		btnAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.RitornoMenu(finestraCorrente);
 			}
 		});
 		btnAnnulla.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnAnnulla.setBounds(26, 225, 111, 25);
 		contentPane.add(btnAnnulla);
 		
-		textFieldCodCentro = new JTextField();
-		textFieldCodCentro.setBounds(418, 40, 151, 22);
-		textFieldCodCentro.setColumns(10);
-		contentPane.add(textFieldCodCentro);			
-		
 		JButton btnContinua = new JButton("Continua");
-		btnContinua.setBounds(562, 225, 111, 25);
 		btnContinua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				/*Lista per conservare cio' che otteniamo dal DB*/
 				ArrayList<Tartaruga> listaTartarugheDB = new ArrayList<Tartaruga>();
 				
-				boolean esistenzaCentro = false;
+				boolean esistenzaTarga = false;
 				
 				/*Array monodimensionale in cui salviamo unariga alla volta*/
 				Object[] valoriRighe = new Object[12];
@@ -108,14 +108,14 @@ public class FinestraListaTartarugheCentro extends JFrame {
 		        modelloTabella.addColumn("Stato Testa");
 
 				
-				if(textFieldCodCentro.getText().length() > 0) {
+				if(textFieldTargaTart.getText().length() > 0) {
 					/*Verificare mediante Dao se il centro esiste, se si' farsi ritornare la lista delle tartarughe e mostrarle mediante una JTable
 					 * altrimenti, eccezione*/
 					try {
-						esistenzaCentro = controller.esisteCentroDB(textFieldCodCentro.getText());
+						esistenzaTarga = controller.esistenzaTargaDB(textFieldTargaTart.getText());
 						
-						if(esistenzaCentro) {
-							 listaTartarugheDB =  controller.getTartarugheByCentroDB(textFieldCodCentro.getText()); 
+						if(esistenzaTarga) {
+							 listaTartarugheDB =  controller.getTartarugheByTargaDB(textFieldTargaTart.getText()); 
 							 
 							 for(Tartaruga t : listaTartarugheDB) {
 	
@@ -139,11 +139,11 @@ public class FinestraListaTartarugheCentro extends JFrame {
 						}
 
 						else {
-							throw new EccezioneCentro("Targa non presente!");
+							throw new EccezioneTartaruga("Targa non presente!");
 						}
 						
 					}
-					catch(EccezioneCentro e1) {
+					catch(EccezioneTartaruga e1) {
 						e1.MostraJDialogErroreScelta(finestraCorrente);
 					}
 
@@ -152,20 +152,10 @@ public class FinestraListaTartarugheCentro extends JFrame {
 					JOptionPane.showMessageDialog(finestraCorrente, "Il campo non puo' essere vuoto", "Attenzione", JOptionPane.ERROR_MESSAGE);
 				}
 				
-
 			}
 		});
-		
-
-		
 		btnContinua.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnContinua.setBounds(578, 225, 111, 25);
 		contentPane.add(btnContinua);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 104, 663, 96);
-		contentPane.add(scrollPane);
-		
-		tabella = new JTable();
-		scrollPane.setViewportView(tabella);
 	}
 }
