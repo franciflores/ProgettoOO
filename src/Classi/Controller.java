@@ -187,10 +187,10 @@ public class Controller {
 		
 	}
 	
-	public void getTarghe(JComboBox comboBox){
+	public void getId(JComboBox comboBox){
 		
 		try {
-			cartellaDao.recuperaTarghe(comboBox, connessione);
+			cartellaDao.recuperaId(comboBox, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -198,17 +198,127 @@ public class Controller {
 		
 	}
 	
-	public int getPesoByTarga(Object targa) {
+	public int getPesoById(Object id) {
 		int peso=0;
 		
 		try {
-			peso=cartellaDao.recuperaPeso(targa, connessione);
+			peso=cartellaDao.recuperaPeso(id, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return peso;
+	}
+	
+	public int getLarghezzaById(Object id) {
+		int larghezza=0;
+		
+		try {
+			larghezza=cartellaDao.recuperaLarghezza(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return larghezza;
+	}
+	
+	public int getLunghezzaById(Object id) {
+		int lunghezza=0;
+		
+		try {
+			lunghezza=cartellaDao.recuperaLunghezza(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lunghezza;
+	}
+	
+	public String getTestaById(Object id) {
+		String testa="";
+		
+		try {
+			testa=cartellaDao.recuperaTesta(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return testa;
+	}
+	
+	public String getOcchiById(Object id) {
+		String occhi="";
+		
+		try {
+			occhi=cartellaDao.recuperaOcchi(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return occhi;
+	}
+	
+	public String getNasoById(Object id) {
+		String naso="";
+		
+		try {
+			naso=cartellaDao.recuperaNaso(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return naso;
+	}
+	
+	public String getBeccoById(Object id) {
+		String becco="";
+		
+		try {
+			becco=cartellaDao.recuperaBecco(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return becco;
+	}
+	
+	public String getColloById(Object id) {
+		String collo="";
+		
+		try {
+			collo=cartellaDao.recuperaCollo(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return collo;
+	}
+	
+	public String getPinneById(Object id) {
+		String pinne="";
+		
+		try {
+			pinne=cartellaDao.recuperaPinne(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pinne;
+	}
+	
+	public String getCodaById(Object id) {
+		String coda="";
+		
+		try {
+			coda=cartellaDao.recuperaCoda(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return coda;
 	}
 	
 	public boolean esisteCentroDB(String centroId) {

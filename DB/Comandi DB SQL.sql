@@ -14,12 +14,36 @@ Parte del progetto "CARTELLA MEDICA DI TARTARUGHE MARINE" assegnato dall''Univer
 
 'smallserial sta ad indicare un auto increment (presente in MySQL)'
 create table Tartaruga (
-	targa BigSerial primary key,
+	id BigSerial primary key,
+	targa Varchar(50) not null 
 	nome VARCHAR(50) not null,
 	primoAccesso VARCHAR(50) not null,
 	morta VARCHAR(50) not null,
 	rilasciata VARCHAR(50) not null
 );
+
+alter table tartaruga 
+drop constraint tartaruga_pkey cascade;
+
+alter table cartellamedica
+drop tartarugatarga;
+
+alter table presaincarico
+drop idtartaruga;
+
+alter table tartaruga 
+add column id bigserial primary key;
+
+alter table tartaruga 
+alter column targa SET DATA TYPE VARCHAR(50);
+
+alter table cartellamedica
+add column tartarugaid bigserial,
+add constraint fk_id_tartaruga foreign key (tartarugaid) references tartaruga(id);
+
+alter table presaincarico
+add column tartarugaid bigserial,
+add constraint fk_id_tartaruga foreign key (tartarugaid) references tartaruga(id);
 
 create table Vasca (
 	id bigserial primary key,
@@ -53,7 +77,10 @@ create table Personale (
 	password VARCHAR(50) not null
 );
 
-create type valutazione as enum ('compromesso', 'con ferite profonde', 'con ferite superficiali', 'buona', 'perfetta');
+create type valutazione as enum ('Compromesso', 'Con ferite profonde', 'Con ferite superficiali', 'Buona', 'Perfetta');
+//per la funzionalità del programma, è necessario che la prima lettera del valore di valutazione sia maiuscola, controllate
+//sia cosi, altrimenti usate il seguente comando con annesso esempi, per ognuno dei valori
+ALTER TYPE valutazione RENAME VALUE 'con ferite profonde' TO 'Con ferite profonde';
 
 create table CartellaMedica (
 	id bigserial primary key,
@@ -62,6 +89,7 @@ create table CartellaMedica (
 	dataRitrovamento DATE not null,
 	peso INT not null,
 	larghezza INT not null,
+	lunghezza INT not null,
 	specie VARCHAR(50) not null,
 	sesso VARCHAR(50) not null,
 	descrizione VARCHAR(50),
@@ -91,9 +119,9 @@ ALTER TABLE cartellamedica ADD COLUMN IF NOT EXISTS personaleId bigserial;
 
 ALTER table cartellamedica add CONSTRAINT fk_id_personale FOREIGN KEY (personaleId) REFERENCES personale (matricola);
 
-ALter table cartellamedica ADD COLUMN IF NOT EXISTS tartarugatarga bigserial;
+ALter table cartellamedica ADD COLUMN IF NOT EXISTS tartarugaid bigserial;
 
-ALter table cartellamedica add CONSTRAINT fk_targa_tartaruga FOREIGN KEY (tartarugatarga) REFERENCES tartaruga (targa)
+ALter table cartellamedica add CONSTRAINT fk_id_tartaruga FOREIGN KEY (tartarugaid) REFERENCES tartaruga (id)
 
 create table CiboVasca(
 	idVasca bigserial ,
@@ -108,4 +136,4 @@ create table PresaInCarico(
 	idTartaruga bigserial
 );
 ALTER table PresaInCarico add CONSTRAINT fk_id_personale FOREIGN KEY (idPersonale) REFERENCES personale (matricola);
-ALTER table PresaInCarico add CONSTRAINT fk_id_tartaruga FOREIGN KEY (idTartaruga) REFERENCES tartaruga (targa);
+ALTER table PresaInCarico add CONSTRAINT fk_id_tartaruga FOREIGN KEY (idTartaruga) REFERENCES tartaruga (id);

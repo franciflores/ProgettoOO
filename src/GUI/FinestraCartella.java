@@ -100,9 +100,9 @@ public class FinestraCartella extends JFrame {
 		final JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 12));
 		comboBox.setMaximumRowCount(100);
-		controller.getTarghe(comboBox);
+		controller.getId(comboBox);
 		comboBox.setBounds(71, 40, 136, 22);
-		contentPane.add(comboBox); //con una query sql si devono ottenere i nomi o targhe delle tartarughe in cura al centro
+		contentPane.add(comboBox); 
 		
 		JButton btnContinua = new JButton("Continua");
 		btnContinua.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -114,7 +114,16 @@ public class FinestraCartella extends JFrame {
 				AccendiBox(e, comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxBecco, comboBoxCollo, comboBoxPinne, comboBoxCoda);
 				AccendiLabel(e, lblTesta, lblOcchi, lblNaso, lblBecco, lblCollo, lblPinne, lblCoda);
 				AccendiChiusura(e, chckbxChiudiCartella);
-				jSpinnerPeso.setValue(controller.getPesoByTarga(comboBox.getSelectedItem()));
+				jSpinnerPeso.setValue(controller.getPesoById(comboBox.getSelectedItem()));
+				jSpinnerLarghezza.setValue(controller.getLarghezzaById(comboBox.getSelectedItem()));
+				jSpinnerLunghezza.setValue(controller.getLunghezzaById(comboBox.getSelectedItem()));
+				comboBoxTesta.setSelectedItem(controller.getTestaById(comboBox.getSelectedItem()));
+				comboBoxOcchi.setSelectedItem(controller.getOcchiById(comboBox.getSelectedItem()));
+				comboBoxNaso.setSelectedItem(controller.getNasoById(comboBox.getSelectedItem()));
+				comboBoxBecco.setSelectedItem(controller.getBeccoById(comboBox.getSelectedItem()));
+				comboBoxCollo.setSelectedItem(controller.getColloById(comboBox.getSelectedItem()));
+				comboBoxPinne.setSelectedItem(controller.getPinneById(comboBox.getSelectedItem()));
+				comboBoxCoda.setSelectedItem(controller.getCodaById(comboBox.getSelectedItem()));
 			}
 		});
 		
