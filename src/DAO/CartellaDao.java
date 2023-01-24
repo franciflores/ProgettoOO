@@ -1,12 +1,9 @@
 package DAO;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 
-import Classi.Tartaruga;
-import Classi.CartellaMedica;
 
 public class CartellaDao {
 	

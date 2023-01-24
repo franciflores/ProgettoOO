@@ -14,6 +14,7 @@ import DAO.CartellaDao;
 import DAO.CentroDao;
 import DAO.PersonaleDao;
 import DAO.TartarugaDao;
+import DAO.CiboVascaDao;
 import GUI.*;
 
 
@@ -39,6 +40,7 @@ public class Controller {
 	TartarugaDao tartarugaDao = new TartarugaDao();
 	CartellaDao cartellaDao = new CartellaDao();
 	CentroDao centroDao = new CentroDao();
+	CiboVascaDao ciboVascaDao = new CiboVascaDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -187,6 +189,16 @@ public class Controller {
 		
 	}
 	
+	
+public void getIdVasca(JComboBox comboBox){
+		
+		try {
+			ciboVascaDao.recuperaId(comboBox, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void getId(JComboBox comboBox){
 		
 		try {

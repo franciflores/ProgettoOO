@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -32,7 +33,7 @@ public class FinestraCartella extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame finestraCorrente;
-	private JTextField textFieldDataChiusura;
+	private JLabel lblDataChiusura;
 	private JSpinner jSpinnerLunghezza;
 	private JSpinner jSpinnerLarghezza;
 	private JSpinner jSpinnerPeso;
@@ -274,18 +275,19 @@ public class FinestraCartella extends JFrame {
 		chckbxChiudiCartella.setEnabled(false);
 		chckbxChiudiCartella.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				ChiudiCartella(e,textFieldDataChiusura, lblChiusura, chckbxRilasciata, chckbxDeceduta);
+				ChiudiCartella(e,lblDataChiusura, lblChiusura, chckbxRilasciata, chckbxDeceduta);
 			}
 		});
 		chckbxChiudiCartella.setFont(new Font("Verdana", Font.BOLD, 11));
-		chckbxChiudiCartella.setBounds(71, 403, 136, 23);
+		chckbxChiudiCartella.setBounds(45, 403, 136, 23);
 		contentPane.add(chckbxChiudiCartella);
 		
-		textFieldDataChiusura = new JTextField();
-		textFieldDataChiusura.setVisible(false);
-		textFieldDataChiusura.setBounds(281, 405, 103, 20);
-		contentPane.add(textFieldDataChiusura);
-		textFieldDataChiusura.setColumns(10);
+		lblDataChiusura = new JLabel(Calendar.getInstance().getTime().toString());
+		lblDataChiusura.setVisible(false);
+		lblDataChiusura.setFont(new Font("Verdana", Font.BOLD, 11));
+		lblDataChiusura.setBounds(213, 405, 211, 18);
+		contentPane.add(lblDataChiusura);
+		
 		
 		lblChiusura = new JLabel("Specificare il motivo della chiusura");
 		lblChiusura.setVisible(false);
@@ -359,7 +361,7 @@ public class FinestraCartella extends JFrame {
 			CheckData.setEnabled(true);
 		}
 	}
-	public void ChiudiCartella(ItemEvent Evento, JTextField JOggetto, JLabel JEtichetta, JCheckBox JCbox1, JCheckBox JCbox2) {
+	public void ChiudiCartella(ItemEvent Evento, JLabel JOggetto, JLabel JEtichetta, JCheckBox JCbox1, JCheckBox JCbox2) {
 		if(Evento.getStateChange()==1) {
 			JOggetto.setVisible(true);
 			JEtichetta.setVisible(true);
