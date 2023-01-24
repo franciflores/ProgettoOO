@@ -91,7 +91,8 @@ public class FinestraCartella extends JFrame {
 		JButton btnConferma = new JButton("Conferma");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				controller.setPesoLarghezzaLunghezzaCartella(jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
+				controller.RitornoMenu(finestraCorrente);
 			}
 		});
 		btnConferma.setFont(new Font("Verdana", Font.BOLD, 12));

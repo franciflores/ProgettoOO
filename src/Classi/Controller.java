@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 
 import DAO.CartellaDao;
 import DAO.CentroDao;
@@ -331,6 +332,15 @@ public void getIdVasca(JComboBox comboBox){
 			e.printStackTrace();
 		}
 		return coda;
+	}
+	
+	public void setPesoLarghezzaLunghezzaCartella(JSpinner peso, JSpinner larghezza, JSpinner lunghezza) {
+		try {
+			cartellaDao.aggiornaCartellaPesoLarghezzaLunghezza(peso, larghezza, lunghezza, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean esisteCentroDB(String centroId) {

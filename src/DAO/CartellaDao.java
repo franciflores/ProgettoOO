@@ -3,6 +3,7 @@ package DAO;
 import java.sql.*;
 
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 
 
 public class CartellaDao {
@@ -160,4 +161,10 @@ public class CartellaDao {
 		return coda;
 	}
 	
+	public void aggiornaCartellaPesoLarghezzaLunghezza(JSpinner peso, JSpinner larghezza, JSpinner lunghezza, Connection connessioneDB) throws SQLException{
+		String sqlQuery = "Update cartellamedica set peso='"+peso.getValue()+"', larghezza='"+larghezza.getValue()+"', lunghezza='"+lunghezza.getValue()+"';";
+		
+		Statement query = connessioneDB.createStatement();
+		query.executeUpdate(sqlQuery);
+	}
 }
