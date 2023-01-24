@@ -58,8 +58,16 @@ create table Cibo (
 	id smallserial primary key,
 	tipo tipoCibo not null,
 	kgDato INT,
-	kgMangiati INT
+	kgMangiati INT,
+	vascaid bigserial
 );
+
+
+drop table cibovasca cascade;
+
+alter table cibo
+add column vascaid bigserial,
+add constraint fk_id_vasca foreign key (vascaid) references vasca(id);
 
 create table Centro (
 	id bigserial primary key,
@@ -123,13 +131,6 @@ ALter table cartellamedica ADD COLUMN IF NOT EXISTS tartarugaid bigserial;
 
 ALter table cartellamedica add CONSTRAINT fk_id_tartaruga FOREIGN KEY (tartarugaid) REFERENCES tartaruga (id)
 
-create table CiboVasca(
-	idVasca bigserial ,
-	idTipo smallserial
-);
-
-ALTER table cibovasca add CONSTRAINT fk_id_vasca FOREIGN KEY (idvasca) REFERENCES vasca (id);
-ALTER table cibovasca add CONSTRAINT fk_id_tipo FOREIGN KEY (idtipo) REFERENCES cibo (id);
 
 create table PresaInCarico(
 	idPersonale bigserial ,
