@@ -40,6 +40,7 @@ public class FinestraCartella extends JFrame {
 	private JCheckBox chckbxPeso;
 	private JCheckBox chckbxLarghezza;
 	private JCheckBox chckbxLunghezza;
+	private JComboBox comboBox;
 	private JComboBox comboBoxTesta;
 	private JComboBox comboBoxOcchi;
 	private JComboBox comboBoxNaso;
@@ -91,7 +92,9 @@ public class FinestraCartella extends JFrame {
 		JButton btnConferma = new JButton("Conferma");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.setPesoLarghezzaLunghezzaCartella(jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
+				controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
+				controller.setValutazioneCartella(comboBox.getSelectedItem(), comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxCollo, comboBoxBecco, comboBoxPinne, comboBoxCoda);
+				chiudiCartellaData(e, chckbxDeceduta, chckbxRilasciata, controller);
 				controller.RitornoMenu(finestraCorrente);
 			}
 		});
@@ -99,7 +102,7 @@ public class FinestraCartella extends JFrame {
 		btnConferma.setBounds(313, 505, 111, 25);
 		contentPane.add(btnConferma);
 		
-		final JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 12));
 		comboBox.setMaximumRowCount(100);
 		controller.getId(comboBox);
@@ -384,5 +387,16 @@ public class FinestraCartella extends JFrame {
 			Cbox.setEnabled(true);
 		}
 	}
+	
+	public void chiudiCartellaData (ActionEvent evento, JCheckBox check1, JCheckBox check2, Controller controller) {
+		if (check1.isSelected()) {
+			controller.setDataChiusura(comboBox.getSelectedItem());
+			controller.setMorte(comboBox.getSelectedItem());
+		} else if (check2.isSelected()) {
+			controller.setDataChiusura(comboBox.getSelectedItem());
+		}
+	
+	}
 }
+
 

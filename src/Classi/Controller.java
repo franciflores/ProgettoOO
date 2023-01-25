@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
+import DAO.RilascioDao;
 import DAO.CartellaDao;
 import DAO.CentroDao;
 import DAO.PersonaleDao;
@@ -32,6 +33,7 @@ public class Controller {
 	FinestraListaTartarugheCentro finestraListaTartarugheCentro;
 	FinestraStoriaTartaruga finestraStoriaTartaruga;
 	FinestraStatistiche finestraStatistiche;
+	FinestraRilascio finestraRilascio;
 
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
@@ -44,6 +46,7 @@ public class Controller {
 	CartellaDao cartellaDao = new CartellaDao();
 	CentroDao centroDao = new CentroDao();
 	CiboVascaDao ciboVascaDao = new CiboVascaDao();
+	RilascioDao rilascioDao= new RilascioDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -161,6 +164,12 @@ public class Controller {
 		menu.setVisible(false);
 		finestraStatistiche = new FinestraStatistiche(this);
 		finestraStatistiche.setVisible(true);
+	}
+	
+	public void CreaRilascio() {
+		menu.setVisible(false);
+		finestraRilascio = new FinestraRilascio(this);
+		finestraRilascio.setVisible(true);
 	}
 	
 	/*Metodi per comunicare con gli oggetti DAO*/
@@ -362,13 +371,60 @@ public void getIdVasca(JComboBox comboBox){
 		return coda;
 	}
 	
-	public void setPesoLarghezzaLunghezzaCartella(JSpinner peso, JSpinner larghezza, JSpinner lunghezza) {
+	public void setPesoLarghezzaLunghezzaCartella(Object id, JSpinner peso, JSpinner larghezza, JSpinner lunghezza) {
 		try {
-			cartellaDao.aggiornaCartellaPesoLarghezzaLunghezza(peso, larghezza, lunghezza, connessione);
+			cartellaDao.aggiornaCartellaPesoLarghezzaLunghezza(id, peso, larghezza, lunghezza, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setValutazioneCartella(Object id, JComboBox testa, JComboBox occhi, JComboBox naso, JComboBox collo, JComboBox becco, JComboBox pinne, JComboBox coda) {
+		try {
+			cartellaDao.aggiornaCartellaValutazione(id, testa, occhi, naso, collo, becco, pinne, coda, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setDataChiusura(Object id) {
+		try {
+			cartellaDao.chiudiCartella(id, connessione);
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setMorte(Object id) {
+		try {
+			tartarugaDao.morteTartaruga(id, connessione);
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getIdRilascio(JComboBox combobox) {
+		try {
+			rilascioDao.recuperaId(combobox, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void setRilascio(Object id) {
+		try {
+			rilascioDao.rilascio(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public boolean esisteCentroDB(String centroId) {

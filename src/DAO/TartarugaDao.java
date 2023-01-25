@@ -17,14 +17,14 @@ public class TartarugaDao {
 		 	CartellaMedica cartellaCorrente;
 		 
 		 	
-		 	String sqlQueryTartaruga = "select * from tartaruga, cartellamedica where tartaruga.cartellaid = cartellamedica.id and centroid = '" + idCentro + "';";
+		 	String sqlQueryTartaruga = "select * from tartaruga, cartellamedica where tartaruga.id = cartellamedica.tartarugaid and centroid = '" + idCentro + "';";
 		 	
 		 
 			Statement queryTart = connessioneDB.createStatement();
 			ResultSet rsTart = queryTart.executeQuery(sqlQueryTartaruga);
 			
 			
-			/*Se l'oggetto result set non è vuoto allora esiste un addetto con queste caratteristiche*/
+			/*Se l'oggetto result set non ï¿½ vuoto allora esiste un addetto con queste caratteristiche*/
 			while(rsTart.next()) {
 				/*Creazione Tartaruga*/
 				tartarugaCorrente.setTarga(rsTart.getString("targa"));
@@ -78,7 +78,7 @@ public class TartarugaDao {
 	 	CartellaMedica cartellaCorrente;
 	 
 	 	
-	 	String sqlQueryTartaruga = "select * from tartaruga, cartellamedica where tartaruga.cartellaid = cartellamedica.id and tartaruga.targa = '" + targa + "';";
+	 	String sqlQueryTartaruga = "select * from tartaruga, cartellamedica where tartaruga.id = cartellamedica.tartarugaid and tartaruga.targa = '" + targa + "';";
 	 	
 	 
 		Statement queryTart = connessioneDB.createStatement();
@@ -173,5 +173,10 @@ public class TartarugaDao {
 		return nTartAmmesse;
 	}
 
-
+	public void morteTartaruga(Object id, Connection connessioneDB) throws SQLException{
+		
+		String queryMorte="Update tartaruga set morta='true' where id='"+id+"';";
+		Statement query = connessioneDB.createStatement();
+		query.executeUpdate(queryMorte);
+	}
 }
