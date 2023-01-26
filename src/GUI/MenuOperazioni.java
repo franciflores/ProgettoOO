@@ -34,11 +34,11 @@ public class MenuOperazioni extends JFrame {
 	 * Create the frame.
 	 * @param nomeAddetto 
 	 */
-	public MenuOperazioni(final Controller controller, String nomeAddetto, String professione) {
+	public MenuOperazioni(final Controller controller, String nomeAddetto,String ruoloAddetto) {
 		setResizable(false);
 		setTitle("Menu Operazioni");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
+		setBounds(100, 100, 500, 255);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -52,7 +52,7 @@ public class MenuOperazioni extends JFrame {
 		contentPane.add(lblAzioni);
 
 		JButton btnNuovaTartaruga = new JButton("Nuova Tartaruga");
-		btnNuovaTartaruga.setBounds(178, 61, 124, 21);
+		btnNuovaTartaruga.setBounds(10, 63, 141, 21);
 		btnNuovaTartaruga.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
@@ -62,14 +62,8 @@ public class MenuOperazioni extends JFrame {
 				controller.ShowTartarugaFrame();
 			}
 		});
-		btnNuovaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnNuovaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		contentPane.add(btnNuovaTartaruga);
-
-		JLabel lblOperazioni = new JLabel("Operazioni");
-		lblOperazioni.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOperazioni.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblOperazioni.setBounds(10, 34, 464, 18);
-		contentPane.add(lblOperazioni);
 
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
@@ -78,81 +72,33 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnLogOut.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnLogOut.setBounds(397, 332, 77, 18);
+		btnLogOut.setBounds(397, 195, 77, 18);
 		contentPane.add(btnLogOut);
 
-		JButton btnStatoVasche = new JButton("Info sul Centro");
-		btnStatoVasche.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStatoVasche.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnStatoVasche.setBounds(10, 61, 117, 21);
-		contentPane.add(btnStatoVasche);
-
-		JButton btnCompilaCartelle = new JButton("Vedi Statistiche");
-		btnCompilaCartelle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCompilaCartelle.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnCompilaCartelle.setBounds(350, 61, 124, 21);
-		contentPane.add(btnCompilaCartelle);
-
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		horizontalStrut.setBounds(125, 63, 54, 19);
-		contentPane.add(horizontalStrut);
-
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setBounds(298, 61, 54, 19);
-		contentPane.add(horizontalStrut_1);
-
-		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setBounds(115, 176, 12, 174);
-		contentPane.add(verticalStrut);
-
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setBounds(10, 296, 464, 18);
-		contentPane.add(horizontalStrut_2);
-
 		JButton btnOperatore = new JButton("Cibo per Vasca");
+		btnOperatore.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		if(!ruoloAddetto.equals("Operatore") && !ruoloAddetto.equals("Tecnico"))
+			btnOperatore.setEnabled(false);
 		btnOperatore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ApriFinestraCibo();
 			}
 		});
-		btnOperatore.setBounds(4, 213, 113, 23);
+		btnOperatore.setBounds(10, 158, 141, 21);
 		contentPane.add(btnOperatore);
-
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		verticalStrut_1.setBounds(236, 176, 12, 174);
-		contentPane.add(verticalStrut_1);
-
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		verticalStrut_2.setBounds(360, 176, 12, 180);
-		contentPane.add(verticalStrut_2);
 		
-		JButton btnCompilaCartella = new JButton("Compila Cartella");
-		btnCompilaCartella.setBounds(161, 213, 141, 23);
-		contentPane.add(btnCompilaCartella);
-		if(!professione.equals("Medico")) {
-			btnCompilaCartella.setEnabled(false);
-		}
+		JButton btnAggiornaCartella = new JButton("Aggiorna Cartella");
+		btnAggiornaCartella.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnAggiornaCartella.setBounds(171, 157, 141, 23);
+		contentPane.add(btnAggiornaCartella);
+		if(!ruoloAddetto.equals("Medico")) {
+			btnAggiornaCartella.setEnabled(false);}
 		
-		JButton btnModificaTartaruga = new JButton("Modifica Tartaruga ");
+		
+		JButton btnModificaTartaruga = new JButton("Modifica Tartaruga");
 		btnModificaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnModificaTartaruga.setBounds(178, 104, 124, 21);
+		btnModificaTartaruga.setBounds(333, 63, 141, 21);
 		contentPane.add(btnModificaTartaruga);
-		
-		JButton btnStatoTartaruga = new JButton("Stato Tartaruga");
-		btnStatoTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnStatoTartaruga.setBounds(350, 103, 124, 21);
-		contentPane.add(btnStatoTartaruga);
-		
-		JButton btnVediTartarughe = new JButton("Vedi Tartarughe");
-		btnVediTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnVediTartarughe.setBounds(10, 103, 117, 21);
-		contentPane.add(btnVediTartarughe);
 		
 		JButton btnListaTartarughe = new JButton("Lista Tartaruga");
 		btnListaTartarughe.addActionListener(new ActionListener() {
@@ -160,14 +106,14 @@ public class MenuOperazioni extends JFrame {
 				controller.CreaFinestraListaTartarugheCentro();
 			}
 		});
-		btnListaTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnListaTartarughe.setBounds(350, 213, 124, 22);
+		btnListaTartarughe.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnListaTartarughe.setBounds(171, 62, 141, 22);
 		contentPane.add(btnListaTartarughe);
 		
 		JLabel lblOperazioniTart = new JLabel("Operazioni Tartarughe");
 		lblOperazioniTart.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOperazioniTart.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblOperazioniTart.setBounds(10, 176, 464, 18);
+		lblOperazioniTart.setBounds(10, 34, 464, 18);
 		contentPane.add(lblOperazioniTart);
 		
 		JButton btnStoriaTartaruga = new JButton("Storia Tartaruga");
@@ -176,8 +122,8 @@ public class MenuOperazioni extends JFrame {
 				controller.CreaFinestraStoriaTartarughe();
 			}
 		});
-		btnStoriaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnStoriaTartaruga.setBounds(4, 262, 113, 23);
+		btnStoriaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnStoriaTartaruga.setBounds(50, 95, 141, 23);
 		contentPane.add(btnStoriaTartaruga);
 		
 		JButton btnStatistiche = new JButton("Statistiche Tartarughe");
@@ -186,20 +132,41 @@ public class MenuOperazioni extends JFrame {
 				controller.CreaFinestraStatistiche();
 			}
 		});
-		btnStatistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnStatistiche.setBounds(161, 262, 141, 23);
+		btnStatistiche.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnStatistiche.setBounds(293, 95, 141, 23);
 		contentPane.add(btnStatistiche);
 		
 		JButton btnRilascia = new JButton("Rilascia Tartaruga");
-		btnRilascia.setBounds(350, 262, 124, 23);
+		btnRilascia.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnRilascia.setBounds(333, 157, 141, 23);
+		if(!ruoloAddetto.equals("Ricercatore"))
+			btnRilascia.setEnabled(false);
 		contentPane.add(btnRilascia);
+		
+		JLabel lblOperazioniVasche = new JLabel("Operatore\\Tecnico");
+		lblOperazioniVasche.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOperazioniVasche.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblOperazioniVasche.setBounds(10, 129, 141, 18);
+		contentPane.add(lblOperazioniVasche);
+		
+		JLabel lblMedico = new JLabel("Medico");
+		lblMedico.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMedico.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblMedico.setBounds(171, 129, 141, 18);
+		contentPane.add(lblMedico);
+		
+		JLabel lblRicercatore = new JLabel("Ricercatore");
+		lblRicercatore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicercatore.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblRicercatore.setBounds(333, 128, 141, 18);
+		contentPane.add(lblRicercatore);
 		btnRilascia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.CreaRilascio();
 			}
 		});
 		
-		btnCompilaCartella.addActionListener(new ActionListener() {
+		btnAggiornaCartella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.ShowCartellaFrame();
 			}
