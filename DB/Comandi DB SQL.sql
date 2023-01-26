@@ -138,3 +138,5 @@ create table PresaInCarico(
 );
 ALTER table PresaInCarico add CONSTRAINT fk_id_personale FOREIGN KEY (idPersonale) REFERENCES personale (matricola);
 ALTER table PresaInCarico add CONSTRAINT fk_id_tartaruga FOREIGN KEY (idTartaruga) REFERENCES tartaruga (id);
+
+ALTER TABLE cibo ADD COLUMN IF NOT EXISTS dataVersamento date;
