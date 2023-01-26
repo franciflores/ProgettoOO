@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Controller;
-import Eccezioni.EccezioneValoreNumerico;
+import Eccezioni.EccezioneTartaruga;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -217,20 +217,21 @@ public class FinestraTartaruga extends JFrame {
 						Double valorePeso;
 						Double lunghezza;
 						Double larghezza;
+						EccezioneTartaruga eccezione = new EccezioneTartaruga();
 						
 						valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
 						lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
 						larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
 						
-						if(valorePeso <= 0 || lunghezza <= 0 || larghezza <= 0) {
-							throw new EccezioneValoreNumerico("Non posso esistere valore negativi o prossimi allo 0");
+						if(!eccezione.verificaMisure(valorePeso, larghezza, lunghezza)) {
+							throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
 						}
 						
 					}
 					catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
-					} catch (EccezioneValoreNumerico e1) {
-						e1.MostraJDialogErrore(finestraCorrente);
+					} catch (EccezioneTartaruga e1) {
+						e1.MostraJDialogErroreScelta(finestraCorrente);
 					}
 				}
 			});
@@ -422,6 +423,8 @@ public class FinestraTartaruga extends JFrame {
 			btnContinua.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					EccezioneTartaruga eccezione = new EccezioneTartaruga();
+					
 					
 					try {
 						
@@ -429,8 +432,8 @@ public class FinestraTartaruga extends JFrame {
 							Double valorePeso;
 							valorePeso = Double.parseDouble(jSpinnerPesoRitrovamento.getValue().toString());
 							
-							if(valorePeso <= 0) {
-								throw new EccezioneValoreNumerico("Non posso esistere valore negativi o prossimi allo 0");
+							if(eccezione.verificaMisurePeso(valorePeso)) {
+								throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
 							}
 							
 						}
@@ -439,8 +442,8 @@ public class FinestraTartaruga extends JFrame {
 							Double lunghezza;
 							lunghezza = Double.parseDouble(jSpinnerLunghezzaRitrovamento.getValue().toString());
 							
-							if(lunghezza <= 0) {
-								throw new EccezioneValoreNumerico("Non posso esistere valore negativi o prossimi allo 0");
+							if(eccezione.verificaMisureLunghezza(lunghezza)) {
+								throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
 							}
 							
 						}
@@ -449,8 +452,8 @@ public class FinestraTartaruga extends JFrame {
 							Double larghezza;
 							larghezza = Double.parseDouble(jSpinnerLarghezzaRitrovamento.getValue().toString());
 							
-							if(larghezza <= 0) {
-								throw new EccezioneValoreNumerico("Non posso esistere valore negativi o prossimi allo 0");
+							if(eccezione.verificaMisureLarghezza(larghezza)) {
+								throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
 							}
 							
 						}
@@ -462,8 +465,8 @@ public class FinestraTartaruga extends JFrame {
 					}
 					catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
-					} catch (EccezioneValoreNumerico e1) {
-						e1.MostraJDialogErrore(finestraCorrente);
+					} catch (EccezioneTartaruga e1) {
+						e1.MostraJDialogErroreScelta(finestraCorrente);
 					}
 
 					

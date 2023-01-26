@@ -3,17 +3,17 @@ package Eccezioni;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class EccezioneValoreNumerico extends Exception{
+public class EccezioneCibo extends Exception{
 	
 	String messaggioErrore;
 
-    public EccezioneValoreNumerico(String messaggio) {
+    public EccezioneCibo(String messaggio) {
         super(messaggio);
         messaggioErrore = messaggio;
     }
     
     public void MostraJDialogErrore(JFrame finestraCorrente) {
-    	JOptionPane.showMessageDialog(finestraCorrente, messaggioErrore, "Attenzione", JOptionPane.OK_OPTION);
+    	JOptionPane.showMessageDialog(finestraCorrente,  messaggioErrore, "Attenzione", JOptionPane.OK_OPTION);
     }
 
 }

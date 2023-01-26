@@ -5,8 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Classi.Controller;
+import Classi.Tartaruga;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class FinestraStatistiche extends JFrame {
@@ -104,6 +107,13 @@ public class FinestraStatistiche extends JFrame {
 				boolean dataValida = dataValida(textFieldDataInizio, textFieldDataFine);
 				
 				if(dataValida) {
+
+					/*Elimina i vecchi valori*/
+					lblTartMorte.setText("Tartarughe Morte:");
+					lblTartAmmesse.setText("Tartarughe Ammesse:");
+					lblTartRilasciate.setText("Tartarughe Rilasciate:");
+					
+					/*Valori per le JLabel dinamiche*/
 					Integer nAmmesse = controller.tartarugheAmmesseDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
 					Integer nRilasciate = controller.tartarugheRilasciateDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
 					Integer nMorte = controller.tartarugheMorteDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
@@ -111,6 +121,57 @@ public class FinestraStatistiche extends JFrame {
 					lblTartMorte.setText(lblTartMorte.getText() + nMorte);
 					lblTartAmmesse.setText(lblTartAmmesse.getText() + nAmmesse);
 					lblTartRilasciate.setText(lblTartRilasciate.getText() + nRilasciate);
+					
+					/**Creazione tabella con info delle tartarughe ammesse in questo intervallo di date**/
+					/*Lista per conservare cio' che otteniamo dal DB*/
+					ArrayList<Tartaruga> listaTartarugheDB = new ArrayList<Tartaruga>();
+					
+					/*Array monodimensionale in cui salviamo unariga alla volta*/
+					Object[] valoriRighe = new Object[12];
+					
+					/*Ottieni il riferiemnto alla tabella modello che usa JTable*/
+				    DefaultTableModel modelloTabella = (DefaultTableModel) tabella.getModel();
+				    
+				    //Setta il numero di colonne a 0
+				    modelloTabella.setColumnCount(0); 
+				    
+				    //Setta il numero di righe a 0
+				    modelloTabella.setRowCount(0);
+				    
+				    /*Setta i nomi delle colonne*/
+				    modelloTabella.addColumn("Targa");
+				    modelloTabella.addColumn("Nome");
+				    modelloTabella.addColumn("Specie");
+				    modelloTabella.addColumn("Larghezza");
+				    modelloTabella.addColumn("Peso");
+				    modelloTabella.addColumn("Stato Becco");
+				    modelloTabella.addColumn("Stato Coda");
+				    modelloTabella.addColumn("Stato Collo");
+				    modelloTabella.addColumn("Stato Naso");
+			        modelloTabella.addColumn("Stato Occhi");
+			        modelloTabella.addColumn("Stato Pinne");
+			        modelloTabella.addColumn("Stato Testa");
+			        
+			        listaTartarugheDB =  controller.getTartarugheByDateDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
+					 
+					 for(Tartaruga t : listaTartarugheDB) {
+
+						  valoriRighe[0] = t.getTarga();
+						  valoriRighe[1] = t.getNomeTartaruga();
+						  valoriRighe[2] = t.getCartellaTartaruga().getSpecieTartaruga();
+						  valoriRighe[3] = t.getCartellaTartaruga().getLarghezzaTartaruga();
+						  //valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
+						  valoriRighe[4] = t.getCartellaTartaruga().getPesoTartaruga();
+						  valoriRighe[5] = t.getDescrizioneStatoBecco();
+						  valoriRighe[6] = t.getDescrizioneStatoCoda();
+						  valoriRighe[7] = t.getDescrizioneStatoCollo();
+						  valoriRighe[8] = t.getDescrizioneStatoNaso();
+						  valoriRighe[9] = t.getDescrizioneStatoOcchi();
+						  valoriRighe[10] = t.getDescrizioneStatoPinne();
+						  valoriRighe[11] = t.getDescrizioneStatoTesta();
+						  
+						  modelloTabella.addRow(valoriRighe);
+					 }
 				}
 				else {
 					JOptionPane.showMessageDialog(finestraCorrente, "Date non valide", "Attenzione", JOptionPane.ERROR_MESSAGE);

@@ -179,4 +179,55 @@ public class TartarugaDao {
 		Statement query = connessioneDB.createStatement();
 		query.executeUpdate(queryMorte);
 	}
+	
+	public ArrayList<Tartaruga> getTartarugheByDate(String dataInizio, String dataFine, Connection connessioneDB) throws SQLException {
+	 	ArrayList<Tartaruga> listaTartarughe = new ArrayList<Tartaruga>();
+	 	
+	 	CartellaMedica cartellaCorrente;
+	 	
+	 	/*select * from tartaruga, cartellamedica where tartaruga.id = cartellamedica.tartarugaid and cartellamedica.dataapertura >= '2021-01-23' and cartellamedica.dataapertura <= '2023-01-23';*/
+	 
+	 	
+	 	String sqlQueryTartaruga = "select * from tartaruga, cartellamedica where tartaruga.id = cartellamedica.tartarugaid and cartellamedica.dataapertura >= '" + dataInizio + "'and cartellamedica.dataapertura <= '"+ dataFine +"';";
+	 	
+	 
+		Statement queryTart = connessioneDB.createStatement();
+		ResultSet rsTart = queryTart.executeQuery(sqlQueryTartaruga);
+		
+		
+		
+		while(rsTart.next()) {
+			Tartaruga tartarugaCorrente = new Tartaruga();
+			
+			/*Creazione Tartaruga*/
+			tartarugaCorrente.setTarga(rsTart.getString("targa"));
+			tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
+			
+			/*Creazione Cartella associata*/
+			cartellaCorrente = new CartellaMedica(tartarugaCorrente);
+			cartellaCorrente.setLarghezzaTartaruga(rsTart.getInt("larghezza"));
+			cartellaCorrente.setPesoTartaruga(rsTart.getInt("peso"));
+			//cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
+			cartellaCorrente.setLuogoRitrovamento(rsTart.getString("descrizione"));
+			cartellaCorrente.setSpecieTartaruga(rsTart.getString("specie"));
+			tartarugaCorrente.setCartellaTartaruga(cartellaCorrente);
+			
+			/*Aggiunta alla tartaruga le info relative ai suoi arti*/
+			tartarugaCorrente.setDescrizioneStatoBecco(rsTart.getString("becco"));
+			tartarugaCorrente.setDescrizioneStatoCoda(rsTart.getString("coda"));
+			tartarugaCorrente.setDescrizioneStatoCollo(rsTart.getString("collo"));
+			tartarugaCorrente.setDescrizioneStatoNaso(rsTart.getString("naso"));
+			tartarugaCorrente.setDescrizioneStatoOcchi(rsTart.getString("occhi"));
+			tartarugaCorrente.setDescrizioneStatoPinne(rsTart.getString("pinne"));
+			tartarugaCorrente.setDescrizioneStatoTesta(rsTart.getString("testa"));
+			
+			/*Tartaruga aggiunta in lista*/
+			listaTartarughe.add(tartarugaCorrente);
+		}
+		
+	 
+		return listaTartarughe;
+	}
+	
+	
 }

@@ -9,6 +9,8 @@ import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Controller;
+import Eccezioni.EccezioneTartaruga;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -92,10 +94,33 @@ public class FinestraCartella extends JFrame {
 		JButton btnConferma = new JButton("Conferma");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
-				controller.setValutazioneCartella(comboBox.getSelectedItem(), comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxCollo, comboBoxBecco, comboBoxPinne, comboBoxCoda);
-				chiudiCartellaData(e, chckbxDeceduta, chckbxRilasciata, controller);
-				controller.RitornoMenu(finestraCorrente);
+				try {
+					Double valorePeso;
+					Double lunghezza;
+					Double larghezza;
+					EccezioneTartaruga eccezione = new EccezioneTartaruga();
+					
+					valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
+					lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
+					larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
+					
+					if(eccezione.verificaMisure(valorePeso, lunghezza, larghezza)) {
+						controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
+						controller.setValutazioneCartella(comboBox.getSelectedItem(), comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxCollo, comboBoxBecco, comboBoxPinne, comboBoxCoda);
+						chiudiCartellaData(e, chckbxDeceduta, chckbxRilasciata, controller);
+						controller.RitornoMenu(finestraCorrente);
+					}
+					else {
+						throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
+					}
+
+				}
+				catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
+				}catch(EccezioneTartaruga e1) {
+					e1.MostraJDialogErroreScelta(finestraCorrente);
+				}
+
 			}
 		});
 		btnConferma.setFont(new Font("Verdana", Font.BOLD, 12));

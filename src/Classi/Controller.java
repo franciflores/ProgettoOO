@@ -228,6 +228,22 @@ public class Controller {
 	}
 	
 	
+	public ArrayList<Tartaruga> getTartarugheByDateDB(String dataInizio, String dataFine){
+		ArrayList<Tartaruga> listaTratrarughe= new ArrayList<Tartaruga>();
+		
+		try {
+			listaTratrarughe = tartarugaDao.getTartarugheByDate(dataInizio, dataFine, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaTratrarughe;
+		
+	}
+	
+	
+	
 public void getIdVasca(JComboBox comboBox){
 		
 		try {
@@ -491,6 +507,15 @@ public void getIdVasca(JComboBox comboBox){
 		}
 		
 		return nTartAmmesse;
+	}
+	
+	public void inserisciCiboDB(String tipo, Integer kgdato, Integer kgmangiati, String vascaid) {
+		try {
+			ciboVascaDao.inserisciCibo(tipo, kgdato, kgmangiati, vascaid, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

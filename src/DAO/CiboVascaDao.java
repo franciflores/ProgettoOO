@@ -18,4 +18,13 @@ public class CiboVascaDao {
 		
 	}
 	
+	public void inserisciCibo(String tipo, Integer kgdato, Integer kgmangiati, String vascaid, Connection connessioneDB) throws SQLException {
+		
+		String sqlQueryCibo = "insert into cibo(tipo, kgdato, kgmangiati, vascaid) values ('"+tipo+"',"+kgdato+","+kgmangiati+",'"+vascaid+"');";
+		Statement query = connessioneDB.createStatement();
+		query.executeUpdate(sqlQueryCibo);
+		
+		
+	}
+	
 }

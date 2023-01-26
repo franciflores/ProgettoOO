@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Controller;
+import Eccezioni.EccezioneCibo;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
@@ -25,20 +27,20 @@ public class FinestraCiboDato extends JFrame {
 	JSpinner spinnerPesce;
 	JSpinner spinnerGamberetti;
 	JSpinner spinnerAlici;
-	JSpinner spinner;
+	JSpinner spinnerVerdura;
 	JFrame finestraCorrente = this;
 	JSpinner spinner1Pesce1;
 	JSpinner spinner1Gamberetti1;
 	JSpinner spinner1Alici1;
 	JSpinner spinnerGamberetti_1;
-	JSpinner spinner_1;
+	JSpinner spinnerVerdura_1;
 	private JPanel contentPane;
 
 	
 	/**
 	 * Create the frame.
 	 */
-	public FinestraCiboDato(final Controller c) {
+	public FinestraCiboDato(final Controller controller) {
 		setTitle("ch s magn sta tartarug");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +62,7 @@ public class FinestraCiboDato extends JFrame {
 		lblInformazioni.setBounds(10, 11, 414, 14);
 		panel.add(lblInformazioni);
 		
-		JCheckBox lblPesce = new JCheckBox("Pesce");
+		final JCheckBox lblPesce = new JCheckBox("Pesce");
 		lblPesce.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e,spinnerPesce);
@@ -75,7 +77,7 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(spinnerPesce);
 		spinnerPesce.setEnabled(false);
 		
-		JCheckBox chckbxGamberetti = new JCheckBox("Gamberetti");
+		final JCheckBox chckbxGamberetti = new JCheckBox("Gamberetti");
 		chckbxGamberetti.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e,spinnerGamberetti);
@@ -91,7 +93,7 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(spinnerGamberetti);
 		spinnerGamberetti.setEnabled(false);
 		
-		JCheckBox chckbxAlici = new JCheckBox("Alici");
+		final JCheckBox chckbxAlici = new JCheckBox("Alici");
 		chckbxAlici.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e, spinnerAlici);
@@ -106,20 +108,20 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(spinnerAlici);
 		spinnerAlici.setEnabled(false);
 		
-		JCheckBox chckbxVegetali = new JCheckBox("Vegetali");
+		final JCheckBox chckbxVegetali = new JCheckBox("Vegetali");
 		chckbxVegetali.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				CambiaStato(e, spinner);
+				CambiaStato(e, spinnerVerdura);
 			}
 		});
 		chckbxVegetali.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxVegetali.setBounds(327, 85, 78, 23);
 		panel.add(chckbxVegetali);
 		
-		spinner = new JSpinner();
-		spinner.setBounds(331, 114, 78, 20);
-		panel.add(spinner);
-		spinner.setEnabled(false);
+		spinnerVerdura = new JSpinner();
+		spinnerVerdura.setBounds(331, 114, 78, 20);
+		panel.add(spinnerVerdura);
+		spinnerVerdura.setEnabled(false);
 		
 		JLabel lblNewLabel = new JLabel("(Grammi)");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -184,12 +186,12 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(spinnerGamberetti_1);
 		spinnerGamberetti_1.setEnabled(false);
 		
-		spinner_1 = new JSpinner();
-		spinner_1.setBounds(331, 203, 78, 20);
-		panel.add(spinner_1);
-		spinner_1.setEnabled(false);
+		spinnerVerdura_1 = new JSpinner();
+		spinnerVerdura_1.setBounds(331, 203, 78, 20);
+		panel.add(spinnerVerdura_1);
+		spinnerVerdura_1.setEnabled(false);
 		
-		JCheckBox lblPesce_1 = new JCheckBox("Pesce");
+		final JCheckBox lblPesce_1 = new JCheckBox("Pesce");
 		lblPesce_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e, spinner1Pesce1);
@@ -199,7 +201,7 @@ public class FinestraCiboDato extends JFrame {
 		lblPesce_1.setBounds(66, 174, 78, 22);
 		panel.add(lblPesce_1);
 		
-		JCheckBox chckbxGamberetti_1 = new JCheckBox("Gamberetti");
+		final JCheckBox chckbxGamberetti_1 = new JCheckBox("Gamberetti");
 		chckbxGamberetti_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e, spinnerGamberetti_1);
@@ -209,7 +211,7 @@ public class FinestraCiboDato extends JFrame {
 		chckbxGamberetti_1.setBounds(155, 175, 78, 23);
 		panel.add(chckbxGamberetti_1);
 		
-		JCheckBox chckbxAlici_1 = new JCheckBox("Alici");
+		final JCheckBox chckbxAlici_1 = new JCheckBox("Alici");
 		chckbxAlici_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CambiaStato(e, spinner1Alici1);
@@ -219,10 +221,10 @@ public class FinestraCiboDato extends JFrame {
 		chckbxAlici_1.setBounds(243, 175, 78, 23);
 		panel.add(chckbxAlici_1);
 		
-		JCheckBox chckbxVegetali_1 = new JCheckBox("Vegetali");
+		final JCheckBox chckbxVegetali_1 = new JCheckBox("Vegetali");
 		chckbxVegetali_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				CambiaStato(e, spinner_1);
+				CambiaStato(e, spinnerVerdura_1);
 			}
 		});
 		chckbxVegetali_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -232,35 +234,140 @@ public class FinestraCiboDato extends JFrame {
 		JButton btnAnnulla = new JButton("Annulla");
 		btnAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.RitornoMenu(finestraCorrente);
+				controller.RitornoMenu(finestraCorrente);
 			}
 		});
 		btnAnnulla.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				c.RitornoMenu(finestraCorrente);
+				controller.RitornoMenu(finestraCorrente);
 			}
 		});
 		btnAnnulla.setBounds(10, 243, 89, 23);
 		panel.add(btnAnnulla);
 		
-		JButton btnContinua = new JButton("Inserisci");
-		btnContinua.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				c.RitornoMenu(finestraCorrente);
-			}
-		});
-		btnContinua.setBounds(335, 243, 89, 23);
-		panel.add(btnContinua);
-		
-		JComboBox comboBoxIdVasca = new JComboBox();
+		final JComboBox comboBoxIdVasca = new JComboBox();
 		comboBoxIdVasca.setBounds(243, 36, 162, 22);
-		c.getIdVasca(comboBoxIdVasca);
+		controller.getIdVasca(comboBoxIdVasca);
 		panel.add(comboBoxIdVasca);
 		
 		JLabel lblVasca = new JLabel("Seleziona Codice Vasca");
 		lblVasca.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblVasca.setBounds(43, 40, 171, 14);
 		panel.add(lblVasca);
+		
+		JButton btnContinua = new JButton("Inserisci");
+		btnContinua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					/*Pesce dato e mangiato? Caricare la quantita sul DB*/
+					if(lblPesce.isSelected() && lblPesce_1.isSelected()) {
+						
+						int valueDato = (Integer) spinnerPesce.getValue();
+						int valueMangiato = (Integer) spinner1Pesce1.getValue();
+						
+						if(valueDato > 0 && valueMangiato >= 0) {
+							controller.inserisciCiboDB("pesce", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+						
+					}
+					/*Solamente Pesce dato? Caricare la quantita sul DB*/
+					else if(lblPesce.isSelected()) {
+						int valueDato = (Integer) spinnerPesce.getValue();
+						
+						if(valueDato > 0) {
+							controller.inserisciCiboDB("pesce", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					
+					/*Gamberetti dato e mangiato? Caricare la quantita sul DB*/
+					if(chckbxGamberetti.isSelected() && chckbxGamberetti_1.isSelected()) {
+						
+						int valueDato = (Integer) spinnerGamberetti.getValue();
+						int valueMangiato = (Integer) spinnerGamberetti_1.getValue();
+						
+						if(valueDato > 0 && valueMangiato >= 0) {
+							controller.inserisciCiboDB("gamberetti", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					/*Solamente Gamberetti dato? Caricare la quantita sul DB*/
+					else if(chckbxGamberetti.isSelected()) {
+						int valueDato = (Integer) spinnerGamberetti.getValue();
+						if(valueDato > 0) {
+							controller.inserisciCiboDB("gamberetti", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					
+					/*Alici dato e mangiato? Caricare la quantita sul DB*/
+					if(chckbxAlici.isSelected() && chckbxAlici_1.isSelected()) {
+						
+						int valueDato = (Integer) spinnerAlici.getValue();
+						int valueMangiato = (Integer) spinner1Alici1.getValue();
+						if(valueDato > 0 && valueMangiato >= 0) {
+							controller.inserisciCiboDB("alici", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					/*Solamente Alici dato? Caricare la quantita sul DB*/
+					else if(chckbxAlici.isSelected()) {
+						int valueDato = (Integer) spinnerAlici.getValue();
+						if(valueDato > 0) {
+							controller.inserisciCiboDB("alici", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					
+					/*Vegetali dato e mangiato? Caricare la quantita sul DB*/
+					if(chckbxVegetali.isSelected() && chckbxVegetali_1.isSelected()) {
+						
+						int valueDato = (Integer) spinnerVerdura.getValue();
+						int valueMangiato = (Integer) spinnerVerdura_1.getValue();
+						if(valueDato > 0 && valueMangiato >= 0) {
+							controller.inserisciCiboDB("vegetali", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+					/*Solamente Vegetali dato? Caricare la quantita sul DB*/
+					else if(chckbxVegetali.isSelected()) {
+						int valueDato = (Integer) spinnerVerdura.getValue();
+						if(valueDato > 0) {
+							controller.inserisciCiboDB("vegetali", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString());
+						}
+						else {
+							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+						}
+					}
+				}
+				catch(EccezioneCibo e1) {
+					e1.MostraJDialogErrore(finestraCorrente);
+				}
+			}
+		});
+		btnContinua.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				controller.RitornoMenu(finestraCorrente);
+			}
+		});
+		btnContinua.setBounds(335, 243, 89, 23);
+		panel.add(btnContinua);
 	}
 	
 	public void CambiaStato(ItemEvent e, Component spinner) {
