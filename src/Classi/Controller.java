@@ -532,5 +532,30 @@ public void getIdVasca(JComboBox comboBox){
 			e.printStackTrace();
 		}
 	}
+	public Integer getCiboVersatoDB(String dataInizio, String dataFine) {
+		
+		Integer kgCiboVersato = 0;
+		
+		try {
+			kgCiboVersato = ciboVascaDao.getCiboVersato(dataInizio, dataFine, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return kgCiboVersato;
+	}
+	public Integer getCiboMangiatoDB(String dataInizio, String dataFine) {
+		Integer kgCiboMangiato= 0;
+		
+		try {
+			kgCiboMangiato = ciboVascaDao.getCiboMangiato(dataInizio, dataFine, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return kgCiboMangiato;
+	}
 	
 }

@@ -34,7 +34,7 @@ public class TartarugaDao {
 				cartellaCorrente = new CartellaMedica(tartarugaCorrente);
 				cartellaCorrente.setLarghezzaTartaruga(rsTart.getInt("larghezza"));
 				cartellaCorrente.setPesoTartaruga(rsTart.getInt("peso"));
-				//cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
+				cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
 				cartellaCorrente.setLuogoRitrovamento(rsTart.getString("descrizione"));
 				cartellaCorrente.setSpecieTartaruga(rsTart.getString("specie"));
 				tartarugaCorrente.setCartellaTartaruga(cartellaCorrente);
@@ -97,7 +97,7 @@ public class TartarugaDao {
 			cartellaCorrente = new CartellaMedica(tartarugaCorrente);
 			cartellaCorrente.setLarghezzaTartaruga(rsTart.getInt("larghezza"));
 			cartellaCorrente.setPesoTartaruga(rsTart.getInt("peso"));
-			//cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
+			cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
 			cartellaCorrente.setLuogoRitrovamento(rsTart.getString("descrizione"));
 			cartellaCorrente.setSpecieTartaruga(rsTart.getString("specie"));
 			tartarugaCorrente.setCartellaTartaruga(cartellaCorrente);
@@ -207,7 +207,7 @@ public class TartarugaDao {
 			cartellaCorrente = new CartellaMedica(tartarugaCorrente);
 			cartellaCorrente.setLarghezzaTartaruga(rsTart.getInt("larghezza"));
 			cartellaCorrente.setPesoTartaruga(rsTart.getInt("peso"));
-			//cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
+			cartellaCorrente.setLunghezzaTartaruga(rsTart.getInt("lunghezza"));
 			cartellaCorrente.setLuogoRitrovamento(rsTart.getString("descrizione"));
 			cartellaCorrente.setSpecieTartaruga(rsTart.getString("specie"));
 			tartarugaCorrente.setCartellaTartaruga(cartellaCorrente);

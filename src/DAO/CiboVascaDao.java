@@ -23,8 +23,37 @@ public class CiboVascaDao {
 		String sqlQueryCibo = "insert into cibo(tipo, kgdato, kgmangiati, vascaid, dataversamento, impiegatoversamentomatr) values ('"+tipo+"',"+kgdato+","+kgmangiati+",'"+vascaid+"','"+dataVersamento+"', '"+impiegatoVersamentoMatr+"');";
 		Statement query = connessioneDB.createStatement();
 		query.executeUpdate(sqlQueryCibo);
+	}
+
+	public Integer getCiboVersato(String dataInizio, String dataFine, Connection connessioneDB) throws SQLException {
 		
+		Integer kgDatoTot = 0;
+		String sqlQuery = "select sum(kgdato) as kgdatotot from cibo where dataversamento >= '"+dataInizio+"' and dataversamento <= '"+dataFine+"';";
 		
+		Statement queryCibo = connessioneDB.createStatement();
+		ResultSet rsCibo = queryCibo.executeQuery(sqlQuery);
+		
+		while(rsCibo.next()) {
+			
+			kgDatoTot = rsCibo.getInt("kgdatotot");
+			
+		}
+		return kgDatoTot;
+	}
+
+	public Integer getCiboMangiato(String dataInizio, String dataFine, Connection connessioneDB) throws SQLException {
+		Integer kgMangiatoTot = 0;
+		String sqlQuery = "select sum(kgmangiati) as kgdmangiatotot from cibo where dataversamento >= '"+dataInizio+"' and dataversamento <= '"+dataFine+"';";
+		
+		Statement queryCibo = connessioneDB.createStatement();
+		ResultSet rsCibo = queryCibo.executeQuery(sqlQuery);
+		
+		while(rsCibo.next()) {
+			
+			kgMangiatoTot = rsCibo.getInt("kgdmangiatotot");
+			
+		}
+		return kgMangiatoTot;
 	}
 	
 }

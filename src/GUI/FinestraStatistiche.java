@@ -43,7 +43,7 @@ public class FinestraStatistiche extends JFrame {
 		setTitle("Statistche");
 		finestraCorrente = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 709, 395);
+		setBounds(100, 100, 709, 452);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -85,7 +85,7 @@ public class FinestraStatistiche extends JFrame {
 		contentPane.add(lblTartRilasciate);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 174, 663, 127);
+		scrollPane.setBounds(10, 231, 663, 127);
 		contentPane.add(scrollPane);
 		
 		tabella = new JTable();
@@ -98,8 +98,23 @@ public class FinestraStatistiche extends JFrame {
 			}
 		});
 		btnAnnulla.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnAnnulla.setBounds(10, 320, 111, 25);
+		btnAnnulla.setBounds(10, 377, 111, 25);
 		contentPane.add(btnAnnulla);
+		
+		lblTartAmmesse = new JLabel("Tartarughe Ammesse:");
+		lblTartAmmesse.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblTartAmmesse.setBounds(250, 121, 185, 18);
+		contentPane.add(lblTartAmmesse);
+		
+		final JLabel lblCiboVersato = new JLabel("Cibo Versato (Kg):");
+		lblCiboVersato.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblCiboVersato.setBounds(10, 189, 229, 18);
+		contentPane.add(lblCiboVersato);
+		
+		final JLabel lblCiboMangiato = new JLabel("Cibo Mangiato (Kg):");
+		lblCiboMangiato.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblCiboMangiato.setBounds(250, 189, 245, 18);
+		contentPane.add(lblCiboMangiato);
 		
 		btnContinua = new JButton("Continua");
 		btnContinua.addActionListener(new ActionListener() {
@@ -112,22 +127,30 @@ public class FinestraStatistiche extends JFrame {
 					lblTartMorte.setText("Tartarughe Morte:");
 					lblTartAmmesse.setText("Tartarughe Ammesse:");
 					lblTartRilasciate.setText("Tartarughe Rilasciate:");
+					lblCiboVersato.setText("Cibo Versato (Kg):");
+					lblCiboMangiato.setText("Cibo Mangiato (Kg):");
+					
 					
 					/*Valori per le JLabel dinamiche*/
 					Integer nAmmesse = controller.tartarugheAmmesseDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
 					Integer nRilasciate = controller.tartarugheRilasciateDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
 					Integer nMorte = controller.tartarugheMorteDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
 					
+					Integer ciboVersato = controller.getCiboVersatoDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
+					Integer ciboMangiato = controller.getCiboMangiatoDB(textFieldDataInizio.getText(), textFieldDataFine.getText());
+					
 					lblTartMorte.setText(lblTartMorte.getText() + nMorte);
 					lblTartAmmesse.setText(lblTartAmmesse.getText() + nAmmesse);
 					lblTartRilasciate.setText(lblTartRilasciate.getText() + nRilasciate);
+					lblCiboVersato.setText(lblCiboVersato.getText() + ciboVersato);
+					lblCiboMangiato.setText(lblCiboMangiato.getText() + ciboMangiato);
 					
 					/**Creazione tabella con info delle tartarughe ammesse in questo intervallo di date**/
 					/*Lista per conservare cio' che otteniamo dal DB*/
 					ArrayList<Tartaruga> listaTartarugheDB = new ArrayList<Tartaruga>();
 					
 					/*Array monodimensionale in cui salviamo unariga alla volta*/
-					Object[] valoriRighe = new Object[12];
+					Object[] valoriRighe = new Object[13];
 					
 					/*Ottieni il riferiemnto alla tabella modello che usa JTable*/
 				    DefaultTableModel modelloTabella = (DefaultTableModel) tabella.getModel();
@@ -143,6 +166,7 @@ public class FinestraStatistiche extends JFrame {
 				    modelloTabella.addColumn("Nome");
 				    modelloTabella.addColumn("Specie");
 				    modelloTabella.addColumn("Larghezza");
+				    modelloTabella.addColumn("Lunghezza");
 				    modelloTabella.addColumn("Peso");
 				    modelloTabella.addColumn("Stato Becco");
 				    modelloTabella.addColumn("Stato Coda");
@@ -160,15 +184,15 @@ public class FinestraStatistiche extends JFrame {
 						  valoriRighe[1] = t.getNomeTartaruga();
 						  valoriRighe[2] = t.getCartellaTartaruga().getSpecieTartaruga();
 						  valoriRighe[3] = t.getCartellaTartaruga().getLarghezzaTartaruga();
-						  //valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
-						  valoriRighe[4] = t.getCartellaTartaruga().getPesoTartaruga();
-						  valoriRighe[5] = t.getDescrizioneStatoBecco();
-						  valoriRighe[6] = t.getDescrizioneStatoCoda();
-						  valoriRighe[7] = t.getDescrizioneStatoCollo();
-						  valoriRighe[8] = t.getDescrizioneStatoNaso();
-						  valoriRighe[9] = t.getDescrizioneStatoOcchi();
-						  valoriRighe[10] = t.getDescrizioneStatoPinne();
-						  valoriRighe[11] = t.getDescrizioneStatoTesta();
+						  valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
+						  valoriRighe[5] = t.getCartellaTartaruga().getPesoTartaruga();
+						  valoriRighe[6] = t.getDescrizioneStatoBecco();
+						  valoriRighe[7] = t.getDescrizioneStatoCoda();
+						  valoriRighe[8] = t.getDescrizioneStatoCollo();
+						  valoriRighe[9] = t.getDescrizioneStatoNaso();
+						  valoriRighe[10] = t.getDescrizioneStatoOcchi();
+						  valoriRighe[11] = t.getDescrizioneStatoPinne();
+						  valoriRighe[12] = t.getDescrizioneStatoTesta();
 						  
 						  modelloTabella.addRow(valoriRighe);
 					 }
@@ -179,13 +203,8 @@ public class FinestraStatistiche extends JFrame {
 			}
 		});
 		btnContinua.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnContinua.setBounds(562, 320, 111, 25);
+		btnContinua.setBounds(562, 377, 111, 25);
 		contentPane.add(btnContinua);
-		
-		lblTartAmmesse = new JLabel("Tartarughe Ammesse:");
-		lblTartAmmesse.setFont(new Font("Verdana", Font.PLAIN, 14));
-		lblTartAmmesse.setBounds(250, 121, 185, 18);
-		contentPane.add(lblTartAmmesse);
 		
 		
 	}
@@ -225,7 +244,4 @@ public class FinestraStatistiche extends JFrame {
 		
 		return valido;
 	}
-	
-
-
 }

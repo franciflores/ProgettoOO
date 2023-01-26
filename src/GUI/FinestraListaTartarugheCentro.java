@@ -82,7 +82,7 @@ public class FinestraListaTartarugheCentro extends JFrame {
 				boolean esistenzaCentro = false;
 				
 				/*Array monodimensionale in cui salviamo unariga alla volta*/
-				Object[] valoriRighe = new Object[12];
+				Object[] valoriRighe = new Object[13];
 				
 				/*Ottieni il riferiemnto alla tabella modello che usa JTable*/
 			    DefaultTableModel modelloTabella = (DefaultTableModel) tabella.getModel();
@@ -98,6 +98,7 @@ public class FinestraListaTartarugheCentro extends JFrame {
 			    modelloTabella.addColumn("Nome");
 			    modelloTabella.addColumn("Specie");
 			    modelloTabella.addColumn("Larghezza");
+			    modelloTabella.addColumn("Lunghezza");
 			    modelloTabella.addColumn("Peso");
 			    modelloTabella.addColumn("Stato Becco");
 			    modelloTabella.addColumn("Stato Coda");
@@ -123,15 +124,15 @@ public class FinestraListaTartarugheCentro extends JFrame {
 								  valoriRighe[1] = t.getNomeTartaruga();
 								  valoriRighe[2] = t.getCartellaTartaruga().getSpecieTartaruga();
 								  valoriRighe[3] = t.getCartellaTartaruga().getLarghezzaTartaruga();
-								  //valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
-								  valoriRighe[4] = t.getCartellaTartaruga().getPesoTartaruga();
-								  valoriRighe[5] = t.getDescrizioneStatoBecco();
-								  valoriRighe[6] = t.getDescrizioneStatoCoda();
-								  valoriRighe[7] = t.getDescrizioneStatoCollo();
-								  valoriRighe[8] = t.getDescrizioneStatoNaso();
-								  valoriRighe[9] = t.getDescrizioneStatoOcchi();
-								  valoriRighe[10] = t.getDescrizioneStatoPinne();
-								  valoriRighe[11] = t.getDescrizioneStatoTesta();
+								  valoriRighe[4] = t.getCartellaTartaruga().getLunghezzaTartaruga();
+								  valoriRighe[5] = t.getCartellaTartaruga().getPesoTartaruga();
+								  valoriRighe[6] = t.getDescrizioneStatoBecco();
+								  valoriRighe[7] = t.getDescrizioneStatoCoda();
+								  valoriRighe[8] = t.getDescrizioneStatoCollo();
+								  valoriRighe[9] = t.getDescrizioneStatoNaso();
+								  valoriRighe[10] = t.getDescrizioneStatoOcchi();
+								  valoriRighe[11] = t.getDescrizioneStatoPinne();
+								  valoriRighe[12] = t.getDescrizioneStatoTesta();
 								  
 								  modelloTabella.addRow(valoriRighe);
 								  
