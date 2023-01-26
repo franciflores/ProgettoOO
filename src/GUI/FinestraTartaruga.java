@@ -29,14 +29,20 @@ import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JSpinner;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JToggleButton;
+import javax.swing.JRadioButton;
 
 public class FinestraTartaruga extends JFrame {
 	private Controller controller;
-	//private ItemEvent x;
+	private ButtonGroup sesso; 
 	private JFrame finestraCorrente;
 	private JTextField textTarghetta;
+	private JRadioButton rdbtnFemmina;
+	private JRadioButton rdbtnMaschio;
 	private JTextField textFieldSpecie;
 	private JSpinner jSpinnerLunghezza;
 	private JSpinner jSpinnerLarghezza;
@@ -47,6 +53,11 @@ public class FinestraTartaruga extends JFrame {
 	private JSpinner jSpinnerLunghezzaRitrovamento;
 	private JTextField textFieldSpecieRitrovamento;
 	private JSpinner jSpinnerLarghezzaRitrovamento;
+	private JTextField textField;
+	private JTextField textFieldNome;
+	private JRadioButton rdbtnFemmina1;
+	private JRadioButton rdbtnMaschio1;
+	private JTextField textTarga;
 	/**
 	 * Create the frame.
 	 */
@@ -60,6 +71,11 @@ public class FinestraTartaruga extends JFrame {
 		setBounds(100, 100, 450, 559);
 
 		if(panelDaAttivare==1) {
+			
+		
+		
+		
+		
 			JPanel NuovaTartaruga = new JPanel();
 			getContentPane().add(NuovaTartaruga, BorderLayout.CENTER);
 			NuovaTartaruga.setLayout(null);
@@ -71,44 +87,44 @@ public class FinestraTartaruga extends JFrame {
 
 			JLabel lblSpecie = new JLabel("Specie");
 			lblSpecie.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpecie.setBounds(10, 115, 95, 14);
+			lblSpecie.setBounds(10, 68, 95, 14);
 			NuovaTartaruga.add(lblSpecie);
 
 			textFieldSpecie = new JTextField();
-			textFieldSpecie.setBounds(115, 112, 309, 20);
+			textFieldSpecie.setBounds(115, 65, 309, 20);
 			NuovaTartaruga.add(textFieldSpecie);
 			textFieldSpecie.setColumns(10);
 
 			JLabel lblLunghezza = new JLabel("Lunghezza (cm)");
 			lblLunghezza.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLunghezza.setBounds(10, 65, 95, 14);
+			lblLunghezza.setBounds(10, 121, 95, 14);
 			NuovaTartaruga.add(lblLunghezza);
 
 			jSpinnerLunghezza = new JSpinner();
-			jSpinnerLunghezza.setBounds(115, 62, 309, 20);
+			jSpinnerLunghezza.setBounds(115, 118, 309, 20);
 			NuovaTartaruga.add(jSpinnerLunghezza);
 
 			JLabel lblLarghezza = new JLabel("Larghezza (cm)");
 			lblLarghezza.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLarghezza.setBounds(10, 90, 95, 14);
+			lblLarghezza.setBounds(10, 146, 95, 14);
 			NuovaTartaruga.add(lblLarghezza);
 
 			jSpinnerLarghezza = new JSpinner();
-			jSpinnerLarghezza.setBounds(115, 87, 309, 20);
+			jSpinnerLarghezza.setBounds(115, 143, 309, 20);
 			NuovaTartaruga.add(jSpinnerLarghezza);
 
 			JLabel lblPeso = new JLabel("Peso (g)");
 			lblPeso.setHorizontalAlignment(SwingConstants.CENTER);
-			lblPeso.setBounds(10, 40, 95, 14);
+			lblPeso.setBounds(10, 96, 95, 14);
 			NuovaTartaruga.add(lblPeso);
 
 			jSpinnerPeso = new JSpinner();
-			jSpinnerPeso.setBounds(115, 37, 309, 20);
+			jSpinnerPeso.setBounds(115, 93, 309, 20);
 			NuovaTartaruga.add(jSpinnerPeso);
 
 			JLabel lblLuogoRitrovamento = new JLabel("Luogo del Ritrovamento ");
 			lblLuogoRitrovamento.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLuogoRitrovamento.setBounds(10, 140, 414, 14);
+			lblLuogoRitrovamento.setBounds(10, 225, 414, 14);
 			NuovaTartaruga.add(lblLuogoRitrovamento);
 
 			JButton btnNewButton = new JButton("Annulla");
@@ -121,7 +137,7 @@ public class FinestraTartaruga extends JFrame {
 			NuovaTartaruga.add(btnNewButton);
 
 			textLuogo = new JTextField();
-			textLuogo.setBounds(10, 157, 414, 112);
+			textLuogo.setBounds(10, 245, 414, 24);
 			NuovaTartaruga.add(textLuogo);
 			textLuogo.setColumns(10);
 
@@ -237,7 +253,50 @@ public class FinestraTartaruga extends JFrame {
 			});
 			btnProsegui.setBounds(328, 486, 96, 23);
 			NuovaTartaruga.add(btnProsegui);
-		}
+			
+			JLabel lblNome = new JLabel("Nome");
+			lblNome.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNome.setBounds(10, 43, 95, 14);
+			NuovaTartaruga.add(lblNome);
+			
+			textField = new JTextField();
+			textField.setBounds(115, 40, 309, 20);
+			NuovaTartaruga.add(textField);
+			textField.setColumns(10);
+			
+			JLabel lblNewLabel = new JLabel("Sesso");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(10, 174, 89, 14);
+			NuovaTartaruga.add(lblNewLabel);
+			
+			rdbtnMaschio = new JRadioButton("Maschio");
+			rdbtnMaschio.setHorizontalAlignment(SwingConstants.CENTER);
+			rdbtnMaschio.setBounds(115, 170, 154, 23);
+			NuovaTartaruga.add(rdbtnMaschio);
+			
+			rdbtnFemmina = new JRadioButton("Femmina");
+			rdbtnFemmina.setHorizontalAlignment(SwingConstants.CENTER);
+			rdbtnFemmina.setBounds(274, 170, 154, 23);
+			NuovaTartaruga.add(rdbtnFemmina);
+			
+			sesso = new ButtonGroup();
+			sesso.add(rdbtnMaschio);
+			sesso.add(rdbtnFemmina);
+			
+			JLabel lblTarga = new JLabel("Targa");
+			lblTarga.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTarga.setBounds(20, 199, 85, 14);
+			NuovaTartaruga.add(lblTarga);
+			
+			textTarga = new JTextField();
+			textTarga.setColumns(10);
+			textTarga.setBounds(115, 196, 309, 20);
+			NuovaTartaruga.add(textTarga);
+			
+			
+			
+			}
+		
 
 		else if(panelDaAttivare==0){
 			JPanel VecchiaTartaruga = new JPanel();
@@ -262,18 +321,13 @@ public class FinestraTartaruga extends JFrame {
 			btnAnnulla.setBounds(10, 490, 89, 23);
 			VecchiaTartaruga.add(btnAnnulla);
 
-			JLabel lblCosaCambiare = new JLabel("Cosa va cambiato?");
-			lblCosaCambiare.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCosaCambiare.setBounds(10, 63, 414, 14);
-			VecchiaTartaruga.add(lblCosaCambiare);
-
 			JCheckBox chckbxPeso = new JCheckBox("Peso (g)");
 			chckbxPeso.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
 					StatoBottoneCambiato(e,jSpinnerPesoRitrovamento);
 				}
 			});
-			chckbxPeso.setBounds(10, 84, 110, 23);
+			chckbxPeso.setBounds(10, 115, 110, 23);
 			VecchiaTartaruga.add(chckbxPeso);
 
 			JCheckBox chckbxLunghezza = new JCheckBox("Lunghezza (cm)");
@@ -282,7 +336,7 @@ public class FinestraTartaruga extends JFrame {
 					StatoBottoneCambiato(e,jSpinnerLunghezzaRitrovamento);
 				}
 			});
-			chckbxLunghezza.setBounds(10, 110, 120, 23);
+			chckbxLunghezza.setBounds(10, 141, 120, 23);
 			VecchiaTartaruga.add(chckbxLunghezza);
 			
 			JCheckBox chckbxLarghezza = new JCheckBox("Larghezza (cm)");
@@ -291,7 +345,7 @@ public class FinestraTartaruga extends JFrame {
 					StatoBottoneCambiato(e,jSpinnerLarghezzaRitrovamento);
 				}
 			});
-			chckbxLarghezza.setBounds(10, 136, 120, 23);
+			chckbxLarghezza.setBounds(10, 167, 120, 23);
 			VecchiaTartaruga.add(chckbxLarghezza);
 
 			JCheckBox chckbxSpecie = new JCheckBox("Specie");
@@ -300,40 +354,40 @@ public class FinestraTartaruga extends JFrame {
 					StatoBottoneCambiato(e,textFieldSpecieRitrovamento);
 				}
 			});
-			chckbxSpecie.setBounds(10, 162, 110, 23);
+			chckbxSpecie.setBounds(10, 193, 110, 23);
 			VecchiaTartaruga.add(chckbxSpecie);
 
 			JLabel lblDescrizioneLuogo = new JLabel("Dov'è stata ritrovata la tartaruga?");
 			lblDescrizioneLuogo.setHorizontalAlignment(SwingConstants.CENTER);
-			lblDescrizioneLuogo.setBounds(10, 192, 414, 14);
+			lblDescrizioneLuogo.setBounds(10, 226, 414, 14);
 			VecchiaTartaruga.add(lblDescrizioneLuogo);
 
 			textLuogoRitrovamento = new JTextField();
-			textLuogoRitrovamento.setBounds(10, 217, 414, 52);
+			textLuogoRitrovamento.setBounds(10, 249, 414, 20);
 			VecchiaTartaruga.add(textLuogoRitrovamento);
 			textLuogoRitrovamento.setColumns(10);
 
 			jSpinnerPesoRitrovamento = new JSpinner();
 			jSpinnerPesoRitrovamento.setEnabled(false);
-			jSpinnerPesoRitrovamento.setBounds(136, 88, 288, 20);
+			jSpinnerPesoRitrovamento.setBounds(136, 116, 288, 20);
 			VecchiaTartaruga.add(jSpinnerPesoRitrovamento);
 
 			jSpinnerLunghezzaRitrovamento = new JSpinner();
 			jSpinnerLunghezzaRitrovamento.setModel(new SpinnerNumberModel(0, null, 10000, 1));
 			jSpinnerLunghezzaRitrovamento.setEnabled(false);
-			jSpinnerLunghezzaRitrovamento.setBounds(136, 111, 288, 20);
+			jSpinnerLunghezzaRitrovamento.setBounds(136, 142, 288, 20);
 			VecchiaTartaruga.add(jSpinnerLunghezzaRitrovamento);
 
 			textFieldSpecieRitrovamento = new JTextField();
 			textFieldSpecieRitrovamento.setEnabled(false);
-			textFieldSpecieRitrovamento.setBounds(136, 162, 288, 20);
+			textFieldSpecieRitrovamento.setBounds(136, 194, 288, 20);
 			VecchiaTartaruga.add(textFieldSpecieRitrovamento);
 			textFieldSpecieRitrovamento.setColumns(10);
 
 			jSpinnerLarghezzaRitrovamento = new JSpinner();
 			jSpinnerLarghezzaRitrovamento.setModel(new SpinnerNumberModel(0, null, 10000, 1));
 			jSpinnerLarghezzaRitrovamento.setEnabled(false);
-			jSpinnerLarghezzaRitrovamento.setBounds(136, 136, 288, 20);
+			jSpinnerLarghezzaRitrovamento.setBounds(136, 168, 288, 20);
 			VecchiaTartaruga.add(jSpinnerLarghezzaRitrovamento);
 
 			JLabel lblGiudizio = new JLabel("Esprimere un giudizio sulle condizioni di salute della Tartaruga:");
@@ -458,8 +512,8 @@ public class FinestraTartaruga extends JFrame {
 							
 						}
 						
-						/*Verifica finita, gli altri campi possono essere recuperati con i dovuti metodi
-						 * e caricato poi tutto sul DB*/
+						//Verifica finita, gli altri campi possono essere recuperati con i dovuti metodi
+						 // e caricato poi tutto sul DB
 						
 						
 					}
@@ -475,15 +529,59 @@ public class FinestraTartaruga extends JFrame {
 			});
 			btnContinua.setBounds(335, 490, 89, 23);
 			VecchiaTartaruga.add(btnContinua);
+			
+			JCheckBox chckbxNome = new JCheckBox("Nome");
+			chckbxNome.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					StatoBottoneCambiato(e, textFieldNome);
+				}
+			});
+			chckbxNome.setBounds(10, 63, 97, 23);
+			VecchiaTartaruga.add(chckbxNome);
+			
+			JCheckBox chckbxSesso = new JCheckBox("Sesso");
+			chckbxSesso.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					StatoBottoneCambiato(e,rdbtnMaschio1);
+					StatoBottoneCambiato(e,rdbtnFemmina1);
+				}
+			});
+			chckbxSesso.setBounds(10, 89, 97, 23);
+			VecchiaTartaruga.add(chckbxSesso);
+			
+			
+			
+			
+			textFieldNome = new JTextField();
+			textFieldNome.setEnabled(false);
+			textFieldNome.setColumns(10);
+			textFieldNome.setBounds(136, 63, 288, 20);
+			VecchiaTartaruga.add(textFieldNome);
+			
+			rdbtnMaschio1 = new JRadioButton("Maschio");
+			rdbtnMaschio1.setHorizontalAlignment(SwingConstants.CENTER);
+			rdbtnMaschio1.setBounds(136, 89, 135, 23);
+			rdbtnMaschio1.setEnabled(false);
+			VecchiaTartaruga.add(rdbtnMaschio1);
+			
+			rdbtnFemmina1 = new JRadioButton("Femmina");
+			rdbtnFemmina1.setHorizontalAlignment(SwingConstants.CENTER);
+			rdbtnFemmina1.setBounds(273, 89, 151, 23);
+			rdbtnFemmina1.setEnabled(false);
+			VecchiaTartaruga.add(rdbtnFemmina1);
 
+			sesso = new ButtonGroup();
+			sesso.add(rdbtnFemmina1);
+			sesso.add(rdbtnMaschio1);
 			}
-
-		else{
+	
+		else {
 			 controller.RitornoMenu(this);
 		}
-
 	}
-
+	
+	
+		
 	
 	public void StatoBottoneCambiato(ItemEvent Evento, Object barraDiTesto) {
 		if(Evento.getStateChange()==1) {

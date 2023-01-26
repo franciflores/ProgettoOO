@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class PersonaleDao {
 	
-	public boolean esistePersonale(String matricola, String ruolo, String password,  Connection connessioneDB) throws SQLException {
+	public boolean esistePersonale(String matricola, String password,  Connection connessioneDB) throws SQLException {
 		
-		String sqlQuery = "Select * from personale where professione = '" + ruolo + "' and matricola = '" + matricola + "' and password = '" + password + "' ;";
+		String sqlQuery = "Select * from personale where matricola = '" + matricola + "' and password = '" + password + "' ;";
 		boolean exist = false;
 		
 		Statement query = connessioneDB.createStatement();
@@ -36,4 +36,18 @@ public class PersonaleDao {
 		return nomeAddetto;
 	}
 
+
+
+	public String getRuoloAddetto(String matricola, Connection connessioneDB) throws SQLException {
+		String ruoloAddetto = "";
+		String sqlQuery = "Select professione from personale where matricola = '" + matricola + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next())
+			ruoloAddetto=rs.getString("professione");
+		
+		return ruoloAddetto; 
+	}
 }

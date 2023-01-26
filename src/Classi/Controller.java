@@ -38,7 +38,7 @@ public class Controller {
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
-	private final static String password = "Armandoegger1_"; //Temporanea
+	private final static String password = "super"; //Temporanea
 	
 	/*Oggetti Dao*/
 	PersonaleDao personaleDao = new PersonaleDao();
@@ -70,9 +70,9 @@ public class Controller {
 
 	/**Crea e passa alla finestra del Menu
 	 * @param professione **/
-	public void AvviaMenu(String nomeAddetto, String professione) {
+	public void AvviaMenu(String nomeAddetto,String ruoloAddetto) {
 		finestraPrincipale.setVisible(false);
-		menu = new MenuOperazioni(this, nomeAddetto, professione);
+		menu = new MenuOperazioni(this, nomeAddetto, ruoloAddetto);
 		menu.setVisible(true);
 	}
 
@@ -173,12 +173,12 @@ public class Controller {
 	}
 	
 	/*Metodi per comunicare con gli oggetti DAO*/
-	public boolean esistePersonaleDB(String matricola, String professione, String password) {
+	public boolean esistePersonaleDB(String matricola, String password) {
 		
 		boolean esistenza = false;
 		
 		try {
-			esistenza = personaleDao.esistePersonale(matricola, professione, password, connessione);
+			esistenza = personaleDao.esistePersonale(matricola, password, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -197,6 +197,17 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return nomeAddetto;
+	}
+	
+	public String getRuoloAddettoDB(String matricola) {
+		String ruoloAddetto = "";
+		
+		try {
+			ruoloAddetto = personaleDao.getRuoloAddetto(matricola, connessione);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ruoloAddetto;
 	}
 	
 	public ArrayList<Tartaruga> getTartarugheByCentroDB(String idCentro){

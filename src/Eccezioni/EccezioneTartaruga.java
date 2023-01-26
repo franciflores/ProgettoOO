@@ -45,7 +45,7 @@ public class EccezioneTartaruga extends Exception{
     	/*Assumiamo che i valori siano validi*/
     	boolean verifica = true;
     	
-    	if( larghezza <= 5) {
+    	if(larghezza <= 5) {
     		verifica = false;
     	}
     	
