@@ -140,3 +140,5 @@ ALTER table PresaInCarico add CONSTRAINT fk_id_personale FOREIGN KEY (idPersonal
 ALTER table PresaInCarico add CONSTRAINT fk_id_tartaruga FOREIGN KEY (idTartaruga) REFERENCES tartaruga (id);
 
 ALTER TABLE cibo ADD COLUMN IF NOT EXISTS dataVersamento date;
+ALter table cibo ADD COLUMN IF NOT EXISTS impiegatoVersamentoMatr bigserial;
+ALter table cibo add CONSTRAINT fk_id_impiegato FOREIGN KEY (impiegatoVersamentoMatr) REFERENCES personale (matricola);

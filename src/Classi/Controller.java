@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,7 +39,8 @@ public class Controller {
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
-	private final static String password = "super"; //Temporanea
+//	private final static String password = "super"; //Temporanea
+	private final static String password = "Armandoegger1_"; //Temporanea
 	
 	/*Oggetti Dao*/
 	PersonaleDao personaleDao = new PersonaleDao();
@@ -50,6 +52,7 @@ public class Controller {
 
 	static Connection connessione;
 	public int SceltaPanel;
+	private String matricolaPersonale;
 
 	public static void main(String[] args)
 	{
@@ -70,7 +73,8 @@ public class Controller {
 
 	/**Crea e passa alla finestra del Menu
 	 * @param professione **/
-	public void AvviaMenu(String nomeAddetto,String ruoloAddetto) {
+	public void AvviaMenu(String nomeAddetto,String ruoloAddetto, String matricolaPersonale) {
+		this.matricolaPersonale = matricolaPersonale;
 		finestraPrincipale.setVisible(false);
 		menu = new MenuOperazioni(this, nomeAddetto, ruoloAddetto);
 		menu.setVisible(true);
@@ -118,7 +122,7 @@ public class Controller {
 	
 	public void ApriFinestraCibo() {
 		menu.setVisible(false);
-		finestraCiboDato = new FinestraCiboDato(this);
+		finestraCiboDato = new FinestraCiboDato(this, matricolaPersonale);
 		finestraCiboDato.setVisible(true);
 	}
 
@@ -520,9 +524,9 @@ public void getIdVasca(JComboBox comboBox){
 		return nTartAmmesse;
 	}
 	
-	public void inserisciCiboDB(String tipo, Integer kgdato, Integer kgmangiati, String vascaid) {
+	public void inserisciCiboDB(String tipo, Integer kgdato, Integer kgmangiati, String dataVersamento, String vascaid, String impiegatoVersamentoMatr) {
 		try {
-			ciboVascaDao.inserisciCibo(tipo, kgdato, kgmangiati, vascaid, connessione);
+			ciboVascaDao.inserisciCibo(tipo, kgdato, kgmangiati, dataVersamento, vascaid, impiegatoVersamentoMatr,connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
