@@ -167,21 +167,21 @@ public class CartellaDao {
 		String sqlQuery = "Update cartellamedica set peso='"+peso.getValue()+"', larghezza='"+larghezza.getValue()+"', lunghezza='"+lunghezza.getValue()+"' where tartarugaid= '"+ id +"';";
 		
 		Statement query = connessioneDB.createStatement();
-		query.executeUpdate(sqlQuery);
+		int rs = query.executeUpdate(sqlQuery);
 	}
 	
 	public void aggiornaCartellaValutazione(Object id, JComboBox testa, JComboBox occhi, JComboBox naso, JComboBox collo, JComboBox becco, JComboBox pinne, JComboBox coda, Connection connessioneDB) throws SQLException{
 		String sqlQuery = "Update cartellamedica set testa='"+ testa.getSelectedItem()+"', occhi='"+occhi.getSelectedItem()+"', naso='"+naso.getSelectedItem()+"', collo='"+collo.getSelectedItem()+"', becco='"+becco.getSelectedItem()+"', pinne='"+pinne.getSelectedItem()+"', coda='"+coda.getSelectedItem()+"'where tartarugaid='"+id+"';";
 		
 		Statement query = connessioneDB.createStatement();
-		query.executeUpdate(sqlQuery);
+		int rs = query.executeUpdate(sqlQuery);
 	}
 	
 	public void chiudiCartella(Object id, Connection connessioneDB) throws SQLException{
 		String sqlQuery = "Update cartellamedica set dataChiusura='"+Calendar.getInstance().getTime()+"' where  tartarugaid= '"+id+"';";
 		
 		Statement query = connessioneDB.createStatement();
-		query.executeUpdate(sqlQuery);
+		int rs = query.executeUpdate(sqlQuery);
 	}
 	
 }

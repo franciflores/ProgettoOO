@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -59,8 +60,9 @@ public class FinestraCartella extends JFrame {
 	private JLabel lblCoda;
 	private JCheckBox chckbxChiudiCartella;
 	private JLabel lblChiusura;
-	private JCheckBox chckbxRilasciata;
-	private JCheckBox chckbxDeceduta;
+	private JRadioButton btnRilasciata;
+	private JRadioButton btnDeceduta;
+	private ButtonGroup buttonGroup;
 
 	/**
 	 * Create the frame.
@@ -107,7 +109,7 @@ public class FinestraCartella extends JFrame {
 					if(eccezione.verificaMisure(valorePeso, lunghezza, larghezza)) {
 						controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
 						controller.setValutazioneCartella(comboBox.getSelectedItem(), comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxCollo, comboBoxBecco, comboBoxPinne, comboBoxCoda);
-						chiudiCartellaData(e, chckbxDeceduta, chckbxRilasciata, controller);
+						chiudiCartellaData(e, btnDeceduta, btnRilasciata, controller);
 						controller.RitornoMenu(finestraCorrente);
 					}
 					else {
@@ -304,7 +306,7 @@ public class FinestraCartella extends JFrame {
 		chckbxChiudiCartella.setEnabled(false);
 		chckbxChiudiCartella.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				ChiudiCartella(e,lblDataChiusura, lblChiusura, chckbxRilasciata, chckbxDeceduta);
+				ChiudiCartella(e,lblDataChiusura, lblChiusura, btnRilasciata, btnDeceduta);
 			}
 		});
 		chckbxChiudiCartella.setFont(new Font("Verdana", Font.BOLD, 11));
@@ -325,27 +327,21 @@ public class FinestraCartella extends JFrame {
 		lblChiusura.setBounds(58, 438, 313, 18);
 		contentPane.add(lblChiusura);
 		
-		chckbxRilasciata = new JCheckBox("Tartaruga Rilasciata");
-		chckbxRilasciata.setVisible(false);
-		chckbxRilasciata.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				SpuntaUna(e, chckbxDeceduta);
-			}
-		});
-		chckbxRilasciata.setFont(new Font("Verdana", Font.PLAIN, 11));
-		chckbxRilasciata.setBounds(37, 465, 159, 23);
-		contentPane.add(chckbxRilasciata);
+		btnRilasciata = new JRadioButton("Tartaruga Rilasciata");
+		btnRilasciata.setFont(new Font("Verdana", Font.PLAIN, 11));
+		btnRilasciata.setBounds(37, 465, 159, 23);
+		btnRilasciata.setVisible(false);
+		contentPane.add(btnRilasciata);
 		
-		chckbxDeceduta = new JCheckBox("Tartaruga Deceduta");
-		chckbxDeceduta.setVisible(false);
-		chckbxDeceduta.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e2) {
-				SpuntaUna(e2, chckbxRilasciata);
-			}
-		});
-		chckbxDeceduta.setFont(new Font("Verdana", Font.PLAIN, 11));
-		chckbxDeceduta.setBounds(241, 465, 143, 23);
-		contentPane.add(chckbxDeceduta);
+		btnDeceduta = new JRadioButton("Tartaruga Deceduta");
+		btnDeceduta.setFont(new Font("Verdana", Font.PLAIN, 11));
+		btnDeceduta.setBounds(241, 465, 143, 23);
+		btnDeceduta.setVisible(false);
+		contentPane.add(btnDeceduta);
+		
+		buttonGroup = new ButtonGroup();
+		buttonGroup.add(btnDeceduta);
+		buttonGroup.add(btnRilasciata);
 		}	
 	
 	public void StatoBottoneCambiato(ItemEvent Evento, JSpinner JOggetto) {
@@ -390,34 +386,27 @@ public class FinestraCartella extends JFrame {
 			CheckData.setEnabled(true);
 		}
 	}
-	public void ChiudiCartella(ItemEvent Evento, JLabel JOggetto, JLabel JEtichetta, JCheckBox JCbox1, JCheckBox JCbox2) {
+	public void ChiudiCartella(ItemEvent Evento, JLabel JOggetto, JLabel JEtichetta, JRadioButton btn1, JRadioButton btn2) {
 		if(Evento.getStateChange()==1) {
 			JOggetto.setVisible(true);
 			JEtichetta.setVisible(true);
-			JCbox1.setVisible(true);
-			JCbox2.setVisible(true);
+			btn1.setVisible(true);
+			btn2.setVisible(true);
 		}
 		else {
 			JOggetto.setVisible(false);
 			JEtichetta.setVisible(false);
-			JCbox1.setVisible(false);
-			JCbox2.setVisible(false);
-		}
-	}
-	public void SpuntaUna(ItemEvent Evento, JCheckBox Cbox) {
-		if(Evento.getStateChange()==1) {
-			 Cbox.setEnabled(false);
-			}
-		else {
-			Cbox.setEnabled(true);
+			btn1.setVisible(false);
+			btn2.setVisible(false);
 		}
 	}
 	
-	public void chiudiCartellaData (ActionEvent evento, JCheckBox check1, JCheckBox check2, Controller controller) {
-		if (check1.isSelected()) {
+	
+	public void chiudiCartellaData (ActionEvent evento, JRadioButton btn1, JRadioButton btn2, Controller controller) {
+		if (btn1.isSelected()) {
 			controller.setDataChiusura(comboBox.getSelectedItem());
 			controller.setMorte(comboBox.getSelectedItem());
-		} else if (check2.isSelected()) {
+		} else if (btn2.isSelected()) {
 			controller.setDataChiusura(comboBox.getSelectedItem());
 		}
 	

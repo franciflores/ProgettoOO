@@ -17,9 +17,9 @@ create table Tartaruga (
 	id BigSerial primary key,
 	targa Varchar(50) not null 
 	nome VARCHAR(50) not null,
-	primoAccesso VARCHAR(50) not null,
-	morta VARCHAR(50) not null,
-	rilasciata VARCHAR(50) not null
+	primoAccesso boolean not null,
+	morta boolean not null,
+	rilasciata boolean not null
 );
 
 alter table tartaruga 
@@ -89,6 +89,12 @@ create type valutazione as enum ('Compromesso', 'Con ferite profonde', 'Con feri
 //per la funzionalità del programma, è necessario che la prima lettera del valore di valutazione sia maiuscola, controllate
 //sia cosi, altrimenti usate il seguente comando con annesso esempi, per ognuno dei valori
 ALTER TYPE valutazione RENAME VALUE 'con ferite profonde' TO 'Con ferite profonde';
+
+Create type sesso AS ENUM ('Maschio', 'Femmina');
+update cartellamedica set sesso='Maschio' where tartarugaid='';
+update cartellamedica set sesso='Femmina' where tartarugaid='';
+//cambiate i valori di sesso nel vostro database con le update qui sopra
+ALTER TABLE cartellamedica ALTER COLUMN sesso type sesso USING sesso::sesso;
 
 create table CartellaMedica (
 	id bigserial primary key,

@@ -111,6 +111,12 @@ public class MenuOperazioni extends JFrame {
 		btnModificaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnModificaTartaruga.setBounds(333, 63, 141, 21);
 		contentPane.add(btnModificaTartaruga);
+		btnModificaTartaruga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.CreaFinestraModifica();
+			}
+		});
+			
 		
 		JButton btnListaTartarughe = new JButton("Lista Tartaruga");
 		btnListaTartarughe.addActionListener(new ActionListener() {
