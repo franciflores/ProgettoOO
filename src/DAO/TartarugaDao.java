@@ -14,7 +14,6 @@ public class TartarugaDao {
 
 	public ArrayList<Tartaruga> getTartarugheByCentro(String idCentro, Connection connessioneDB) throws SQLException {
 		 	ArrayList<Tartaruga> listaTartarughe = new ArrayList<Tartaruga>();
-		 	Tartaruga tartarugaCorrente = new Tartaruga();
 		 	CartellaMedica cartellaCorrente;
 
 
@@ -25,8 +24,8 @@ public class TartarugaDao {
 			ResultSet rsTart = queryTart.executeQuery(sqlQueryTartaruga);
 
 
-			/*Se l'oggetto result set non � vuoto allora esiste un addetto con queste caratteristiche*/
 			while(rsTart.next()) {
+				Tartaruga tartarugaCorrente = new Tartaruga();
 				/*Creazione Tartaruga*/
 				tartarugaCorrente.setTarga(rsTart.getString("targa"));
 				tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));

@@ -140,7 +140,7 @@ public class FinestraListaTartarugheCentro extends JFrame {
 						}
 
 						else {
-							throw new EccezioneCentro("Targa non presente!");
+							throw new EccezioneCentro("Centro non presente!");
 						}
 						
 					}

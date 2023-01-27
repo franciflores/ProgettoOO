@@ -46,8 +46,8 @@ public class Controller {
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 
-	private final static String password = "super"; //Temporanea
-	//private final static String password = "Armandoegger1_"; //Temporanea
+	//private final static String password = "super"; //Temporanea
+	private final static String password = "Armandoegger1_"; //Temporanea
 	//private final static String password = "2597gendobus"; //Temporanea
 
 	/*Oggetti Dao*/
