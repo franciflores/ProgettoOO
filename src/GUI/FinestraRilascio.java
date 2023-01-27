@@ -37,6 +37,7 @@ public class FinestraRilascio extends JFrame {
 	
 	public FinestraRilascio(final Controller controller) {
 		setTitle("Rilascia una Tartaruga");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		finestraCorrente = this;
 		setBounds(100, 100, 444, 234);
 		contentPane = new JPanel();
