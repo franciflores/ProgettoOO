@@ -1,5 +1,6 @@
 package DAO;
 
+import java.awt.TextField;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -229,5 +230,95 @@ public class TartarugaDao {
 		return listaTartarughe;
 	}
 	
+	public String recuperaNome(Object id, Connection connessioneDB) throws SQLException {
+		String nome="";
+		String sqlQuery = "Select nome from tartaruga where id  = '" + id + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			nome = rs.getString("nome");
+		}
+		
+		return nome;
+	}
 	
-}
+	public String recuperaTarga(Object id, Connection connessioneDB) throws SQLException {
+		String targa="";
+		String sqlQuery = "Select targa from tartaruga where id  = '" + id + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			targa = rs.getString("targa");
+		}
+		
+		return targa;
+	}
+	
+	public String recuperaSesso(Object id, Connection connessioneDB) throws SQLException {
+		String sesso="";
+		String sqlQuery = "Select sesso from cartellamedica where tartarugaid  = '" + id + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			sesso = rs.getString("sesso");
+		}
+		
+		return sesso;
+	}
+	
+	public String recuperaSpecie(Object id, Connection connessioneDB) throws SQLException {
+		String specie="";
+		String sqlQuery = "Select specie from cartellamedica where tartarugaid  = '" + id + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			specie = rs.getString("specie");
+		}
+		
+		return specie;
+	}
+	
+	public String recuperaLuogo(Object id, Connection connessioneDB) throws SQLException {
+		String luogo="";
+		String sqlQuery = "Select descrizione from cartellamedica where tartarugaid  = '" + id + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next()) {
+			luogo = rs.getString("descrizione");
+		}
+		
+		return luogo;
+	}
+	
+	public void aggiornaNomeTarga(Object id, String Nome, String Targa,  Connection connessioneDB) throws SQLException {
+		String sqlQuery ="Update tartaruga set nome='"+Nome+"', targa='"+Targa+"' where id='"+id+"';";
+		Statement query = connessioneDB.createStatement();
+		int rs = query.executeUpdate(sqlQuery);
+	}
+	
+	public void aggiornaSessoSpecieLuogo(Object id, String Sesso, String Specie, String Luogo, Connection connessioneDB) throws SQLException {
+		String sqlQuery ="Update cartellamedica set sesso='"+Sesso+"', specie='"+Specie+"', descrizione='"+Luogo+"' where tartarugaid='"+id+"';";
+		Statement query = connessioneDB.createStatement();
+		int rs = query.executeUpdate(sqlQuery);
+	}
+	
+	public void elimina(Object id, Connection connessioneDB) throws SQLException{
+		String sqlQuery="Delete from cartellamedica where tartarugaid='"+id+"';";
+		Statement query = connessioneDB.createStatement();
+		int rs = query.executeUpdate(sqlQuery);
+		String sqlQuery2="Delete from tartaruga where id='"+id+"';";
+		rs = query.executeUpdate(sqlQuery2);
+	}
+	
+	}
+

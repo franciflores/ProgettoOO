@@ -1,5 +1,6 @@
 package Classi;
 
+import java.awt.TextField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 
 import DAO.RilascioDao;
@@ -35,7 +37,7 @@ public class Controller {
 	FinestraStoriaTartaruga finestraStoriaTartaruga;
 	FinestraStatistiche finestraStatistiche;
 	FinestraRilascio finestraRilascio;
-
+	FinestraModifica finestraModifica;
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
@@ -171,6 +173,13 @@ public class Controller {
 		menu.setVisible(false);
 		finestraStatistiche = new FinestraStatistiche(this);
 		finestraStatistiche.setVisible(true);
+	}
+	
+	public void CreaFinestraModifica() {
+	
+		menu.setVisible(false);
+		finestraModifica = new FinestraModifica(this);
+		finestraModifica.setVisible(true);
 	}
 	
 	public void CreaRilascio() {
@@ -561,4 +570,107 @@ public void getIdVasca(JComboBox comboBox){
 		return kgCiboMangiato;
 	}
 	
+	public String getNomeById(Object id) {
+		String nome="";
+		
+		try {
+			nome=tartarugaDao.recuperaNome(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nome;
+	}
+	
+	public String getTargaById(Object id) {
+		String targa="";
+		
+		try {
+			targa=tartarugaDao.recuperaTarga(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return targa;
+	}
+	
+	public String getSpecieById(Object id) {
+		String specie="";
+		
+		try {
+			specie=tartarugaDao.recuperaSpecie(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return specie;
+	}
+	
+	
+	public String getLuogoById(Object id) {
+		String luogo="";
+		
+		try {
+			luogo=tartarugaDao.recuperaLuogo(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return luogo;
+	}
+	
+	public void setNomeTarga(Object id, String nome, String targa) {
+		try {
+			tartarugaDao.aggiornaNomeTarga(id, nome, targa, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setSessoSpecieLuogo(Object id, String specie, String luogo, JRadioButton btn1, JRadioButton btn2) {
+		
+		if(btn1.isSelected()) {
+			String sesso="Maschio";
+		try {
+			tartarugaDao.aggiornaSessoSpecieLuogo(id, sesso, specie, luogo, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} else if(btn2.isSelected()) {
+			String sesso="Femmina";
+			try {
+				tartarugaDao.aggiornaSessoSpecieLuogo(id, sesso, specie, luogo, connessione);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void selezionaBottone(Object id, JRadioButton btn1, JRadioButton btn2) {
+		String sesso="";
+		
+		try {
+			sesso=tartarugaDao.recuperaSesso(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (sesso.equals("Maschio")) {
+			btn1.setSelected(true);
+		} else if (sesso.equals("Femmina")){
+			btn2.setSelected(true);
+		}
+	}
+	
+	public void eliminaTartaruga(Object id) {
+		try {
+			tartarugaDao.elimina(id, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
