@@ -37,6 +37,7 @@ public class Controller {
 	FinestraStoriaTartaruga finestraStoriaTartaruga;
 	FinestraStatistiche finestraStatistiche;
 	FinestraRilascio finestraRilascio;
+	FinestraModifica finestraModifica;
 	int centroCorrente;
 
 
@@ -599,7 +600,8 @@ public void getIdVasca(JComboBox comboBox){
 
 	public int getTargaMaxDB() throws SQLException {
 		return tartarugaDao.getTargaMax(connessione);
-
+	}
+		
 	public String getNomeById(Object id) {
 		String nome="";
 
