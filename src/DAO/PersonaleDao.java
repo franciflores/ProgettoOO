@@ -50,4 +50,17 @@ public class PersonaleDao {
 		
 		return ruoloAddetto; 
 	}
+	
+	public int getCentroAddetto(String matricola, int centro, Connection connessioneDB) throws SQLException {
+		int centroAddetto = 0;
+		String sqlQuery = "Select centroid from personale where matricola = '" + matricola + "';";
+		
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+		
+		if(rs.next())
+			centroAddetto=rs.getInt("centroid");
+		
+		return centroAddetto; 
+	}
 }

@@ -27,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.awt.event.ItemEvent;
 import javax.swing.JSpinner;
 import javax.swing.AbstractButton;
@@ -53,15 +54,18 @@ public class FinestraTartaruga extends JFrame {
 	private JSpinner jSpinnerLunghezzaRitrovamento;
 	private JTextField textFieldSpecieRitrovamento;
 	private JSpinner jSpinnerLarghezzaRitrovamento;
-	private JTextField textField;
 	private JTextField textFieldNome;
+	private JTextField textFieldNomeRitrovamento;
 	private JRadioButton rdbtnFemmina1;
 	private JRadioButton rdbtnMaschio1;
 	private JTextField textTarga;
+	int targaMax;
+	private JTextField textField;
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public FinestraTartaruga(Controller c, int panelDaAttivare,JFrame finestraPrecedente) {
+	public FinestraTartaruga(Controller c, int panelDaAttivare,JFrame finestraPrecedente) throws SQLException {
 		setTitle("Inserimento Tartaruga nel Sistema");
 		controller = c;
 		finestraCorrente = this;
@@ -69,13 +73,9 @@ public class FinestraTartaruga extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 559);
-
+		targaMax = controller.getTargaMaxDB();
+		
 		if(panelDaAttivare==1) {
-			
-		
-		
-		
-		
 			JPanel NuovaTartaruga = new JPanel();
 			getContentPane().add(NuovaTartaruga, BorderLayout.CENTER);
 			NuovaTartaruga.setLayout(null);
@@ -229,26 +229,7 @@ public class FinestraTartaruga extends JFrame {
 			JButton btnProsegui = new JButton("Conferma");
 			btnProsegui.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-						Double valorePeso;
-						Double lunghezza;
-						Double larghezza;
-						EccezioneTartaruga eccezione = new EccezioneTartaruga();
-						
-						valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
-						lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
-						larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
-						
-						if(!eccezione.verificaMisure(valorePeso, larghezza, lunghezza)) {
-							throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
-						}
-						
-					}
-					catch (NumberFormatException e1) {
-						JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
-					} catch (EccezioneTartaruga e1) {
-						e1.MostraJDialogErroreScelta(finestraCorrente);
-					}
+					InviaTartaruga(textTarga.getText(), textFieldNome.getText(), false, false, false, "1", "1", controller.getCentroCorrente());
 				}
 			});
 			btnProsegui.setBounds(328, 486, 96, 23);
@@ -259,10 +240,10 @@ public class FinestraTartaruga extends JFrame {
 			lblNome.setBounds(10, 43, 95, 14);
 			NuovaTartaruga.add(lblNome);
 			
-			textField = new JTextField();
-			textField.setBounds(115, 40, 309, 20);
-			NuovaTartaruga.add(textField);
-			textField.setColumns(10);
+			textFieldNome = new JTextField();
+			textFieldNome.setBounds(115, 40, 309, 20);
+			NuovaTartaruga.add(textFieldNome);
+			textFieldNome.setColumns(10);
 			
 			JLabel lblNewLabel = new JLabel("Sesso");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -283,14 +264,14 @@ public class FinestraTartaruga extends JFrame {
 			sesso.add(rdbtnMaschio);
 			sesso.add(rdbtnFemmina);
 			
-			JLabel lblTarga = new JLabel("Targa");
+			JLabel lblTarga = new JLabel("Targa (la più grande è: "+targaMax+")");
 			lblTarga.setHorizontalAlignment(SwingConstants.CENTER);
-			lblTarga.setBounds(20, 199, 85, 14);
+			lblTarga.setBounds(20, 199, 156, 14);
 			NuovaTartaruga.add(lblTarga);
 			
 			textTarga = new JTextField();
 			textTarga.setColumns(10);
-			textTarga.setBounds(115, 196, 309, 20);
+			textTarga.setBounds(186, 196, 238, 20);
 			NuovaTartaruga.add(textTarga);
 			
 			
@@ -305,11 +286,11 @@ public class FinestraTartaruga extends JFrame {
 
 			JLabel lblLabelTitolo = new JLabel("Targhetta della Tartaruga da riammettere:");
 			lblLabelTitolo.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLabelTitolo.setBounds(10, 11, 414, 14);
+			lblLabelTitolo.setBounds(10, 11, 204, 14);
 			VecchiaTartaruga.add(lblLabelTitolo);
 
 			textTarghetta = new JTextField();
-			textTarghetta.setBounds(10, 32, 414, 20);
+			textTarghetta.setBounds(10, 32, 204, 20);
 			VecchiaTartaruga.add(textTarghetta);
 
 			JButton btnAnnulla = new JButton("Annulla");
@@ -533,7 +514,7 @@ public class FinestraTartaruga extends JFrame {
 			JCheckBox chckbxNome = new JCheckBox("Nome");
 			chckbxNome.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
-					StatoBottoneCambiato(e, textFieldNome);
+					StatoBottoneCambiato(e, textFieldNomeRitrovamento);
 				}
 			});
 			chckbxNome.setBounds(10, 63, 97, 23);
@@ -552,11 +533,11 @@ public class FinestraTartaruga extends JFrame {
 			
 			
 			
-			textFieldNome = new JTextField();
-			textFieldNome.setEnabled(false);
-			textFieldNome.setColumns(10);
-			textFieldNome.setBounds(136, 63, 288, 20);
-			VecchiaTartaruga.add(textFieldNome);
+			textFieldNomeRitrovamento = new JTextField();
+			textFieldNomeRitrovamento.setEnabled(false);
+			textFieldNomeRitrovamento.setColumns(10);
+			textFieldNomeRitrovamento.setBounds(136, 63, 288, 20);
+			VecchiaTartaruga.add(textFieldNomeRitrovamento);
 			
 			rdbtnMaschio1 = new JRadioButton("Maschio");
 			rdbtnMaschio1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -573,12 +554,22 @@ public class FinestraTartaruga extends JFrame {
 			sesso = new ButtonGroup();
 			sesso.add(rdbtnFemmina1);
 			sesso.add(rdbtnMaschio1);
+			
+			JLabel lblNuovaTarga = new JLabel("Nuova Targa (la più grande è: "+targaMax+")");
+			lblNuovaTarga.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNuovaTarga.setBounds(224, 11, 200, 14);
+			VecchiaTartaruga.add(lblNuovaTarga);
+			
+			textField = new JTextField();
+			textField.setBounds(224, 32, 200, 20);
+			VecchiaTartaruga.add(textField);
+			textField.setColumns(10);
 			}
 	
 		else {
 			 controller.RitornoMenu(this);
-		}
-	}
+		} 
+	} 
 	
 	
 		
@@ -590,5 +581,35 @@ public class FinestraTartaruga extends JFrame {
 		else {
 			((Component) barraDiTesto).setEnabled(false);
 		}
+	}
+	
+	public void InviaTartaruga(String targa, String nome, boolean primoaccesso, boolean  morta, boolean rilasciata, String vascaid, String cartellaid, int centroid) {	
+		try {
+			Double valorePeso;
+			Double lunghezza;
+			Double larghezza;
+			EccezioneTartaruga eccezione = new EccezioneTartaruga();
+		
+			valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
+			lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
+			larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
+		
+			if(!eccezione.verificaMisure(valorePeso, larghezza, lunghezza)) {
+				throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
+			}
+			
+			
+			controller.InvioTartaruga(targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid);
+		
+		}
+		catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
+		} catch (EccezioneTartaruga e1) {
+			e1.MostraJDialogErroreScelta(finestraCorrente);
+		}
+			catch (SQLException e1) {
+			 e1.printStackTrace();
+			}
+		
 	}
 }

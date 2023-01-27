@@ -35,15 +35,17 @@ public class Controller {
 	FinestraStoriaTartaruga finestraStoriaTartaruga;
 	FinestraStatistiche finestraStatistiche;
 	FinestraRilascio finestraRilascio;
+	int centroCorrente;
 
+
+	
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 
-	//private final static String password = "super"; //Temporanea
+	private final static String password = "super"; //Temporanea
 	//private final static String password = "Armandoegger1_"; //Temporanea
-
-	private final static String password = "2597gendobus"; //Temporanea
+	//private final static String password = "2597gendobus"; //Temporanea
 
 	/*Oggetti Dao*/
 	PersonaleDao personaleDao = new PersonaleDao();
@@ -100,7 +102,7 @@ public class Controller {
 	}
 
 	//Apri finestraTartarughe
-	public void ShowTartarugaFrame() {
+	public void ShowTartarugaFrame() throws SQLException {
 		menu.setVisible(false);
 		finestraTart = new FinestraTartaruga(this,SceltaPanel,menu);
 		finestraTart.setVisible(true);
@@ -215,6 +217,17 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return ruoloAddetto;
+	}
+	
+	public int getCentroAddettoDB(int centro, String matricola) {
+		int centroAddetto = 0;
+		
+		try {
+			centroAddetto = personaleDao.getCentroAddetto(matricola, centro, connessione);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return centroAddetto;
 	}
 	
 	public ArrayList<Tartaruga> getTartarugheByCentroDB(String idCentro){
@@ -561,4 +574,20 @@ public void getIdVasca(JComboBox comboBox){
 		return kgCiboMangiato;
 	}
 	
+	public void InvioTartaruga(String targa, String nome, boolean primoaccesso, boolean morta, 
+	boolean rilasciata, String vascaid, String cartellaid, int centroid) throws SQLException {
+		
+		tartarugaDao.tartarugaEntrataNelCentro(connessione, targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid);
+		
+	}
+	public int getCentroCorrente() {
+		return centroCorrente;
+	}
+	public void setCentroCorrente(int centroCorrente) {
+		this.centroCorrente = centroCorrente;
+	}
+	
+	public int getTargaMaxDB() throws SQLException {
+		return tartarugaDao.getTargaMax(connessione);
+	}
 }

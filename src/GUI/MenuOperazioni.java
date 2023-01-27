@@ -21,6 +21,8 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Component;
@@ -59,7 +61,12 @@ public class MenuOperazioni extends JFrame {
 				//Cambiare con un setter questa Variabile
 				controller.SceltaPanel = controller.DialogTartarughe();
 				if((Integer)controller.SceltaPanel==0 || (Integer)controller.SceltaPanel==1)
-				controller.ShowTartarugaFrame();
+					try {
+						controller.ShowTartarugaFrame();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			}
 		});
 		btnNuovaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -77,7 +84,7 @@ public class MenuOperazioni extends JFrame {
 
 		JButton btnOperatore = new JButton("Cibo per Vasca");
 		btnOperatore.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		if(!ruoloAddetto.equals("Operatore") && !ruoloAddetto.equals("Tecnico"))
+		if(ruoloAddetto.equals("Medico"))
 			btnOperatore.setEnabled(false);
 		btnOperatore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,6 +103,11 @@ public class MenuOperazioni extends JFrame {
 		
 		
 		JButton btnModificaTartaruga = new JButton("Modifica Tartaruga");
+		btnModificaTartaruga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(controller.getCentroCorrente());
+			}
+		});
 		btnModificaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnModificaTartaruga.setBounds(333, 63, 141, 21);
 		contentPane.add(btnModificaTartaruga);

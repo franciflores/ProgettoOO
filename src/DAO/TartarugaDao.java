@@ -229,5 +229,24 @@ public class TartarugaDao {
 		return listaTartarughe;
 	}
 	
+	public void tartarugaEntrataNelCentro(Connection connessioneDB, String targa, String nome, boolean primoaccesso, 
+			boolean morta, boolean rilasciata, String vascaid, String cartellaid, int centroid) throws SQLException {
+
+	 	
+			String sqlInsertTartarugaInserita = "insert into tartaruga values ('" +targa+"','"+nome+"','"+primoaccesso+"','"+morta+"','"
+			+rilasciata+"','"+vascaid+"','"+centroid+"');";
+		 	
+			Statement queryTart = connessioneDB.createStatement();
+			int rsTart = queryTart.executeUpdate(sqlInsertTartarugaInserita);
+		}
 	
+	public int getTargaMax(Connection connessioneDB) throws SQLException {
+		int numTarga = 0;
+		String sqlTarga ="select max(targa) from tartaruga having max(targa)>0";
+		Statement queryTart= connessioneDB.createStatement();
+		ResultSet rsTart = queryTart.executeQuery(sqlTarga);
+		if(rsTart.next())
+			numTarga = rsTart.getInt(1);
+		return numTarga;
+	}
 }
