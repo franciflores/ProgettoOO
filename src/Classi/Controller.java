@@ -39,7 +39,7 @@ public class Controller {
 	FinestraRilascio finestraRilascio;
 	FinestraModifica finestraModifica;
 	int centroCorrente;
-
+	String matr;
 
 
 
@@ -147,6 +147,26 @@ public class Controller {
 	}
 
 
+	public void salvaMatricola(String matricola) {
+
+		 matr.valueOf(matricola);
+	}
+
+	public String ritornaMatricola() {
+		return matr;
+	}
+
+	public int getId(String targa) {
+		int id=0;
+		try {
+			id = tartarugaDao.recuperaId(targa, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id;
+	}
 	public void CreaCartella(String specie, Float peso, Float lunghezza, Float larghezza) throws SQLException {
 		Statement st = connessione.createStatement();
 		st.executeUpdate("INSERT INTO  cartellemediche(specietartaruga, lunghezzatartaruga, larghezzatartaruga, pesotartaruga) VALUES \n"
@@ -446,9 +466,9 @@ public void getIdVasca(JComboBox comboBox){
 		}
 	}
 
-	public void setDataChiusura(Object id) {
+	public void setDataChiusura(Object id, String data) {
 		try {
-			cartellaDao.chiudiCartella(id, connessione);
+			cartellaDao.chiudiCartella(id, data, connessione);
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -601,7 +621,30 @@ public void getIdVasca(JComboBox comboBox){
 	public int getTargaMaxDB() throws SQLException {
 		return tartarugaDao.getTargaMax(connessione);
 	}
-		
+
+
+//	public void setCartella(int peso, int larghezza, String descrizione, String testa, String pinne, String occhi, String naso, String becco, String collo, String coda, String matr, int lunghezza, String targa, JRadioButton btn1, JRadioButton btn2) {
+//
+//		if (btn1.isSelected()) {
+//
+//			String sesso="Maschio";
+//		try {
+//			tartarugaDao.creaTartaruga(peso, larghezza, sesso, descrizione, testa, pinne, occhi, naso, becco, collo, coda, matr, lunghezza, targa, connessione);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		}else if(btn2.isSelected()) {
+//			String sesso="Femmina";
+//			try {
+//				tartarugaDao.creaTartaruga(id, connessione);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+
 	public String getNomeById(Object id) {
 		String nome="";
 

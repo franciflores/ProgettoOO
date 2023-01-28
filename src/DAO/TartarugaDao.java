@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Classi.CartellaMedica;
@@ -239,6 +241,17 @@ public class TartarugaDao {
 			Statement queryTart = connessioneDB.createStatement();
 			int rsTart = queryTart.executeUpdate(sqlInsertTartarugaInserita);
 		}
+	
+	public void creaTartaruga(int peso, int larghezza, String sesso, String descrizione, String testa, String pinne, String occhi, String naso, String becco, String collo, String coda, String personaleid, int lunghezza, String tartarugaid, Connection connessioneDB ) throws SQLException{
+		
+		LocalDate dataObj = LocalDate.now();
+        DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String data = dataObj.format(formattazioneData);
+		
+		String sqlCartella = "insert into cartellamedica values('"+data+"', null, '"+data+"', '"+peso+"', '"+larghezza+"', '"+sesso+"'. '"+descrizione+"' , '"+testa+"', '"+pinne+"', '"+occhi+"', '"+naso+"', '"+becco+"', '"+collo+"', '"+coda+"', '"+personaleid+"', '"+lunghezza+"', '"+tartarugaid+"';"; 
+		Statement queryCart= connessioneDB.createStatement();
+		int rs= queryCart.executeUpdate(sqlCartella);
+	}
 
 	public int getTargaMax(Connection connessioneDB) throws SQLException {
 		int numTarga = 0;
@@ -250,7 +263,16 @@ public class TartarugaDao {
 		return numTarga;
 	}
 
-
+	public int recuperaId(String targa, Connection connessioneDB) throws SQLException{
+		int id=0;
+		String sql= "Select id from tartaruga where targa='"+targa+"';";
+		Statement query= connessioneDB.createStatement();
+		ResultSet rsTart= query.executeQuery(sql);
+		if(rsTart.next())
+			id = rsTart.getInt(1);
+		return id;
+	}
+	
 	public String recuperaNome(Object id, Connection connessioneDB) throws SQLException {
 		String nome="";
 		String sqlQuery = "Select nome from tartaruga where id  = '" + id + "';";

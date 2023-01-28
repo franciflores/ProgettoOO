@@ -26,6 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -63,6 +65,7 @@ public class FinestraCartella extends JFrame {
 	private JRadioButton btnRilasciata;
 	private JRadioButton btnDeceduta;
 	private ButtonGroup buttonGroup;
+	private String data;
 
 	/**
 	 * Create the frame.
@@ -109,7 +112,7 @@ public class FinestraCartella extends JFrame {
 					if(eccezione.verificaMisure(valorePeso, lunghezza, larghezza)) {
 						controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);
 						controller.setValutazioneCartella(comboBox.getSelectedItem(), comboBoxTesta, comboBoxOcchi, comboBoxNaso, comboBoxCollo, comboBoxBecco, comboBoxPinne, comboBoxCoda);
-						chiudiCartellaData(e, btnDeceduta, btnRilasciata, controller);
+						chiudiCartellaData(e, btnDeceduta, btnRilasciata, data, controller);
 						controller.RitornoMenu(finestraCorrente);
 					}
 					else {
@@ -313,10 +316,14 @@ public class FinestraCartella extends JFrame {
 		chckbxChiudiCartella.setBounds(45, 403, 136, 23);
 		contentPane.add(chckbxChiudiCartella);
 		
-		lblDataChiusura = new JLabel(Calendar.getInstance().getTime().toString());
+		LocalDate dataObj = LocalDate.now();
+        DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        data = dataObj.format(formattazioneData);
+		
+		lblDataChiusura = new JLabel(data);
 		lblDataChiusura.setVisible(false);
 		lblDataChiusura.setFont(new Font("Verdana", Font.BOLD, 11));
-		lblDataChiusura.setBounds(213, 405, 211, 18);
+		lblDataChiusura.setBounds(285, 405, 86, 18);
 		contentPane.add(lblDataChiusura);
 		
 		
@@ -402,12 +409,12 @@ public class FinestraCartella extends JFrame {
 	}
 	
 	
-	public void chiudiCartellaData (ActionEvent evento, JRadioButton btn1, JRadioButton btn2, Controller controller) {
+	public void chiudiCartellaData (ActionEvent evento, JRadioButton btn1, JRadioButton btn2, String data, Controller controller) {
 		if (btn1.isSelected()) {
-			controller.setDataChiusura(comboBox.getSelectedItem());
+			controller.setDataChiusura(comboBox.getSelectedItem(), data);
 			controller.setMorte(comboBox.getSelectedItem());
 		} else if (btn2.isSelected()) {
-			controller.setDataChiusura(comboBox.getSelectedItem());
+			controller.setDataChiusura(comboBox.getSelectedItem(), data);
 		}
 	
 	}

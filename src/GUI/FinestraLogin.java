@@ -138,6 +138,7 @@ public class FinestraLogin extends JFrame {
 				/*Per ovviare a tante Frame Menu, passiamo al controller la scelta ed in base a quest'ultima si settano i bottoni nel menu*/
 				controller.setCentroCorrente(centroAddetto);
 				controller.AvviaMenu(nomeAddetto, ruoloAddetto, matricola);
+				controller.salvaMatricola(matricola);
 			}
 			else {
 				throw new EccezioneLogin("Utente non presente, credenziali errate o professione errata!");
