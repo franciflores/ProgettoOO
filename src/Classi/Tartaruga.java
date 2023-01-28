@@ -2,7 +2,7 @@ package Classi;
 
 public class Tartaruga {
 	
-	private String targa;
+	private int targa;
 	private String nomeTartaruga;
 	private CartellaMedica cartellaTartaruga;
 	private String descrizioneStatoTesta;
@@ -13,7 +13,7 @@ public class Tartaruga {
 	private String descrizioneStatoPinne;
 	private String descrizioneStatoCoda;
 	
-	public Tartaruga(String targa, String nomeTartaruga) {
+	public Tartaruga(int targa, String nomeTartaruga) {
 		super();
 		this.targa = targa;
 		this.nomeTartaruga = nomeTartaruga;
@@ -22,11 +22,11 @@ public class Tartaruga {
 	public Tartaruga() {
 	}
 
-	public String getTarga() {
+	public int getTarga() {
 		return targa;
 	}
 
-	public void setTarga(String targa) {
+	public void setTarga(int targa) {
 		this.targa = targa;
 	}
 

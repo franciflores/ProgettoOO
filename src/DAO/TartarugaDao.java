@@ -27,7 +27,7 @@ public class TartarugaDao {
 			while(rsTart.next()) {
 				Tartaruga tartarugaCorrente = new Tartaruga();
 				/*Creazione Tartaruga*/
-				tartarugaCorrente.setTarga(rsTart.getString("targa"));
+				tartarugaCorrente.setTarga(rsTart.getInt("targa"));
 				tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 				/*Creazione Cartella associata*/
@@ -90,7 +90,7 @@ public class TartarugaDao {
 			Tartaruga tartarugaCorrente = new Tartaruga();
 
 			/*Creazione Tartaruga*/
-			tartarugaCorrente.setTarga(rsTart.getString("targa"));
+			tartarugaCorrente.setTarga(rsTart.getInt("targa"));
 			tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 			/*Creazione Cartella associata*/
@@ -200,7 +200,7 @@ public class TartarugaDao {
 			Tartaruga tartarugaCorrente = new Tartaruga();
 
 			/*Creazione Tartaruga*/
-			tartarugaCorrente.setTarga(rsTart.getString("targa"));
+			tartarugaCorrente.setTarga(rsTart.getInt("targa"));
 			tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 			/*Creazione Cartella associata*/
@@ -321,7 +321,7 @@ public class TartarugaDao {
 		return luogo;
 	}
 
-	public void aggiornaNomeTarga(Object id, String Nome, String Targa,  Connection connessioneDB) throws SQLException {
+	public void aggiornaNomeTarga(Object id, String Nome, int Targa,  Connection connessioneDB) throws SQLException {
 		String sqlQuery ="Update tartaruga set nome='"+Nome+"', targa='"+Targa+"' where id='"+id+"';";
 		Statement query = connessioneDB.createStatement();
 		int rs = query.executeUpdate(sqlQuery);

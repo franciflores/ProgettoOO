@@ -89,7 +89,7 @@ public class FinestraModifica extends JFrame{
 		getContentPane().add(btnConferma);
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.setNomeTarga(comboBox.getSelectedItem(), txtNome.getText(), txtTarga.getText());
+				controller.setNomeTarga(comboBox.getSelectedItem(), txtNome.getText(), Integer.parseInt(txtTarga.getText()));
 				controller.setSessoSpecieLuogo(comboBox.getSelectedItem(),txtSpecie.getText(), txtLuogo.getText(), rdbtnMaschio, rdbtnFemmina);
 				inizioElimina(chckbxElimina, controller);
 				controller.RitornoMenu(finestraCorrente);

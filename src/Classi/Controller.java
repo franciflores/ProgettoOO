@@ -46,8 +46,8 @@ public class Controller {
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 
-	//private final static String password = "super"; //Temporanea
-	private final static String password = "Armandoegger1_"; //Temporanea
+	private final static String password = "super"; //Temporanea
+	//private final static String password = "Armandoegger1_"; //Temporanea
 	//private final static String password = "2597gendobus"; //Temporanea
 
 	/*Oggetti Dao*/
@@ -651,7 +651,7 @@ public void getIdVasca(JComboBox comboBox){
 		return luogo;
 	}
 
-	public void setNomeTarga(Object id, String nome, String targa) {
+	public void setNomeTarga(Object id, String nome, int targa) {
 		try {
 			tartarugaDao.aggiornaNomeTarga(id, nome, targa, connessione);
 		} catch (SQLException e) {
