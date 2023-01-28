@@ -1,7 +1,6 @@
 package DAO;
 
 import java.sql.*;
-import java.util.Calendar;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -177,8 +176,8 @@ public class CartellaDao {
 		int rs = query.executeUpdate(sqlQuery);
 	}
 	
-	public void chiudiCartella(Object id, Connection connessioneDB) throws SQLException{
-		String sqlQuery = "Update cartellamedica set dataChiusura='"+Calendar.getInstance().getTime()+"' where  tartarugaid= '"+id+"';";
+	public void chiudiCartella(Object id, String data, Connection connessioneDB) throws SQLException{
+		String sqlQuery = "Update cartellamedica set dataChiusura='"+data+"' where  tartarugaid= '"+id+"';";
 		
 		Statement query = connessioneDB.createStatement();
 		int rs = query.executeUpdate(sqlQuery);

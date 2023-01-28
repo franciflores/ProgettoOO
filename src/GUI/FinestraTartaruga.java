@@ -151,7 +151,7 @@ public class FinestraTartaruga extends JFrame {
 			lblTestaN.setBounds(10, 305, 53, 14);
 			NuovaTartaruga.add(lblTestaN);
 
-			JComboBox comboBoxTestaN = new JComboBox();
+			final JComboBox comboBoxTestaN = new JComboBox();
 			comboBoxTestaN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxTestaN.setMaximumRowCount(5);
 			comboBoxTestaN.setBounds(73, 301, 351, 22);
@@ -163,7 +163,7 @@ public class FinestraTartaruga extends JFrame {
 			lblOcchiN.setBounds(10, 330, 46, 14);
 			NuovaTartaruga.add(lblOcchiN);
 
-			JComboBox comboBoxOcchiN = new JComboBox();
+			final JComboBox comboBoxOcchiN = new JComboBox();
 			comboBoxOcchiN.setMaximumRowCount(5);
 			comboBoxOcchiN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxOcchiN.setBounds(73, 326, 351, 22);
@@ -174,7 +174,7 @@ public class FinestraTartaruga extends JFrame {
 			lblNasoN.setBounds(10, 355, 46, 14);
 			NuovaTartaruga.add(lblNasoN);
 
-			JComboBox comboBoxNasoN = new JComboBox();
+			final JComboBox comboBoxNasoN = new JComboBox();
 			comboBoxNasoN.setMaximumRowCount(5);
 			comboBoxNasoN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxNasoN.setBounds(73, 351, 351, 22);
@@ -185,7 +185,7 @@ public class FinestraTartaruga extends JFrame {
 			lblBeccoN.setBounds(10, 380, 46, 14);
 			NuovaTartaruga.add(lblBeccoN);
 
-			JComboBox comboBoxBeccoN = new JComboBox();
+			final JComboBox comboBoxBeccoN = new JComboBox();
 			comboBoxBeccoN.setMaximumRowCount(5);
 			comboBoxBeccoN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxBeccoN.setBounds(73, 376, 351, 22);
@@ -196,7 +196,7 @@ public class FinestraTartaruga extends JFrame {
 			lblColloN.setBounds(10, 405, 46, 14);
 			NuovaTartaruga.add(lblColloN);
 
-			JComboBox comboBoxColloN = new JComboBox();
+			final JComboBox comboBoxColloN = new JComboBox();
 			comboBoxColloN.setMaximumRowCount(5);
 			comboBoxColloN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxColloN.setBounds(73, 401, 351, 22);
@@ -207,7 +207,7 @@ public class FinestraTartaruga extends JFrame {
 			lblPinneN.setBounds(10, 430, 46, 14);
 			NuovaTartaruga.add(lblPinneN);
 
-			JComboBox comboBoxPinneN = new JComboBox();
+			final JComboBox comboBoxPinneN = new JComboBox();
 			comboBoxPinneN.setMaximumRowCount(5);
 			comboBoxPinneN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxPinneN.setBounds(73, 426, 351, 22);
@@ -218,7 +218,7 @@ public class FinestraTartaruga extends JFrame {
 			lblCodaN.setBounds(10, 455, 46, 14);
 			NuovaTartaruga.add(lblCodaN);
 
-			JComboBox comboBoxCodaN = new JComboBox();
+			final JComboBox comboBoxCodaN = new JComboBox();
 			comboBoxCodaN.setMaximumRowCount(5);
 			comboBoxCodaN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxCodaN.setBounds(73, 451, 351, 22);
@@ -230,6 +230,7 @@ public class FinestraTartaruga extends JFrame {
 			btnProsegui.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					InviaTartaruga(textTarga.getText(), textFieldNome.getText(), false, false, false, "1", "1", controller.getCentroCorrente());
+					//controller.setCartella(jSpinnerPeso.getValue(), jSpinnerLarghezza.getValue(), textLuogo.getText(), comboBoxTestaN.getSelectedItem(), comboBoxPinneN.getSelectedItem(), comboBoxOcchiN.getSelectedItem(), comboBoxNasoN.getSelectedItem(), comboBoxBeccoN.getSelectedItem(), comboBoxColloN.getSelectedItem(), comboBoxCodaN.getSelectedItem(), controller.ritornaMatricola(), jSpinnerLunghezza.getValue(), controller.getId(textTarga.getText()), rdbtnMaschio, rdbtnFemmina );
 				}
 			});
 			btnProsegui.setBounds(328, 486, 96, 23);
