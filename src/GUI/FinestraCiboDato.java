@@ -39,15 +39,17 @@ public class FinestraCiboDato extends JFrame {
 	JSpinner spinnerGamberetti_1;
 	JSpinner spinnerVerdura_1;
 	private JPanel contentPane;
+	private Controller controller;
 
 	
 	/**
 	 * Create the frame.
 	 */
-	public FinestraCiboDato(final Controller controller, final String matricolaPersonale) {
+	public FinestraCiboDato(Controller c, final String matricolaPersonale) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setTitle("Finestra Cibo");
 		setVisible(true);
+		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 316);
 		contentPane = new JPanel();
@@ -267,126 +269,10 @@ public class FinestraCiboDato extends JFrame {
 		        LocalDate dataObj = LocalDate.now();
 		        DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		        String data = dataObj.format(formattazioneData);
+		        
+		        versaCibo(lblPesce, lblPesce_1, chckbxGamberetti, chckbxGamberetti_1,chckbxAlici, chckbxAlici_1, chckbxVegetali, chckbxVegetali_1, data, matricolaPersonale, comboBoxIdVasca.getSelectedItem().toString());
 				
-				try {
-					/*Pesce dato e mangiato? Caricare la quantita sul DB*/
-					if(lblPesce.isSelected() && lblPesce_1.isSelected()) {
-						
-						int valueDato = (Integer) spinnerPesce.getValue();
-						int valueMangiato = (Integer) spinner1Pesce1.getValue();
-						
-						if(valueDato > 0 && valueMangiato >= 0) {
-							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
-								controller.inserisciCiboDB("pesce", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-						
-					}
-					/*Solamente Pesce dato? Caricare la quantita sul DB*/
-					else if(lblPesce.isSelected()) {
-						int valueDato = (Integer) spinnerPesce.getValue();
-						
-						if(valueDato > 0) {
-							if(controlloQuantitaGiusta(0, valueDato)) {
-								controller.inserisciCiboDB("pesce", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					
-					/*Gamberetti dato e mangiato? Caricare la quantita sul DB*/
-					if(chckbxGamberetti.isSelected() && chckbxGamberetti_1.isSelected()) {
-						
-						int valueDato = (Integer) spinnerGamberetti.getValue();
-						int valueMangiato = (Integer) spinnerGamberetti_1.getValue();
-						
-						if(valueDato > 0 && valueMangiato >= 0) {
-							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
-								controller.inserisciCiboDB("gamberetti", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					/*Solamente Gamberetti dato? Caricare la quantita sul DB*/
-					else if(chckbxGamberetti.isSelected()) {
-						int valueDato = (Integer) spinnerGamberetti.getValue();
-						if(valueDato > 0) {
-							if(controlloQuantitaGiusta(0, valueDato)) {
-								controller.inserisciCiboDB("gamberetti", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					
-					/*Alici dato e mangiato? Caricare la quantita sul DB*/
-					if(chckbxAlici.isSelected() && chckbxAlici_1.isSelected()) {
-						
-						int valueDato = (Integer) spinnerAlici.getValue();
-						int valueMangiato = (Integer) spinner1Alici1.getValue();
-						if(valueDato > 0 && valueMangiato >= 0) {
-							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
-								controller.inserisciCiboDB("alici", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					/*Solamente Alici dato? Caricare la quantita sul DB*/
-					else if(chckbxAlici.isSelected()) {
-						int valueDato = (Integer) spinnerAlici.getValue();
-						if(valueDato > 0) {
-							if(controlloQuantitaGiusta(0, valueDato)) {
-								controller.inserisciCiboDB("alici", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					
-					/*Vegetali dato e mangiato? Caricare la quantita sul DB*/
-					if(chckbxVegetali.isSelected() && chckbxVegetali_1.isSelected()) {
-						
-						int valueDato = (Integer) spinnerVerdura.getValue();
-						int valueMangiato = (Integer) spinnerVerdura_1.getValue();
-						if(valueDato > 0 && valueMangiato >= 0) {
-							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
-								controller.inserisciCiboDB("vegetali", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					/*Solamente Vegetali dato? Caricare la quantita sul DB*/
-					else if(chckbxVegetali.isSelected()) {
-						int valueDato = (Integer) spinnerVerdura.getValue();
-						if(valueDato > 0) {
-							if(controlloQuantitaGiusta(0, valueDato)) {
-								controller.inserisciCiboDB("vegetali", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
-							}
-						}
-						else {
-							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
-						}
-					}
-					
-					if(JOptionPane.showConfirmDialog(finestraCorrente, "Ritornare al Menu?","Inserimento completato", JOptionPane.OK_OPTION) == 0)
-						controller.RitornoMenu(finestraCorrente);
-				}
-				catch(EccezioneCibo e1) {
-					e1.MostraJDialogErrore(finestraCorrente);
-				}
+				
 			}
 		});
 		btnContinua.addItemListener(new ItemListener() {
@@ -398,6 +284,129 @@ public class FinestraCiboDato extends JFrame {
 		panel.add(btnContinua);
 	}
 	
+	protected void versaCibo(JCheckBox lblPesce, JCheckBox lblPesce_1, JCheckBox chckbxGamberetti, JCheckBox chckbxGamberetti_1, JCheckBox chckbxAlici, JCheckBox chckbxAlici_1, JCheckBox chckbxVegetali, JCheckBox chckbxVegetali_1, String data, String matricolaPersonale, String vascaId) {
+		try {
+			/*Pesce dato e mangiato? Caricare la quantita sul DB*/
+			if(lblPesce.isSelected() && lblPesce_1.isSelected()) {
+				
+				int valueDato = (Integer) spinnerPesce.getValue();
+				int valueMangiato = (Integer) spinner1Pesce1.getValue();
+				
+				if(valueDato > 0 && valueMangiato >= 0) {
+					if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+						controller.inserisciCiboDB("pesce", valueDato, valueMangiato, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+				
+			}
+			/*Solamente Pesce dato? Caricare la quantita sul DB*/
+			else if(lblPesce.isSelected()) {
+				int valueDato = (Integer) spinnerPesce.getValue();
+				
+				if(valueDato > 0) {
+					if(controlloQuantitaGiusta(0, valueDato)) {
+						controller.inserisciCiboDB("pesce", valueDato, 0, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			
+			/*Gamberetti dato e mangiato? Caricare la quantita sul DB*/
+			if(chckbxGamberetti.isSelected() && chckbxGamberetti_1.isSelected()) {
+				
+				int valueDato = (Integer) spinnerGamberetti.getValue();
+				int valueMangiato = (Integer) spinnerGamberetti_1.getValue();
+				
+				if(valueDato > 0 && valueMangiato >= 0) {
+					if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+						controller.inserisciCiboDB("gamberetti", valueDato, valueMangiato, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			/*Solamente Gamberetti dato? Caricare la quantita sul DB*/
+			else if(chckbxGamberetti.isSelected()) {
+				int valueDato = (Integer) spinnerGamberetti.getValue();
+				if(valueDato > 0) {
+					if(controlloQuantitaGiusta(0, valueDato)) {
+						controller.inserisciCiboDB("gamberetti", valueDato, 0, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			
+			/*Alici dato e mangiato? Caricare la quantita sul DB*/
+			if(chckbxAlici.isSelected() && chckbxAlici_1.isSelected()) {
+				
+				int valueDato = (Integer) spinnerAlici.getValue();
+				int valueMangiato = (Integer) spinner1Alici1.getValue();
+				if(valueDato > 0 && valueMangiato >= 0) {
+					if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+						controller.inserisciCiboDB("alici", valueDato, valueMangiato, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			/*Solamente Alici dato? Caricare la quantita sul DB*/
+			else if(chckbxAlici.isSelected()) {
+				int valueDato = (Integer) spinnerAlici.getValue();
+				if(valueDato > 0) {
+					if(controlloQuantitaGiusta(0, valueDato)) {
+						controller.inserisciCiboDB("alici", valueDato, 0, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			
+			/*Vegetali dato e mangiato? Caricare la quantita sul DB*/
+			if(chckbxVegetali.isSelected() && chckbxVegetali_1.isSelected()) {
+				
+				int valueDato = (Integer) spinnerVerdura.getValue();
+				int valueMangiato = (Integer) spinnerVerdura_1.getValue();
+				if(valueDato > 0 && valueMangiato >= 0) {
+					if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+						controller.inserisciCiboDB("vegetali", valueDato, valueMangiato, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			/*Solamente Vegetali dato? Caricare la quantita sul DB*/
+			else if(chckbxVegetali.isSelected()) {
+				int valueDato = (Integer) spinnerVerdura.getValue();
+				if(valueDato > 0) {
+					if(controlloQuantitaGiusta(0, valueDato)) {
+						controller.inserisciCiboDB("vegetali", valueDato, 0, vascaId, data, matricolaPersonale);
+					}
+				}
+				else {
+					throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
+				}
+			}
+			
+			if(JOptionPane.showConfirmDialog(finestraCorrente, "Ritornare al Menu?","Inserimento completato", JOptionPane.OK_OPTION) == 0)
+				controller.RitornoMenu(finestraCorrente);
+		}
+		catch(EccezioneCibo e1) {
+			e1.MostraJDialogErrore(finestraCorrente);
+		}
+		
+	}
+
 	public boolean controlloQuantitaGiusta(int ciboMangiato, int ciboVersato) {
 		if(ciboMangiato > ciboVersato) {
 			JOptionPane.showMessageDialog(finestraCorrente, "E' stato mangiato troppo cibo rispetto a quello dato!", "Attenzione", JOptionPane.ERROR_MESSAGE);
