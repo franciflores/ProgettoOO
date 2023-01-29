@@ -472,7 +472,7 @@ public void getIdVasca(JComboBox comboBox){
 
 	public void getIdRilascio(JComboBox combobox) {
 		try {
-			rilascioDao.recuperaId(combobox, connessione);
+			rilascioDao.recuperaIdTartViva(combobox, connessione);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -742,5 +742,19 @@ public void getIdVasca(JComboBox comboBox){
 		e.printStackTrace();
 	}
 	
+	}
+	public boolean recuperaDataChiusuraDB(String id) {
+		
+		boolean esistenza = false;
+		
+		try {
+			esistenza = rilascioDao.recuperaDataChiusura(connessione, id);
+		}
+		catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return esistenza;
 	}
 }

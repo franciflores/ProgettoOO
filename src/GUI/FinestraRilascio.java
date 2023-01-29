@@ -67,8 +67,18 @@ public class FinestraRilascio extends JFrame {
 		getContentPane().add(btnConferma);
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.setRilascio(comboBox.getSelectedItem());
-				controller.RitornoMenu(finestraCorrente);
+				/*Controllo rilascio*/
+				boolean dataValida = controller.recuperaDataChiusuraDB(comboBox.getSelectedItem().toString());
+				if(dataValida) {
+					controller.setRilascio(comboBox.getSelectedItem());
+					
+					controller.RitornoMenu(finestraCorrente);
+				}
+				else {
+					JOptionPane.showMessageDialog(finestraCorrente, "Cartella ancora attiva", "Attenzione", JOptionPane.OK_OPTION);
+				}
+				
+
 			}
 		});
 		

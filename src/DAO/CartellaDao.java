@@ -199,4 +199,20 @@ public class CartellaDao {
 		queryCart.executeUpdate(sqlQuery);
 	}
 	
+	public String ultimaCartellaInserita(Connection connessioneDB) throws SQLException {
+		String id = null;
+		
+		String sqlQuery = "Select id from cartellamedica;";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		/*Ciclo fino all'ultimo id*/
+		while(rs.next()) {
+			id = rs.getString("id");
+		}
+		
+		return id;
+	}
+	
 }
