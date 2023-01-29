@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FinestraStoriaTartaruga extends JFrame {
 
@@ -34,6 +35,8 @@ public class FinestraStoriaTartaruga extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraStoriaTartaruga(final Controller controller) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
+		setTitle("Storico Tartarughe");
 		finestraCorrente = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 300);

@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+import java.awt.Toolkit;
 
 public class FinestraCartella extends JFrame {
 
@@ -71,6 +72,7 @@ public class FinestraCartella extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraCartella(final Controller controller) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setTitle("Compila la Cartella Medica");
 		finestraCorrente = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

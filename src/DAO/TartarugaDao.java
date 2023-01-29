@@ -29,7 +29,7 @@ public class TartarugaDao {
 			while(rsTart.next()) {
 				Tartaruga tartarugaCorrente = new Tartaruga();
 				/*Creazione Tartaruga*/
-				tartarugaCorrente.setTarga(rsTart.getInt("targa"));
+				tartarugaCorrente.setTarga(rsTart.getString("targa"));
 				tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 				/*Creazione Cartella associata*/
@@ -92,7 +92,7 @@ public class TartarugaDao {
 			Tartaruga tartarugaCorrente = new Tartaruga();
 
 			/*Creazione Tartaruga*/
-			tartarugaCorrente.setTarga(rsTart.getInt("targa"));
+			tartarugaCorrente.setTarga(rsTart.getString("targa"));
 			tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 			/*Creazione Cartella associata*/
@@ -202,7 +202,7 @@ public class TartarugaDao {
 			Tartaruga tartarugaCorrente = new Tartaruga();
 
 			/*Creazione Tartaruga*/
-			tartarugaCorrente.setTarga(rsTart.getInt("targa"));
+			tartarugaCorrente.setTarga(rsTart.getString("targa"));
 			tartarugaCorrente.setNomeTartaruga(rsTart.getString("nome"));
 
 			/*Creazione Cartella associata*/
@@ -300,6 +300,20 @@ public class TartarugaDao {
 
 		return targa;
 	}
+	
+	public String recuperaId(Object targa, Connection connessioneDB) throws SQLException {
+		String id="";
+		String sqlQuery = "Select id from tartaruga where targa  = '" + targa + "';";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		while(rs.next()) {
+			id = rs.getString("id");
+		}
+
+		return id;
+	}
 
 	public String recuperaSesso(Object id, Connection connessioneDB) throws SQLException {
 		String sesso="";
@@ -395,4 +409,27 @@ public class TartarugaDao {
 		return id;
 	}
 
+	public void associaCartellaMedicaTartaruga(Connection connessioneDB, String ultimaCartella, String ultimaTartarugaId) throws SQLException {
+		
+		String sqlQuery = "UPDATE tartaruga SET cartellaid = '"+ultimaCartella+"' WHERE id = '"+ultimaTartarugaId+"';";
+		Statement query = connessioneDB.createStatement();
+		int rs = query.executeUpdate(sqlQuery);
+		
 	}
+
+	public boolean statoRilascioTartaruga(Connection connessioneDB, String targaTart) throws SQLException {
+		boolean rilasciata = false;
+		
+		String sqlQuery = "Select rilasciata from tartaruga where targa = '"+targaTart+"';";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		/*Ciclo fino all'ultimo id*/
+		while(rs.next()) {
+			rilasciata = rs.getBoolean("rilasciata");
+		}
+		return rilasciata;
+	}
+
+}

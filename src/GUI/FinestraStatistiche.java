@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FinestraStatistiche extends JFrame {
 
@@ -40,7 +41,8 @@ public class FinestraStatistiche extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraStatistiche(final Controller controller) {
-		setTitle("Statistche");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
+		setTitle("Finestra Statistiche");
 		finestraCorrente = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 709, 452);
@@ -106,12 +108,12 @@ public class FinestraStatistiche extends JFrame {
 		lblTartAmmesse.setBounds(250, 121, 185, 18);
 		contentPane.add(lblTartAmmesse);
 		
-		final JLabel lblCiboVersato = new JLabel("Cibo Versato (Kg):");
+		final JLabel lblCiboVersato = new JLabel("Cibo Versato (g):");
 		lblCiboVersato.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblCiboVersato.setBounds(10, 189, 229, 18);
 		contentPane.add(lblCiboVersato);
 		
-		final JLabel lblCiboMangiato = new JLabel("Cibo Mangiato (Kg):");
+		final JLabel lblCiboMangiato = new JLabel("Cibo Mangiato (g):");
 		lblCiboMangiato.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblCiboMangiato.setBounds(250, 189, 245, 18);
 		contentPane.add(lblCiboMangiato);
@@ -127,8 +129,8 @@ public class FinestraStatistiche extends JFrame {
 					lblTartMorte.setText("Tartarughe Morte:");
 					lblTartAmmesse.setText("Tartarughe Ammesse:");
 					lblTartRilasciate.setText("Tartarughe Rilasciate:");
-					lblCiboVersato.setText("Cibo Versato (Kg):");
-					lblCiboMangiato.setText("Cibo Mangiato (Kg):");
+					lblCiboVersato.setText("Cibo Versato (g):");
+					lblCiboMangiato.setText("Cibo Mangiato (g):");
 					
 					
 					/*Valori per le JLabel dinamiche*/
@@ -218,6 +220,7 @@ public class FinestraStatistiche extends JFrame {
 			/*Controllo se e' formato YYYY-MM-DD*/
 			if((dataInizio.getText().charAt(4) == '-' && dataInizio.getText().charAt(7) == '-')
 					&& (dataFine.getText().charAt(4) == '-' && dataFine.getText().charAt(7) == '-')) {
+				
 				
 				/*Controllo sulle Date*/
 				Integer annoInizio = Integer.parseInt(dataInizio.getText().substring(0, 4));

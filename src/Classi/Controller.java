@@ -30,7 +30,6 @@ public class Controller {
 	FinestraLogin finestraPrincipale;
 	MenuOperazioni menu;
 	FinestraTartaruga finestraTart;
-	FinestraVasca finestraVasca;
 	FinestraCentro finestraCentro;
 	FinestraCartella finestraCartellaMedica;
 	FinestraCiboDato finestraCiboDato;
@@ -39,6 +38,7 @@ public class Controller {
 	FinestraStatistiche finestraStatistiche;
 	FinestraRilascio finestraRilascio;
 	FinestraModifica finestraModifica;
+	FinestraRiammetti finestraRiammetti;
 	String centroCorrente;
 
 
@@ -60,7 +60,6 @@ public class Controller {
 	VascaDao vascaDao = new VascaDao();
 
 	static Connection connessione;
-	public int SceltaPanel;
 	private String matricolaPersonale;
 
 	public static void main(String[] args)
@@ -101,21 +100,11 @@ public class Controller {
 		framePrecedente.setVisible(true);
 	}
 
-	public int DialogTartarughe() {
-		 return JOptionPane.showConfirmDialog(null,"La Tartaruga è già stata nel centro?","Opzione",0,3);
-	}
-
 	//Apri finestraTartarughe
-	public void ShowTartarugaFrame() throws SQLException {
+	public void ShowTartarugaFrame(){
 		menu.setVisible(false);
-		finestraTart = new FinestraTartaruga(this,SceltaPanel,menu);
+		finestraTart = new FinestraTartaruga(this,menu);
 		finestraTart.setVisible(true);
-	}
-
-	public void ShowVascaFrame() {
-		menu.setVisible(false);
-		finestraVasca = new FinestraVasca(this);
-		finestraVasca.setVisible(true);
 	}
 
 	public void ShowCentroFrame() {
@@ -283,6 +272,7 @@ public class Controller {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(finestraStatistiche, "Date non valide", "Attenzione", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return listaTratrarughe;
@@ -636,6 +626,18 @@ public void getIdVasca(JComboBox comboBox){
 		}
 		return targa;
 	}
+	
+	public String getIdByTarga(Object targa) {
+		String id="";
+
+		try {
+			id=tartarugaDao.recuperaId(targa, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+	}
 
 	public String getSpecieById(Object id) {
 		String specie="";
@@ -756,5 +758,48 @@ public void getIdVasca(JComboBox comboBox){
 		}
 		
 		return esistenza;
+	}
+	public void associaCartellaMedicaTartarugaDB() {
+		
+		try {
+			String ultimaCartella = cartellaDao.ultimaCartellaInserita(connessione);
+			String ultimaTartarugaId = tartarugaDao.ultimaTartarugaId(connessione);
+			tartarugaDao.associaCartellaMedicaTartaruga(connessione, ultimaCartella, ultimaTartarugaId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public void creaRiammettiFinestra() {
+		menu.setVisible(false);
+		finestraRiammetti = new FinestraRiammetti(this);
+		finestraRiammetti.setVisible(true);
+	}
+	public String getSessoById(String idTartarugaByTarga) {
+		String sesso="";
+		
+		try {
+			sesso=cartellaDao.getSessoByIdTartaruga(idTartarugaByTarga, connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sesso;
+	}
+	public boolean statoRilascioTartarugaDB(String targaTart) {
+		boolean rilasciato = false;
+		
+		try {
+			rilasciato = tartarugaDao.statoRilascioTartaruga(connessione, targaTart);
+		}
+		catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rilasciato;
 	}
 }

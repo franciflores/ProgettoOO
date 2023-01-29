@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Choice;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class FinestraLogin extends JFrame {
@@ -49,6 +50,8 @@ public class FinestraLogin extends JFrame {
 	 */
 
 	public FinestraLogin(Controller c) {
+		setTitle("Login");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setResizable(false);
 		finestraCorrente = this;
 		controller = c;

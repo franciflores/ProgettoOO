@@ -215,4 +215,18 @@ public class CartellaDao {
 		return id;
 	}
 	
+	public String getSessoByIdTartaruga(String idTartarugaByTarga, Connection connessioneDB) throws SQLException {
+		String sesso="";
+		String sqlQuery = "Select sesso from cartellamedica where tartarugaid  = '" + idTartarugaByTarga + "';";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		if(rs.next()) {
+			sesso = rs.getString("sesso");
+		}
+
+		return sesso;
+	}
+	
 }

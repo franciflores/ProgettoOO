@@ -11,6 +11,7 @@ import Classi.Controller;
 import Eccezioni.EccezioneCibo;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
@@ -23,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class FinestraCiboDato extends JFrame {
 
@@ -43,7 +45,8 @@ public class FinestraCiboDato extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraCiboDato(final Controller controller, final String matricolaPersonale) {
-		setTitle("ch s magn sta tartarug");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
+		setTitle("Finestra Cibo");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 316);
@@ -264,7 +267,6 @@ public class FinestraCiboDato extends JFrame {
 		        LocalDate dataObj = LocalDate.now();
 		        DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		        String data = dataObj.format(formattazioneData);
-		        System.out.println(data);
 				
 				try {
 					/*Pesce dato e mangiato? Caricare la quantita sul DB*/
@@ -274,7 +276,9 @@ public class FinestraCiboDato extends JFrame {
 						int valueMangiato = (Integer) spinner1Pesce1.getValue();
 						
 						if(valueDato > 0 && valueMangiato >= 0) {
-							controller.inserisciCiboDB("pesce", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+								controller.inserisciCiboDB("pesce", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -286,7 +290,9 @@ public class FinestraCiboDato extends JFrame {
 						int valueDato = (Integer) spinnerPesce.getValue();
 						
 						if(valueDato > 0) {
-							controller.inserisciCiboDB("pesce", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(0, valueDato)) {
+								controller.inserisciCiboDB("pesce", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -300,7 +306,9 @@ public class FinestraCiboDato extends JFrame {
 						int valueMangiato = (Integer) spinnerGamberetti_1.getValue();
 						
 						if(valueDato > 0 && valueMangiato >= 0) {
-							controller.inserisciCiboDB("gamberetti", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+								controller.inserisciCiboDB("gamberetti", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -310,7 +318,9 @@ public class FinestraCiboDato extends JFrame {
 					else if(chckbxGamberetti.isSelected()) {
 						int valueDato = (Integer) spinnerGamberetti.getValue();
 						if(valueDato > 0) {
-							controller.inserisciCiboDB("gamberetti", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(0, valueDato)) {
+								controller.inserisciCiboDB("gamberetti", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -323,7 +333,9 @@ public class FinestraCiboDato extends JFrame {
 						int valueDato = (Integer) spinnerAlici.getValue();
 						int valueMangiato = (Integer) spinner1Alici1.getValue();
 						if(valueDato > 0 && valueMangiato >= 0) {
-							controller.inserisciCiboDB("alici", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+								controller.inserisciCiboDB("alici", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -333,7 +345,9 @@ public class FinestraCiboDato extends JFrame {
 					else if(chckbxAlici.isSelected()) {
 						int valueDato = (Integer) spinnerAlici.getValue();
 						if(valueDato > 0) {
-							controller.inserisciCiboDB("alici", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(0, valueDato)) {
+								controller.inserisciCiboDB("alici", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -346,7 +360,9 @@ public class FinestraCiboDato extends JFrame {
 						int valueDato = (Integer) spinnerVerdura.getValue();
 						int valueMangiato = (Integer) spinnerVerdura_1.getValue();
 						if(valueDato > 0 && valueMangiato >= 0) {
-							controller.inserisciCiboDB("vegetali", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(valueMangiato, valueDato)) {
+								controller.inserisciCiboDB("vegetali", valueDato, valueMangiato, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
@@ -356,12 +372,17 @@ public class FinestraCiboDato extends JFrame {
 					else if(chckbxVegetali.isSelected()) {
 						int valueDato = (Integer) spinnerVerdura.getValue();
 						if(valueDato > 0) {
-							controller.inserisciCiboDB("vegetali", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							if(controlloQuantitaGiusta(0, valueDato)) {
+								controller.inserisciCiboDB("vegetali", valueDato, 0, comboBoxIdVasca.getSelectedItem().toString(), data, matricolaPersonale);
+							}
 						}
 						else {
 							throw new EccezioneCibo("Cibo dato non puo' essere 0 o assumere valore negativo; Cibo mangiato non puo' essere negativo");
 						}
 					}
+					
+					if(JOptionPane.showConfirmDialog(finestraCorrente, "Ritornare al Menu?","Inserimento completato", JOptionPane.OK_OPTION) == 0)
+						controller.RitornoMenu(finestraCorrente);
 				}
 				catch(EccezioneCibo e1) {
 					e1.MostraJDialogErrore(finestraCorrente);
@@ -375,6 +396,14 @@ public class FinestraCiboDato extends JFrame {
 		});
 		btnContinua.setBounds(335, 243, 89, 23);
 		panel.add(btnContinua);
+	}
+	
+	public boolean controlloQuantitaGiusta(int ciboMangiato, int ciboVersato) {
+		if(ciboMangiato > ciboVersato) {
+			JOptionPane.showMessageDialog(finestraCorrente, "E' stato mangiato troppo cibo rispetto a quello dato!", "Attenzione", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 	
 	public void CambiaStato(ItemEvent e, Component spinner) {

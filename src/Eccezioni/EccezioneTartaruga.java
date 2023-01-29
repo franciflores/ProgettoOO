@@ -30,7 +30,7 @@ public class EccezioneTartaruga extends Exception{
     	return verifica;
     }
     
-    public boolean verificaMisurePeso(Double peso) {
+    public boolean verificaMisurePeso(Integer peso) {
     	/*Assumiamo che i valori siano validi*/
     	boolean verifica = true;
     	
@@ -41,7 +41,7 @@ public class EccezioneTartaruga extends Exception{
     	return verifica;
     }
     
-    public boolean verificaMisureLarghezza( Double larghezza) {
+    public boolean verificaMisureLarghezza( Integer larghezza) {
     	/*Assumiamo che i valori siano validi*/
     	boolean verifica = true;
     	
@@ -52,7 +52,7 @@ public class EccezioneTartaruga extends Exception{
     	return verifica;
     }
     
-    public boolean verificaMisureLunghezza(Double lunghezza) {
+    public boolean verificaMisureLunghezza(Integer lunghezza) {
     	/*Assumiamo che i valori siano validi*/
     	boolean verifica = true;
     	
