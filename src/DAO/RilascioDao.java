@@ -8,7 +8,7 @@ public class RilascioDao {
 
 public void recuperaId(JComboBox comboBox, Connection connessioneDB) throws SQLException{
 		
-		String sqlQueryId = "Select cartellamedica.tartarugaid from cartellamedica join tartaruga on cartellamedica.tartarugaid=tartaruga.id where tartaruga.morta= 'false' and tartaruga.rilasciata='false' and cartellamedica.dataChiusura is not null;";
+		String sqlQueryId = "Select cartellamedica.tartarugaid from cartellamedica join tartaruga on cartellamedica.tartarugaid=tartaruga.id where tartaruga.morta= 'false' and tartaruga.rilasciata='false';";
 		
 		Statement query = connessioneDB.createStatement();
 		ResultSet rs = query.executeQuery(sqlQueryId);

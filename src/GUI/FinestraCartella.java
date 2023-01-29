@@ -100,14 +100,14 @@ public class FinestraCartella extends JFrame {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Double valorePeso;
-					Double lunghezza;
-					Double larghezza;
+					Integer valorePeso;
+					Integer lunghezza;
+					Integer larghezza;
 					EccezioneTartaruga eccezione = new EccezioneTartaruga();
 					
-					valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
-					lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
-					larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
+					valorePeso = Integer.parseInt(jSpinnerPeso.getValue().toString());
+					lunghezza = Integer.parseInt(jSpinnerLunghezza.getValue().toString());
+					larghezza = Integer.parseInt(jSpinnerLarghezza.getValue().toString());
 					
 					if(eccezione.verificaMisure(valorePeso, lunghezza, larghezza)) {
 						controller.setPesoLarghezzaLunghezzaCartella(comboBox.getSelectedItem(), jSpinnerPeso, jSpinnerLarghezza, jSpinnerLunghezza);

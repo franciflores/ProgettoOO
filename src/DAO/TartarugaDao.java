@@ -232,11 +232,11 @@ public class TartarugaDao {
 	}
 
 	public void tartarugaEntrataNelCentro(Connection connessioneDB, String targa, String nome, boolean primoaccesso,
-			boolean morta, boolean rilasciata, String vascaid, String cartellaid, int centroid) throws SQLException {
+			boolean morta, boolean rilasciata, String vascaid, String cartellaid, String centroid) throws SQLException {
 
 
-			String sqlInsertTartarugaInserita = "insert into tartaruga values ('" +targa+"','"+nome+"','"+primoaccesso+"','"+morta+"','"
-			+rilasciata+"','"+vascaid+"','"+centroid+"');";
+			String sqlInsertTartarugaInserita = "insert into tartaruga(targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid)"
+					+ " values ('" +targa+"','"+nome+"','"+primoaccesso+"','"+morta+"','"+rilasciata+"','"+vascaid+"',"+cartellaid+", '"+centroid+"');";
 
 			Statement queryTart = connessioneDB.createStatement();
 			int rsTart = queryTart.executeUpdate(sqlInsertTartarugaInserita);
@@ -248,14 +248,14 @@ public class TartarugaDao {
         DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String data = dataObj.format(formattazioneData);
 		
-		String sqlCartella = "insert into cartellamedica values('"+data+"', null, '"+data+"', '"+peso+"', '"+larghezza+"', '"+sesso+"'. '"+descrizione+"' , '"+testa+"', '"+pinne+"', '"+occhi+"', '"+naso+"', '"+becco+"', '"+collo+"', '"+coda+"', '"+personaleid+"', '"+lunghezza+"', '"+tartarugaid+"';"; 
+		String sqlCartella = "insert into cartellamedica values('"+data+"', null, '"+data+"', '"+peso+"', '"+larghezza+"', '"+sesso+"', '"+descrizione+"' , '"+testa+"', '"+pinne+"', '"+occhi+"', '"+naso+"', '"+becco+"', '"+collo+"', '"+coda+"', '"+personaleid+"', '"+lunghezza+"', '"+tartarugaid+"');"; 
 		Statement queryCart= connessioneDB.createStatement();
 		int rs= queryCart.executeUpdate(sqlCartella);
 	}
 
 	public int getTargaMax(Connection connessioneDB) throws SQLException {
 		int numTarga = 0;
-		String sqlTarga ="select max(targa) from tartaruga having max(targa)>0";
+		String sqlTarga ="select max(targa) from tartaruga having max(targa)>0;";
 		Statement queryTart= connessioneDB.createStatement();
 		ResultSet rsTart = queryTart.executeQuery(sqlTarga);
 		if(rsTart.next())
@@ -361,6 +361,38 @@ public class TartarugaDao {
 		int rs = query.executeUpdate(sqlQuery);
 		String sqlQuery2="Delete from tartaruga where id='"+id+"';";
 		rs = query.executeUpdate(sqlQuery2);
+	}
+
+	public String ultimaTargaId(Connection connessioneDB) throws SQLException {
+		String id = null;
+		
+		String sqlQuery = "Select targa from tartaruga;";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		/*Ciclo fino all'ultima targa*/
+		while(rs.next()) {
+			id = rs.getString("targa");
+		}
+		
+		return id;
+	}
+
+	public String ultimaTartarugaId(Connection connessioneDB) throws SQLException {
+		String id = null;
+		
+		String sqlQuery = "Select id from tartaruga;";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		/*Ciclo fino all'ultimo id*/
+		while(rs.next()) {
+			id = rs.getString("id");
+		}
+		
+		return id;
 	}
 
 	}

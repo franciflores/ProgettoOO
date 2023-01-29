@@ -133,12 +133,11 @@ public class FinestraLogin extends JFrame {
 				/*Dopo aver verificato l'esistenza, recuperare il nome da poi mostrare nel menu*/
 				String nomeAddetto = controller.getNomeByMatricolaDB(matricola);
 				String ruoloAddetto = controller.getRuoloAddettoDB(matricola);
-				int centroAddetto = controller.getCentroAddettoDB(centro, matricola);
+				String centroAddetto = controller.getCentroAddettoDB(matricola);
 
 				/*Per ovviare a tante Frame Menu, passiamo al controller la scelta ed in base a quest'ultima si settano i bottoni nel menu*/
 				controller.setCentroCorrente(centroAddetto);
 				controller.AvviaMenu(nomeAddetto, ruoloAddetto, matricola);
-				controller.salvaMatricola(matricola);
 			}
 			else {
 				throw new EccezioneLogin("Utente non presente, credenziali errate o professione errata!");

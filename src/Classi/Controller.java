@@ -19,6 +19,7 @@ import DAO.CartellaDao;
 import DAO.CentroDao;
 import DAO.PersonaleDao;
 import DAO.TartarugaDao;
+import DAO.VascaDao;
 import DAO.CiboVascaDao;
 import GUI.*;
 
@@ -38,16 +39,15 @@ public class Controller {
 	FinestraStatistiche finestraStatistiche;
 	FinestraRilascio finestraRilascio;
 	FinestraModifica finestraModifica;
-	int centroCorrente;
-	String matr;
+	String centroCorrente;
 
 
 
 	private final static String url = "jdbc:postgresql://localhost:5432/DBTartarughe";
 	private final static String user = "postgres";
 
-	private final static String password = "super"; //Temporanea
-	//private final static String password = "Armandoegger1_"; //Temporanea
+	//private final static String password = "super"; //Temporanea
+	private final static String password = "Armandoegger1_"; //Temporanea
 	//private final static String password = "2597gendobus"; //Temporanea
 
 	/*Oggetti Dao*/
@@ -57,6 +57,7 @@ public class Controller {
 	CentroDao centroDao = new CentroDao();
 	CiboVascaDao ciboVascaDao = new CiboVascaDao();
 	RilascioDao rilascioDao= new RilascioDao();
+	VascaDao vascaDao = new VascaDao();
 
 	static Connection connessione;
 	public int SceltaPanel;
@@ -146,16 +147,6 @@ public class Controller {
 		finestraListaTartarugheCentro.setVisible(true);
 	}
 
-
-	public void salvaMatricola(String matricola) {
-
-		 matr.valueOf(matricola);
-	}
-
-	public String ritornaMatricola() {
-		return matr;
-	}
-
 	public int getId(String targa) {
 		int id=0;
 		try {
@@ -166,11 +157,6 @@ public class Controller {
 		}
 
 		return id;
-	}
-	public void CreaCartella(String specie, Float peso, Float lunghezza, Float larghezza) throws SQLException {
-		Statement st = connessione.createStatement();
-		st.executeUpdate("INSERT INTO  cartellemediche(specietartaruga, lunghezzatartaruga, larghezzatartaruga, pesotartaruga) VALUES \n"
-				+ "('"+specie+"', '"+lunghezza+"', '"+larghezza+"', '"+peso+"')");
 	}
 
 	//Chiude il Menu e torna al login (Resetta la finestra di Login)
@@ -249,15 +235,15 @@ public class Controller {
 		return ruoloAddetto;
 	}
 
-	public int getCentroAddettoDB(int centro, String matricola) {
-		int centroAddetto = 0;
+	public String getCentroAddettoDB(String matricola) {
+		String centroIdAddetto = null;
 
 		try {
-			centroAddetto = personaleDao.getCentroAddetto(matricola, centro, connessione);
+			centroIdAddetto = personaleDao.getCentroAddetto(matricola, connessione);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return centroAddetto;
+		return centroIdAddetto;
 	}
 
 	public ArrayList<Tartaruga> getTartarugheByCentroDB(String idCentro){
@@ -606,44 +592,26 @@ public void getIdVasca(JComboBox comboBox){
 
 
 	public void InvioTartaruga(String targa, String nome, boolean primoaccesso, boolean morta,
-	boolean rilasciata, String vascaid, String cartellaid, int centroid) throws SQLException {
+	boolean rilasciata, String vascaid, String cartellaid, String centroid) {
 
-		tartarugaDao.tartarugaEntrataNelCentro(connessione, targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid);
+		try {
+			tartarugaDao.tartarugaEntrataNelCentro(connessione, targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
-	public int getCentroCorrente() {
+	public String getCentroCorrente() {
 		return centroCorrente;
 	}
-	public void setCentroCorrente(int centroCorrente) {
+	public void setCentroCorrente(String centroCorrente) {
 		this.centroCorrente = centroCorrente;
 	}
 
 	public int getTargaMaxDB() throws SQLException {
 		return tartarugaDao.getTargaMax(connessione);
 	}
-
-
-//	public void setCartella(int peso, int larghezza, String descrizione, String testa, String pinne, String occhi, String naso, String becco, String collo, String coda, String matr, int lunghezza, String targa, JRadioButton btn1, JRadioButton btn2) {
-//
-//		if (btn1.isSelected()) {
-//
-//			String sesso="Maschio";
-//		try {
-//			tartarugaDao.creaTartaruga(peso, larghezza, sesso, descrizione, testa, pinne, occhi, naso, becco, collo, coda, matr, lunghezza, targa, connessione);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		}else if(btn2.isSelected()) {
-//			String sesso="Femmina";
-//			try {
-//				tartarugaDao.creaTartaruga(id, connessione);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}
 
 	public String getNomeById(Object id) {
 		String nome="";
@@ -748,5 +716,31 @@ public void getIdVasca(JComboBox comboBox){
 			e.printStackTrace();
 		}
 
+	}
+	
+	public ArrayList<String> recuperaVascaIdDB() {
+		ArrayList<String> vascheDisponibili = new ArrayList<String>();
+		try {
+			vascheDisponibili = vascaDao.recuperaVascaId(connessione);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return vascheDisponibili;
+
+	}
+	
+	public void CreaCartellaDB(String specie, Integer valorePeso, Integer valoreLarghezza, Integer valoreLunghezza, String luogo,String condTesta,String condOcchi,String condNaso,String condCollo,String condPinne,String condCoda,String sesso, String condBecco) {
+		
+		try {
+			String ultimaTargaId = tartarugaDao.ultimaTargaId(connessione);
+			String ultimaTartarugaId = tartarugaDao.ultimaTartarugaId(connessione);
+			cartellaDao.CreaCartella(specie, valorePeso, valoreLarghezza, valoreLunghezza, luogo, condTesta, condOcchi, condNaso, condCollo, condPinne, condCoda, sesso, condBecco, ultimaTargaId, ultimaTartarugaId, matricolaPersonale, connessione);
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 	}
 }

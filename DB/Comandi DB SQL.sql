@@ -148,3 +148,7 @@ ALTER table PresaInCarico add CONSTRAINT fk_id_tartaruga FOREIGN KEY (idTartarug
 ALTER TABLE cibo ADD COLUMN IF NOT EXISTS dataVersamento date;
 ALter table cibo ADD COLUMN IF NOT EXISTS impiegatoVersamentoMatr bigserial;
 ALter table cibo add CONSTRAINT fk_id_impiegato FOREIGN KEY (impiegatoVersamentoMatr) REFERENCES personale (matricola);
+
+ALTER TABLE cartellamedica
+ALTER COLUMN targaid SET DATA TYPE Varchar(50)
+USING targaid::Varchar(50);

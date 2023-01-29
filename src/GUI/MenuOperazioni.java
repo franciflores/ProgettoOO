@@ -136,7 +136,7 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnStoriaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnStoriaTartaruga.setBounds(50, 95, 141, 23);
+		btnStoriaTartaruga.setBounds(171, 95, 141, 23);
 		contentPane.add(btnStoriaTartaruga);
 		
 		JButton btnStatistiche = new JButton("Statistiche Tartarughe");
@@ -146,7 +146,7 @@ public class MenuOperazioni extends JFrame {
 			}
 		});
 		btnStatistiche.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnStatistiche.setBounds(293, 95, 141, 23);
+		btnStatistiche.setBounds(333, 95, 141, 23);
 		contentPane.add(btnStatistiche);
 		
 		JButton btnRilascia = new JButton("Rilascia Tartaruga");
@@ -173,6 +173,11 @@ public class MenuOperazioni extends JFrame {
 		lblRicercatore.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblRicercatore.setBounds(333, 128, 141, 18);
 		contentPane.add(lblRicercatore);
+		
+		JButton btnRiammettiTartaruga = new JButton("Riammetti Tartaruga");
+		btnRiammettiTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnRiammettiTartaruga.setBounds(10, 95, 141, 21);
+		contentPane.add(btnRiammettiTartaruga);
 		btnRilascia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.CreaRilascio();

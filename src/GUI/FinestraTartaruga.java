@@ -28,6 +28,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ItemEvent;
 import javax.swing.JSpinner;
 import javax.swing.AbstractButton;
@@ -59,36 +60,43 @@ public class FinestraTartaruga extends JFrame {
 	private JRadioButton rdbtnFemmina1;
 	private JRadioButton rdbtnMaschio1;
 	private JTextField textTarga;
-	int targaMax;
 	private JTextField textField;
+	private ArrayList<String> vascheDisponibili;
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public FinestraTartaruga(Controller c, int panelDaAttivare,JFrame finestraPrecedente) throws SQLException {
+		
 		setTitle("Inserimento Tartaruga nel Sistema");
 		controller = c;
+		vascheDisponibili = controller.recuperaVascaIdDB();
 		finestraCorrente = this;
 		final JFrame finestraPrec = finestraPrecedente;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 559);
-		targaMax = controller.getTargaMaxDB();
+		setBounds(100, 100, 450, 626);
 		
-		if(panelDaAttivare==1) {
+		//if(panelDaAttivare==1) {
 			JPanel NuovaTartaruga = new JPanel();
 			getContentPane().add(NuovaTartaruga, BorderLayout.CENTER);
 			NuovaTartaruga.setLayout(null);
 
 			JLabel lblUpperTesto = new JLabel("Inserimento di una nuova Tartaruga nel centro");
-			lblUpperTesto.setHorizontalAlignment(SwingConstants.CENTER);
 			lblUpperTesto.setBounds(10, 5, 414, 24);
+			lblUpperTesto.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblUpperTesto);
 
 			JLabel lblSpecie = new JLabel("Specie");
-			lblSpecie.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSpecie.setBounds(10, 68, 95, 14);
+			lblSpecie.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblSpecie);
+			
+			final JComboBox comboBoxVasca = new JComboBox();
+			comboBoxVasca.setBounds(186, 247, 238, 22);
+			NuovaTartaruga.add(comboBoxVasca);
+			for(String s : vascheDisponibili)
+				comboBoxVasca.addItem(s);
 
 			textFieldSpecie = new JTextField();
 			textFieldSpecie.setBounds(115, 65, 309, 20);
@@ -96,8 +104,8 @@ public class FinestraTartaruga extends JFrame {
 			textFieldSpecie.setColumns(10);
 
 			JLabel lblLunghezza = new JLabel("Lunghezza (cm)");
-			lblLunghezza.setHorizontalAlignment(SwingConstants.CENTER);
 			lblLunghezza.setBounds(10, 121, 95, 14);
+			lblLunghezza.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblLunghezza);
 
 			jSpinnerLunghezza = new JSpinner();
@@ -105,8 +113,8 @@ public class FinestraTartaruga extends JFrame {
 			NuovaTartaruga.add(jSpinnerLunghezza);
 
 			JLabel lblLarghezza = new JLabel("Larghezza (cm)");
-			lblLarghezza.setHorizontalAlignment(SwingConstants.CENTER);
 			lblLarghezza.setBounds(10, 146, 95, 14);
+			lblLarghezza.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblLarghezza);
 
 			jSpinnerLarghezza = new JSpinner();
@@ -114,8 +122,8 @@ public class FinestraTartaruga extends JFrame {
 			NuovaTartaruga.add(jSpinnerLarghezza);
 
 			JLabel lblPeso = new JLabel("Peso (g)");
-			lblPeso.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPeso.setBounds(10, 96, 95, 14);
+			lblPeso.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblPeso);
 
 			jSpinnerPeso = new JSpinner();
@@ -123,122 +131,111 @@ public class FinestraTartaruga extends JFrame {
 			NuovaTartaruga.add(jSpinnerPeso);
 
 			JLabel lblLuogoRitrovamento = new JLabel("Luogo del Ritrovamento ");
+			lblLuogoRitrovamento.setBounds(10, 292, 414, 14);
 			lblLuogoRitrovamento.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLuogoRitrovamento.setBounds(10, 225, 414, 14);
 			NuovaTartaruga.add(lblLuogoRitrovamento);
 
 			JButton btnNewButton = new JButton("Annulla");
+			btnNewButton.setBounds(10, 553, 89, 23);
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					controller.FinestraPrecedente(finestraCorrente, finestraPrec);
 				}
 			});
-			btnNewButton.setBounds(10, 486, 89, 23);
 			NuovaTartaruga.add(btnNewButton);
 
 			textLuogo = new JTextField();
-			textLuogo.setBounds(10, 245, 414, 24);
+			textLuogo.setBounds(10, 312, 414, 24);
 			NuovaTartaruga.add(textLuogo);
 			textLuogo.setColumns(10);
 
 			JLabel lblNewLabel_2 = new JLabel("Esprimere un giudizio sulle condizioni di salute della Tartaruga:");
+			lblNewLabel_2.setBounds(10, 347, 414, 14);
 			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_2.setBounds(10, 280, 414, 14);
 			NuovaTartaruga.add(lblNewLabel_2);
 
 			JLabel lblTestaN = new JLabel("Testa");
+			lblTestaN.setBounds(10, 372, 53, 14);
 			lblTestaN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblTestaN.setBounds(10, 305, 53, 14);
 			NuovaTartaruga.add(lblTestaN);
 
 			final JComboBox comboBoxTestaN = new JComboBox();
+			comboBoxTestaN.setBounds(73, 368, 351, 22);
 			comboBoxTestaN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
 			comboBoxTestaN.setMaximumRowCount(5);
-			comboBoxTestaN.setBounds(73, 301, 351, 22);
 			NuovaTartaruga.add(comboBoxTestaN);
 
 
 			JLabel lblOcchiN = new JLabel("Occhi");
+			lblOcchiN.setBounds(10, 397, 46, 14);
 			lblOcchiN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblOcchiN.setBounds(10, 330, 46, 14);
 			NuovaTartaruga.add(lblOcchiN);
 
 			final JComboBox comboBoxOcchiN = new JComboBox();
+			comboBoxOcchiN.setBounds(73, 393, 351, 22);
 			comboBoxOcchiN.setMaximumRowCount(5);
 			comboBoxOcchiN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxOcchiN.setBounds(73, 326, 351, 22);
 			NuovaTartaruga.add(comboBoxOcchiN);
 
 			JLabel lblNasoN = new JLabel("Naso");
+			lblNasoN.setBounds(10, 422, 46, 14);
 			lblNasoN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNasoN.setBounds(10, 355, 46, 14);
 			NuovaTartaruga.add(lblNasoN);
 
 			final JComboBox comboBoxNasoN = new JComboBox();
+			comboBoxNasoN.setBounds(73, 418, 351, 22);
 			comboBoxNasoN.setMaximumRowCount(5);
 			comboBoxNasoN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxNasoN.setBounds(73, 351, 351, 22);
 			NuovaTartaruga.add(comboBoxNasoN);
 
 			JLabel lblBeccoN = new JLabel("Becco");
+			lblBeccoN.setBounds(10, 447, 46, 14);
 			lblBeccoN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBeccoN.setBounds(10, 380, 46, 14);
 			NuovaTartaruga.add(lblBeccoN);
 
 			final JComboBox comboBoxBeccoN = new JComboBox();
+			comboBoxBeccoN.setBounds(73, 443, 351, 22);
 			comboBoxBeccoN.setMaximumRowCount(5);
 			comboBoxBeccoN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxBeccoN.setBounds(73, 376, 351, 22);
 			NuovaTartaruga.add(comboBoxBeccoN);
 
 			JLabel lblColloN = new JLabel("Collo");
+			lblColloN.setBounds(10, 472, 46, 14);
 			lblColloN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblColloN.setBounds(10, 405, 46, 14);
 			NuovaTartaruga.add(lblColloN);
 
 			final JComboBox comboBoxColloN = new JComboBox();
+			comboBoxColloN.setBounds(73, 468, 351, 22);
 			comboBoxColloN.setMaximumRowCount(5);
 			comboBoxColloN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxColloN.setBounds(73, 401, 351, 22);
 			NuovaTartaruga.add(comboBoxColloN);
 
 			JLabel lblPinneN = new JLabel("Pinne");
+			lblPinneN.setBounds(10, 497, 46, 14);
 			lblPinneN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblPinneN.setBounds(10, 430, 46, 14);
 			NuovaTartaruga.add(lblPinneN);
 
 			final JComboBox comboBoxPinneN = new JComboBox();
+			comboBoxPinneN.setBounds(73, 493, 351, 22);
 			comboBoxPinneN.setMaximumRowCount(5);
 			comboBoxPinneN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxPinneN.setBounds(73, 426, 351, 22);
 			NuovaTartaruga.add(comboBoxPinneN);
 
 			JLabel lblCodaN = new JLabel("Coda");
+			lblCodaN.setBounds(10, 522, 46, 14);
 			lblCodaN.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCodaN.setBounds(10, 455, 46, 14);
 			NuovaTartaruga.add(lblCodaN);
 
 			final JComboBox comboBoxCodaN = new JComboBox();
+			comboBoxCodaN.setBounds(73, 518, 351, 22);
 			comboBoxCodaN.setMaximumRowCount(5);
 			comboBoxCodaN.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromesso"}));
-			comboBoxCodaN.setBounds(73, 451, 351, 22);
 			NuovaTartaruga.add(comboBoxCodaN);
 			
-
-			//Per ora invece di inserire la tartaruga torna al menu
-			JButton btnProsegui = new JButton("Conferma");
-			btnProsegui.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					InviaTartaruga(textTarga.getText(), textFieldNome.getText(), false, false, false, "1", "1", controller.getCentroCorrente());
-					//controller.setCartella(jSpinnerPeso.getValue(), jSpinnerLarghezza.getValue(), textLuogo.getText(), comboBoxTestaN.getSelectedItem(), comboBoxPinneN.getSelectedItem(), comboBoxOcchiN.getSelectedItem(), comboBoxNasoN.getSelectedItem(), comboBoxBeccoN.getSelectedItem(), comboBoxColloN.getSelectedItem(), comboBoxCodaN.getSelectedItem(), controller.ritornaMatricola(), jSpinnerLunghezza.getValue(), controller.getId(textTarga.getText()), rdbtnMaschio, rdbtnFemmina );
-				}
-			});
-			btnProsegui.setBounds(328, 486, 96, 23);
-			NuovaTartaruga.add(btnProsegui);
 			
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNome.setBounds(10, 43, 95, 14);
+			lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblNome);
 			
 			textFieldNome = new JTextField();
@@ -247,40 +244,126 @@ public class FinestraTartaruga extends JFrame {
 			textFieldNome.setColumns(10);
 			
 			JLabel lblNewLabel = new JLabel("Sesso");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setBounds(10, 174, 89, 14);
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(lblNewLabel);
 			
 			rdbtnMaschio = new JRadioButton("Maschio");
-			rdbtnMaschio.setHorizontalAlignment(SwingConstants.CENTER);
 			rdbtnMaschio.setBounds(115, 170, 154, 23);
+			rdbtnMaschio.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(rdbtnMaschio);
 			
 			rdbtnFemmina = new JRadioButton("Femmina");
-			rdbtnFemmina.setHorizontalAlignment(SwingConstants.CENTER);
 			rdbtnFemmina.setBounds(274, 170, 154, 23);
+			rdbtnFemmina.setHorizontalAlignment(SwingConstants.CENTER);
 			NuovaTartaruga.add(rdbtnFemmina);
 			
 			sesso = new ButtonGroup();
 			sesso.add(rdbtnMaschio);
 			sesso.add(rdbtnFemmina);
 			
-			JLabel lblTarga = new JLabel("Targa (la più grande è: "+targaMax+")");
-			lblTarga.setHorizontalAlignment(SwingConstants.CENTER);
-			lblTarga.setBounds(20, 199, 156, 14);
-			NuovaTartaruga.add(lblTarga);
-			
 			textTarga = new JTextField();
-			textTarga.setColumns(10);
 			textTarga.setBounds(186, 196, 238, 20);
+			textTarga.setColumns(10);
 			NuovaTartaruga.add(textTarga);
+			
+			//Per ora invece di inserire la tartaruga torna al menu
+			JButton btnProsegui = new JButton("Conferma");
+			btnProsegui.setBounds(328, 553, 96, 23);
+			btnProsegui.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String nuovaTarga = AggiungiPrefissoCentro(textTarga.getText());
+					InviaTartaruga(nuovaTarga, textFieldNome.getText(), true, false, false, comboBoxVasca.getSelectedItem().toString(), "null", controller.getCentroCorrente());
+					
+					String sesso = sceltaSesso(rdbtnMaschio, rdbtnFemmina);
+					creaNuovaCartellaMedica(textFieldSpecie.getText(), jSpinnerPeso.getValue(),textLuogo.getText(),
+							comboBoxTestaN.getSelectedItem(), comboBoxOcchiN.getSelectedItem() , comboBoxNasoN.getSelectedItem() ,
+							comboBoxColloN.getSelectedItem() , comboBoxPinneN.getSelectedItem() , comboBoxCodaN.getSelectedItem(),
+							sesso, jSpinnerLunghezza.getValue(), jSpinnerLarghezza.getValue(), comboBoxBeccoN.getSelectedItem());
+				}
+
+
+			});
+			NuovaTartaruga.add(btnProsegui);
+			
+			JLabel lblNuovaTarga = new JLabel("Nuova Targa");
+			lblNuovaTarga.setBounds(10, 200, 89, 14);
+			lblNuovaTarga.setHorizontalAlignment(SwingConstants.CENTER);
+			NuovaTartaruga.add(lblNuovaTarga);
+			
+			JLabel lblScegliVasca = new JLabel("Scegli Vasca");
+			lblScegliVasca.setHorizontalAlignment(SwingConstants.CENTER);
+			lblScegliVasca.setBounds(10, 251, 89, 14);
+			NuovaTartaruga.add(lblScegliVasca);
+			
+
+			
+			
 			
 			
 			
 			}
+	
+		protected String sceltaSesso(JRadioButton rdbtnMaschio, JRadioButton rdbtnFemmina) {
+			String scelta = null;
+			
+			if(rdbtnMaschio.isSelected()) {
+				scelta = "Maschio";
+			}
+			else {
+				scelta = "Femmina";
+			}
+			
+			return scelta;
+			
+		}
+
+		private String AggiungiPrefissoCentro(String targaNuova) {
+			
+			String prefissoCentro = controller.getCentroCorrente();
+			String nuovaTarga = prefissoCentro.concat("-").concat(targaNuova);
+			
+			return nuovaTarga;
+			
+		}
 		
 
-		else if(panelDaAttivare==0){
+		protected void creaNuovaCartellaMedica(String specie, Object peso, String luogo, Object condTesta,
+			Object condOcchi, Object condNaso, Object condCollo, Object condPinne,
+			Object condCoda, String sesso, Object lunghezza, Object larghezza, Object condBecco) {
+			
+			EccezioneTartaruga eccezione = new EccezioneTartaruga();
+			
+			try
+			{
+				
+				Integer valorePeso;
+				valorePeso = Integer.parseInt(peso.toString());
+				Integer valoreLunghezza;
+				valoreLunghezza = Integer.parseInt(lunghezza.toString());
+				Integer valoreLarghezza;
+				valoreLarghezza = Integer.parseInt(larghezza.toString());
+				
+				if(!eccezione.verificaMisure(valorePeso, valoreLarghezza, valoreLunghezza)) {
+					throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
+				}
+				
+				/*Procedo alla query sul DB*/
+				controller.CreaCartellaDB(specie, valorePeso, valoreLarghezza, valoreLunghezza, luogo,
+						condTesta.toString(), condOcchi.toString(), condNaso.toString(), condCollo.toString(),
+						condPinne.toString(), condCoda.toString(), sesso, condBecco.toString());
+			}
+			catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
+			} catch (EccezioneTartaruga e1) {
+					e1.MostraJDialogErroreScelta(finestraCorrente);
+				}
+					
+		
+		}
+
+
+		/*else if(panelDaAttivare==0){
 			JPanel VecchiaTartaruga = new JPanel();
 			getContentPane().add(VecchiaTartaruga, BorderLayout.CENTER);
 			VecchiaTartaruga.setLayout(null);
@@ -339,7 +422,7 @@ public class FinestraTartaruga extends JFrame {
 			chckbxSpecie.setBounds(10, 193, 110, 23);
 			VecchiaTartaruga.add(chckbxSpecie);
 
-			JLabel lblDescrizioneLuogo = new JLabel("Dov'è stata ritrovata la tartaruga?");
+			JLabel lblDescrizioneLuogo = new JLabel("Dov'e' stata ritrovata la tartaruga?");
 			lblDescrizioneLuogo.setHorizontalAlignment(SwingConstants.CENTER);
 			lblDescrizioneLuogo.setBounds(10, 226, 414, 14);
 			VecchiaTartaruga.add(lblDescrizioneLuogo);
@@ -556,21 +639,13 @@ public class FinestraTartaruga extends JFrame {
 			sesso.add(rdbtnFemmina1);
 			sesso.add(rdbtnMaschio1);
 			
-			JLabel lblNuovaTarga = new JLabel("Nuova Targa (la più grande è: "+targaMax+")");
-			lblNuovaTarga.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNuovaTarga.setBounds(224, 11, 200, 14);
-			VecchiaTartaruga.add(lblNuovaTarga);
-			
 			textField = new JTextField();
 			textField.setBounds(224, 32, 200, 20);
 			VecchiaTartaruga.add(textField);
 			textField.setColumns(10);
-			}
+			}*/
 	
-		else {
-			 controller.RitornoMenu(this);
-		} 
-	} 
+	//} 
 	
 	
 		
@@ -584,33 +659,9 @@ public class FinestraTartaruga extends JFrame {
 		}
 	}
 	
-	public void InviaTartaruga(String targa, String nome, boolean primoaccesso, boolean  morta, boolean rilasciata, String vascaid, String cartellaid, int centroid) {	
-		try {
-			Double valorePeso;
-			Double lunghezza;
-			Double larghezza;
-			EccezioneTartaruga eccezione = new EccezioneTartaruga();
-		
-			valorePeso = Double.parseDouble(jSpinnerPeso.getValue().toString());
-			lunghezza = Double.parseDouble(jSpinnerLunghezza.getValue().toString());
-			larghezza = Double.parseDouble(jSpinnerLarghezza.getValue().toString());
-		
-			if(!eccezione.verificaMisure(valorePeso, larghezza, lunghezza)) {
-				throw new EccezioneTartaruga("Non posso esistere valore negativi o prossimi allo 0");
-			}
-			
-			
+	public void InviaTartaruga(String targa, String nome, boolean primoaccesso, boolean  morta, boolean rilasciata, String vascaid, String cartellaid, String centroid) {	
+
 			controller.InvioTartaruga(targa, nome, primoaccesso, morta, rilasciata, vascaid, cartellaid, centroid);
-		
-		}
-		catch (NumberFormatException e1) {
-			JOptionPane.showMessageDialog(finestraCorrente, "Inserisci solo un valore numerico!", "Attenzione", JOptionPane.OK_OPTION);
-		} catch (EccezioneTartaruga e1) {
-			e1.MostraJDialogErroreScelta(finestraCorrente);
-		}
-			catch (SQLException e1) {
-			 e1.printStackTrace();
-			}
-		
+
 	}
 }

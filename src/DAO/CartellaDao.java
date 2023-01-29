@@ -1,6 +1,8 @@
 package DAO;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -181,6 +183,20 @@ public class CartellaDao {
 		
 		Statement query = connessioneDB.createStatement();
 		int rs = query.executeUpdate(sqlQuery);
+	}
+
+	public void CreaCartella(String specie, Integer valorePeso, Integer valoreLarghezza, Integer valoreLunghezza, String luogo, String condTesta, String condOcchi,
+			String condNaso, String condCollo, String condPinne, String condCoda, String sesso, String condBecco, String ultimaTargaId, String ultimaTartarugaId, String matricola, Connection connessioneDB) throws SQLException {
+		
+        LocalDate dataObj = LocalDate.now();
+        DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String data = dataObj.format(formattazioneData);
+		
+		String sqlQuery = "INSERT INTO cartellamedica(dataapertura, dataritrovamento, peso, larghezza, specie, sesso, descrizione, testa, pinne, occhi, naso, becco, collo, coda, personaleid, targaid, tartarugaid, lunghezza)" 
+				+ "VALUES('"+data+"','"+data+"', "+valorePeso+", "+valoreLarghezza+",'"+specie+"','"+sesso+"','"+luogo+"','"+condTesta+"','"+condPinne+"','"+condOcchi+"','"+condNaso+"','"+condBecco+"','"+condCollo+"','"+condCoda+"','"+matricola+"','"+ultimaTargaId+"',"+ultimaTartarugaId+","+valoreLunghezza+");";
+		
+		Statement queryCart = connessioneDB.createStatement();
+		queryCart.executeUpdate(sqlQuery);
 	}
 	
 }

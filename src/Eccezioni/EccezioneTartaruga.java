@@ -19,11 +19,11 @@ public class EccezioneTartaruga extends Exception{
     	JOptionPane.showMessageDialog(finestraCorrente,  messaggioErrore, "Attenzione", JOptionPane.OK_OPTION);
     }
     
-    public boolean verificaMisure(Double peso, Double larghezza, Double lunghezza) {
+    public boolean verificaMisure(Integer valorePeso, Integer valoreLarghezza, Integer valoreLunghezza) {
     	/*Assumiamo che i valori siano validi*/
     	boolean verifica = true;
     	
-    	if(peso <= 6 || larghezza <= 5 || lunghezza <= 5) {
+    	if(valorePeso <= 6 || valoreLarghezza <= 5 || valoreLunghezza <= 5) {
     		verifica = false;
     	}
     	
