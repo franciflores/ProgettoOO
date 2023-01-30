@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FinestraListaTartarugheCentro extends JFrame {
 
@@ -38,6 +39,7 @@ public class FinestraListaTartarugheCentro extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraListaTartarugheCentro(final Controller controller) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setTitle("Tartarughe di un Centro");
 		finestraCorrente = this;
 		tabella = new JTable();

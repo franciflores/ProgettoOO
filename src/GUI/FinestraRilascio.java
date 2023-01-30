@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+import java.awt.Toolkit;
 
 public class FinestraRilascio extends JFrame {
 
@@ -36,6 +37,7 @@ public class FinestraRilascio extends JFrame {
 	private JComboBox comboBox;
 	
 	public FinestraRilascio(final Controller controller) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setTitle("Rilascia una Tartaruga");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		finestraCorrente = this;
@@ -67,8 +69,18 @@ public class FinestraRilascio extends JFrame {
 		getContentPane().add(btnConferma);
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.setRilascio(comboBox.getSelectedItem());
-				controller.RitornoMenu(finestraCorrente);
+				/*Controllo rilascio*/
+				boolean dataValida = controller.recuperaDataChiusuraDB(comboBox.getSelectedItem().toString());
+				if(dataValida) {
+					controller.setRilascio(comboBox.getSelectedItem());
+					
+					controller.RitornoMenu(finestraCorrente);
+				}
+				else {
+					JOptionPane.showMessageDialog(finestraCorrente, "Cartella ancora attiva", "Attenzione", JOptionPane.OK_OPTION);
+				}
+				
+
 			}
 		});
 		

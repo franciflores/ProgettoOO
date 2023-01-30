@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Component;
 import javax.swing.Box;
+import java.awt.Toolkit;
 
 public class MenuOperazioni extends JFrame {
 
@@ -37,6 +38,7 @@ public class MenuOperazioni extends JFrame {
 	 * @param nomeAddetto 
 	 */
 	public MenuOperazioni(final Controller controller, String nomeAddetto,String ruoloAddetto) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		setResizable(false);
 		setTitle("Menu Operazioni");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,17 +58,9 @@ public class MenuOperazioni extends JFrame {
 		JButton btnNuovaTartaruga = new JButton("Nuova Tartaruga");
 		btnNuovaTartaruga.setBounds(10, 63, 141, 21);
 		btnNuovaTartaruga.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
+
 			public void actionPerformed(ActionEvent e) {
-				//Cambiare con un setter questa Variabile
-				controller.SceltaPanel = controller.DialogTartarughe();
-				if((Integer)controller.SceltaPanel==0 || (Integer)controller.SceltaPanel==1)
-					try {
-						controller.ShowTartarugaFrame();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				controller.ShowTartarugaFrame();
 			}
 		});
 		btnNuovaTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -175,6 +169,11 @@ public class MenuOperazioni extends JFrame {
 		contentPane.add(lblRicercatore);
 		
 		JButton btnRiammettiTartaruga = new JButton("Riammetti Tartaruga");
+		btnRiammettiTartaruga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.creaRiammettiFinestra();
+			}
+		});
 		btnRiammettiTartaruga.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnRiammettiTartaruga.setBounds(10, 95, 141, 21);
 		contentPane.add(btnRiammettiTartaruga);

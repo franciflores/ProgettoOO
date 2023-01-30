@@ -199,4 +199,34 @@ public class CartellaDao {
 		queryCart.executeUpdate(sqlQuery);
 	}
 	
+	public String ultimaCartellaInserita(Connection connessioneDB) throws SQLException {
+		String id = null;
+		
+		String sqlQuery = "Select id from cartellamedica;";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		/*Ciclo fino all'ultimo id*/
+		while(rs.next()) {
+			id = rs.getString("id");
+		}
+		
+		return id;
+	}
+	
+	public String getSessoByIdTartaruga(String idTartarugaByTarga, Connection connessioneDB) throws SQLException {
+		String sesso="";
+		String sqlQuery = "Select sesso from cartellamedica where tartarugaid  = '" + idTartarugaByTarga + "';";
+
+		Statement query = connessioneDB.createStatement();
+		ResultSet rs = query.executeQuery(sqlQuery);
+
+		if(rs.next()) {
+			sesso = rs.getString("sesso");
+		}
+
+		return sesso;
+	}
+	
 }

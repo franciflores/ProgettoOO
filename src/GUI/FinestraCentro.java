@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Choice;
+import java.awt.Toolkit;
 
 public class FinestraCentro extends JFrame {
 
@@ -31,6 +32,7 @@ public class FinestraCentro extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraCentro(final Controller controller) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Fraes\\Documents\\GitHub\\ProgettoOO\\icona\\tortoise-icon-5.jpg"));
 		finestraCorrente = this;
 		setTitle("Crea Centro");
 		setResizable(false);
