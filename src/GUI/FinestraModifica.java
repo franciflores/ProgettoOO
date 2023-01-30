@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classi.Controller;
-import Eccezioni.EccezioneCibo;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
